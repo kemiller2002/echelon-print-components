@@ -1,0 +1,91 @@
+@layer ef-print-foundation, ef-print-components;
+
+@layer ef-print-foundation {
+  :root {
+    --ef-print-page-size: Letter;
+    --ef-print-page-margin: 0.7in;
+    --ef-print-font-family: Arial, Helvetica, sans-serif;
+    --ef-print-font-size: 10.5pt;
+    --ef-print-line-height: 1.45;
+    --ef-print-text: #161616;
+    --ef-print-rule: #9a9a9a;
+    --ef-print-space: 0.18in;
+  }
+
+  @page {
+    size: var(--ef-print-page-size);
+    margin: var(--ef-print-page-margin);
+  }
+
+  html {
+    color: var(--ef-print-text);
+    font-family: var(--ef-print-font-family);
+    font-size: var(--ef-print-font-size);
+    line-height: var(--ef-print-line-height);
+  }
+
+  body {
+    margin: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+  }
+}
+
+@layer ef-print-components {
+  ef-print-document,
+  ef-print-title-page,
+  ef-print-section,
+  ef-print-back-page,
+  ef-print-columns,
+  ef-print-sidebar,
+  ef-print-break,
+  ef-print-keep {
+    display: block;
+  }
+
+  ef-print-title-page {
+    break-after: page;
+  }
+
+  ef-print-section[break-before="page"] {
+    break-before: page;
+  }
+
+  ef-print-section[break-after="page"] {
+    break-after: page;
+  }
+
+  ef-print-break[page] {
+    break-after: page;
+  }
+
+  ef-print-keep {
+    break-inside: avoid;
+  }
+
+  ef-print-columns {
+    column-count: var(--ef-print-column-count, 2);
+    column-gap: var(--ef-print-column-gap, 0.28in);
+  }
+
+  ef-print-sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--ef-print-sidebar-width, 1.65in);
+    gap: var(--ef-print-sidebar-gap, 0.24in);
+  }
+}
+
+@media print {
+  [data-screen-only] {
+    display: none !important;
+  }
+}
