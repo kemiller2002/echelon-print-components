@@ -1,0 +1,45 @@
+name: Begin Folio instruction and component mobile work
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/folio-instruction-mobile-work.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  begin:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Begin GH-9
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./ros add "Make Folio instructions and remaining components mobile-friendly" --id "GH-9" --tag folio,mobile,components,documentation --priority high --source github-issue --source-reference "https://github.com/kemiller2002/echelon-print-components/issues/9" --actor "agent:chatgpt"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work backlog-transition --action ready --id "GH-9" --occurred-at "$NOW"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work start --id "GH-9" --occurred-at "$NOW" --type feature
+          ./ros work context "GH-9"
+      - name: Commit ROS state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if [ -d .ros/telemetry ]; then git add -f .ros/telemetry; fi
+          git reset -- .github/workflows
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Begin GH-9 Folio mobile instruction work"
+          git pull --rebase origin main
+          git push
