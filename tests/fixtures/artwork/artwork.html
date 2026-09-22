@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ART-01 Page Artwork</title>
+<link rel="stylesheet" href="../../../src/styles/print.css">
+<script type="module" src="../../../src/components/register.js"></script>
+<style>
+@page { size: Letter; margin: .45in; }
+body { margin:0; }
+ef-print-document { display:block; }
+.art-page { position:relative; min-height:9.9in; overflow:hidden; border:1px solid transparent; }
+.art-layer {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect width='800' height='1000' fill='%2315263a'/%3E%3Ccircle cx='670' cy='170' r='260' fill='%23416a8b'/%3E%3Cpath d='M0 720 L800 440 L800 1000 L0 1000Z' fill='%23223d55'/%3E%3C/svg%3E");
+  background-size:cover;
+  background-position:center;
+}
+.art-content { position:relative; z-index:1; color:#fff; padding:.65in; }
+.art-content h1 { font-size:29pt; margin:0 0 .25in; }
+.art-content p { max-width:5.4in; font-size:13pt; }
+.art-footer { position:absolute; z-index:1; left:.65in; right:.65in; bottom:.55in; color:#fff; border-top:1px solid currentColor; padding-top:.12in; }
+@media print {
+  .art-page { -webkit-print-color-adjust: economy; print-color-adjust:economy; }
+}
+</style>
+</head>
+<body>
+<ef-print-document>
+<section class="art-page">
+  <div class="art-layer" aria-hidden="true"></div>
+  <div class="art-content">
+    <h1>ART-ESSENTIAL-TITLE</h1>
+    <p><strong>ART-ESSENTIAL-BODY</strong> This title-page content must remain present whether the user's output path includes background graphics or suppresses them.</p>
+  </div>
+  <div class="art-footer">ART-ESSENTIAL-FOOTER</div>
+</section>
+</ef-print-document>
+</body>
+</html>

@@ -25,6 +25,8 @@ const results = {
   columns: {},
   sidebar: {},
   table: {},
+  artwork: {},
+  accessibilityPdf: {},
 };
 
 function mimeType(path) {
@@ -166,6 +168,67 @@ function pdfInfo(path) {
   };
 }
 
+function pdfTagged(path) {
+  const info = execFileSync("pdfinfo", [path], { encoding: "utf8" });
+  const taggedMatch = info.match(/^Tagged:\s+(.+)$/m);
+  return taggedMatch?.[1]?.trim().toLowerCase() ?? "unknown";
+}
+
+async function rasterInkScore(pdfPath, stem) {
+  const prefix = resolve(outputDir, stem);
+  execFileSync("pdftoppm", [
+    "-f", "1",
+    "-l", "1",
+    "-singlefile",
+    "-r", "36",
+    "-ppm",
+    pdfPath,
+    prefix,
+  ]);
+
+  const ppmPath = `${prefix}.ppm`;
+  const buffer = await readFile(ppmPath);
+  await rm(ppmPath, { force: true });
+
+  let offset = 0;
+  function nextToken() {
+    while (offset < buffer.length) {
+      const byte = buffer[offset];
+      if (byte === 35) {
+        while (offset < buffer.length && buffer[offset] !== 10) offset += 1;
+      } else if (byte === 9 || byte === 10 || byte === 13 || byte === 32) {
+        offset += 1;
+      } else {
+        break;
+      }
+    }
+    const start = offset;
+    while (offset < buffer.length) {
+      const byte = buffer[offset];
+      if (byte === 9 || byte === 10 || byte === 13 || byte === 32 || byte === 35) break;
+      offset += 1;
+    }
+    return buffer.toString("ascii", start, offset);
+  }
+
+  const magic = nextToken();
+  const width = Number(nextToken());
+  const height = Number(nextToken());
+  const max = Number(nextToken());
+  assert.equal(magic, "P6", "Expected binary PPM raster");
+  assert.equal(max, 255, "Expected 8-bit PPM raster");
+
+  while (offset < buffer.length && [9, 10, 13, 32].includes(buffer[offset])) offset += 1;
+  const expectedBytes = width * height * 3;
+  assert.ok(buffer.length - offset >= expectedBytes, "PPM pixel payload is incomplete");
+
+  let darkness = 0;
+  for (let index = offset; index < offset + expectedBytes; index += 3) {
+    darkness += ((255 - buffer[index]) + (255 - buffer[index + 1]) + (255 - buffer[index + 2])) / 3;
+  }
+  return darkness / (width * height);
+}
+
 function pdfText(path) {
   return execFileSync("pdftotext", ["-layout", path, "-"], { encoding: "utf8" });
 }
@@ -231,7 +294,7 @@ function occurrenceCount(value, needle) {
   return value.split(needle).length - 1;
 }
 
-async function renderChromiumPdf(baseUrl, fixturePath, outputPath) {
+async function renderChromiumPdf(baseUrl, fixturePath, outputPath, pdfOptions = {}) {
   const browser = await chromium.launch();
   const version = browser.version();
   const page = await browser.newPage();
@@ -243,6 +306,7 @@ async function renderChromiumPdf(baseUrl, fixturePath, outputPath) {
     preferCSSPageSize: true,
     printBackground: true,
     displayHeaderFooter: false,
+    ...pdfOptions,
   });
   await browser.close();
   return version;
@@ -461,6 +525,74 @@ async function run() {
       widePageNumber,
       widePageSize,
       allMarkerTextPreserved: true,
+    };
+
+    const artBackgroundPdf = resolve(outputDir, "art-01-backgrounds-on.pdf");
+    const artNoBackgroundPdf = resolve(outputDir, "art-01-backgrounds-off.pdf");
+    const artChromiumVersion = await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/artwork/artwork.html",
+      artBackgroundPdf,
+      { printBackground: true },
+    );
+    await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/artwork/artwork.html",
+      artNoBackgroundPdf,
+      { printBackground: false },
+    );
+    const artOnText = normalizeText(pdfText(artBackgroundPdf));
+    const artOffText = normalizeText(pdfText(artNoBackgroundPdf));
+    for (const marker of ["ART-ESSENTIAL-TITLE", "ART-ESSENTIAL-BODY", "ART-ESSENTIAL-FOOTER"]) {
+      assertMarkerOnce(artOnText, marker);
+      assertMarkerOnce(artOffText, marker);
+    }
+    assert.equal(artOffText, artOnText, "Essential textual content changed when print backgrounds were disabled");
+    const artOnInk = await rasterInkScore(artBackgroundPdf, "art-on-raster");
+    const artOffInk = await rasterInkScore(artNoBackgroundPdf, "art-off-raster");
+    const artInkDelta = artOnInk - artOffInk;
+    assert.ok(artInkDelta > 20, `Expected background artwork to materially change raster ink score; delta=${artInkDelta}`);
+    results.artwork = {
+      browserVersion: artChromiumVersion,
+      backgroundsOnPages: pdfInfo(artBackgroundPdf).pages,
+      backgroundsOffPages: pdfInfo(artNoBackgroundPdf).pages,
+      essentialTextEquivalent: true,
+      backgroundsOnInkScore: artOnInk,
+      backgroundsOffInkScore: artOffInk,
+      inkScoreDelta: artInkDelta,
+    };
+
+    const accessUntaggedPdf = resolve(outputDir, "access-pdf-01-untagged.pdf");
+    const accessTaggedPdf = resolve(outputDir, "access-pdf-01-tagged.pdf");
+    const accessChromiumVersion = await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/accessibility/semantic.html",
+      accessUntaggedPdf,
+      { tagged: false, outline: false },
+    );
+    await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/accessibility/semantic.html",
+      accessTaggedPdf,
+      { tagged: true, outline: true },
+    );
+    const untaggedState = pdfTagged(accessUntaggedPdf);
+    const taggedState = pdfTagged(accessTaggedPdf);
+    assert.ok(untaggedState.startsWith("no"), `Expected explicitly untagged PDF; pdfinfo reported ${untaggedState}`);
+    assert.ok(taggedState.startsWith("yes"), `Expected tagged PDF; pdfinfo reported ${taggedState}`);
+    const accessUntaggedText = normalizeText(pdfText(accessUntaggedPdf));
+    const accessTaggedText = normalizeText(pdfText(accessTaggedPdf));
+    assert.equal(accessTaggedText, accessUntaggedText, "Tagged export changed extracted document text");
+    for (const marker of ["ACCESS-TITLE", "ACCESS-SECTION", "ACCESS-TABLE", "ACCESS-FIGURE"]) {
+      assertMarkerOnce(accessTaggedText, marker);
+    }
+    results.accessibilityPdf = {
+      browserVersion: accessChromiumVersion,
+      untaggedState,
+      taggedState,
+      extractedTextEquivalent: true,
+      semanticMarkersPreserved: 4,
+      limitation: "Tagged: yes is not evidence of PDF/UA conformance or correct assistive-technology reading behavior.",
     };
 
     results.status = "passed";

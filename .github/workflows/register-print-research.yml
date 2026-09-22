@@ -1,5 +1,9 @@
 name: Register print research
 
+concurrency:
+  group: register-print-research-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches: [main]
