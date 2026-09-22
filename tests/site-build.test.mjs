@@ -1,0 +1,74 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const root = process.cwd();
+const site = path.join(root, "site-dist");
+
+async function registeredElements() {
+  const source = await fs.readFile(path.join(root, "src/components/register.js"), "utf8");
+  return [...new Set([...source.matchAll(/"(ef-print-[a-z-]+)"/g)].map(match => match[1]))];
+}
+
+async function walk(directory) {
+  const entries = await fs.readdir(directory, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await walk(target));
+    else files.push(target);
+  }
+  return files;
+}
+
+test("Folio site has one component page and three examples for every registered element", async () => {
+  const registered = await registeredElements();
+  const manifest = JSON.parse(await fs.readFile(path.join(site, "site-manifest.json"), "utf8"));
+
+  assert.equal(manifest.componentCount, registered.length);
+  assert.deepEqual([...manifest.registeredElements].sort(), [...registered].sort());
+  assert.equal(manifest.exampleCount, registered.length * 3);
+
+  for (const component of manifest.components) {
+    const page = await fs.readFile(path.join(site, "components", component.slug, "index.html"), "utf8");
+    assert.equal((page.match(/data-example/g) ?? []).length, 3, component.slug);
+    assert.match(page, new RegExp(component.element.replaceAll("-", "\\-")));
+
+    for (let index = 1; index <= 3; index += 1) {
+      await fs.access(path.join(site, "demos", component.slug, `${index}.html`));
+    }
+  }
+});
+
+test("generated Folio documentation contains no browser scripts", async () => {
+  const files = await walk(site);
+  for (const file of files.filter(file => file.endsWith(".html"))) {
+    const html = await fs.readFile(file, "utf8");
+    assert.doesNotMatch(html, /<script\b/i, path.relative(site, file));
+    assert.doesNotMatch(html, /\bon[a-z]+\s*=/i, path.relative(site, file));
+  }
+});
+
+test("Folio site publishes capability and agent guidance surfaces", async () => {
+  const home = await fs.readFile(path.join(site, "index.html"), "utf8");
+  const capabilities = await fs.readFile(path.join(site, "capabilities", "index.html"), "utf8");
+  const agents = await fs.readFile(path.join(site, "agents", "index.html"), "utf8");
+
+  assert.match(home, /Folio/);
+  assert.match(home, /Only shipped primitives get pages/);
+  assert.match(capabilities, /P0/);
+  assert.match(capabilities, /P3/);
+  assert.match(capabilities, /provisional/i);
+  assert.match(agents, /not a pagination engine/i);
+  assert.match(agents, /docs\/AGENT-USAGE\.md/);
+});
+
+test("site artifact contains actual Folio print CSS and Pages marker", async () => {
+  await fs.access(path.join(site, ".nojekyll"));
+  const printCss = await fs.readFile(path.join(site, "assets", "folio-print.css"), "utf8");
+  assert.match(printCss, /ef-print-columns/);
+  assert.match(printCss, /ef-print-sidebar/);
+  await fs.access(path.join(site, "assets", "site.css"));
+  await fs.access(path.join(site, "assets", "demo.css"));
+});
