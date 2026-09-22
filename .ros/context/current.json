@@ -4,7 +4,7 @@
   "repository": "echelon-print-components",
   "actor": "ros-bootstrap",
   "startedAt": "2026-09-22T01:08:47.354Z",
-  "updatedAt": "2026-09-22T16:50:20.000Z",
+  "updatedAt": "2026-09-22T17:09:59.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -45,13 +45,35 @@
     {
       "id": "GH-4",
       "type": "feature",
-      "state": "active",
-      "semanticState": "active",
-      "evidence": [],
-      "updatedAt": "2026-09-22T16:50:20.000Z",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "requirements",
+          "path": "docs/requirements/FOLIO-SITE-REQUIREMENTS.md"
+        },
+        {
+          "type": "implementation",
+          "path": "tools/build-site.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/site-build.test.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/run-site-browser-tests.mjs"
+        },
+        {
+          "type": "documentation",
+          "path": "docs/AGENT-USAGE.md"
+        }
+      ],
+      "updatedAt": "2026-09-22T17:09:59.000Z",
       "telemetryExecutionIds": [
         "EXE-20260922T165020251Z-2a708acf"
-      ]
+      ],
+      "completedAt": "2026-09-22T17:09:59.000Z"
     }
   ]
 }
