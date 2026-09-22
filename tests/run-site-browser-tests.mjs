@@ -39,11 +39,28 @@ function serve() {
 }
 
 async function assertNoPageOverflow(page, label) {
-  const widths = await page.evaluate(() => ({
-    scroll: document.documentElement.scrollWidth,
-    client: document.documentElement.clientWidth
-  }));
-  assert.ok(widths.scroll <= widths.client + 1, `${label}: page-level horizontal overflow (${widths.scroll} > ${widths.client})`);
+  const result = await page.evaluate(() => {
+    const client = document.documentElement.clientWidth;
+    const scroll = document.documentElement.scrollWidth;
+    const offenders = [...document.querySelectorAll("*")]
+      .map(element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          tag: element.tagName.toLowerCase(),
+          cls: element.className || "",
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width)
+        };
+      })
+      .filter(item => item.right > client + 1 || item.left < -1)
+      .slice(0, 8);
+    return { scroll, client, offenders };
+  });
+  assert.ok(
+    result.scroll <= result.client + 1,
+    `${label}: page-level horizontal overflow (${result.scroll} > ${result.client}); offenders=${JSON.stringify(result.offenders)}`
+  );
 }
 
 async function assertMinTarget(page, locator, minimum, label) {
