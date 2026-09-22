@@ -82,3 +82,18 @@ The site contract:
 - GitHub Pages deployment after validation.
 
 The site deliberately does not create pages for merely planned components.
+
+
+## Folio mobile documentation hardening
+
+Tracked work item GH-6 strengthens the Folio documentation site for phone-width use.
+
+The mobile contract now requires:
+
+- no page-level horizontal overflow at 320px, 390px, or 430px;
+- touch-friendly primary and component navigation;
+- internally scrollable code/tables rather than page overflow;
+- embedded print previews that remain understandable on phones;
+- screen-only inspection adaptations for columns, sidebars, and wide tables;
+- preservation of the original Folio print-media contract under `@media print`;
+- Chromium, Firefox, and WebKit verification.

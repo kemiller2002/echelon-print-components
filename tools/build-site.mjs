@@ -543,6 +543,7 @@ function exampleBlock(component, example, index) {
     </div>
     <div class="example-actions">
       <a href="${demoPath}" target="_blank" rel="noopener">Open standalone print preview</a>
+      <p class="preview-note">On narrow screens the embedded example uses a screen-only inspection layout. Printing and the standalone document keep Folio's physical print rules.</p>
     </div>
     <details>
       <summary>View HTML</summary>
@@ -613,6 +614,7 @@ function capabilitiesPage() {
     </div>
 
     <h2>Current evidence posture</h2>
+    <div class="table-scroll" role="region" aria-label="Renderer capability evidence" tabindex="0">
     <table>
       <thead><tr><th>Capability</th><th>Current posture</th><th>Evidence</th></tr></thead>
       <tbody>
@@ -623,6 +625,7 @@ function capabilitiesPage() {
         <tr><td>Tagged/PDF-UA quality</td><td>Separate validation track</td><td>Semantic HTML is necessary but browser PDF tagging is not assumed.</td></tr>
       </tbody>
     </table>
+    </div>
 
     <h2>Do not infer capability from markup</h2>
     <p>A document containing a Folio component is not evidence that every renderer can honor every requested physical-page feature. Consumers that require a feature must select or validate a renderer profile that provides it.</p>
@@ -649,6 +652,7 @@ function agentsPage() {
     </ol>
 
     <h2>Boundary ownership</h2>
+    <div class="table-scroll" role="region" aria-label="Folio boundary ownership" tabindex="0">
     <table>
       <thead><tr><th>Concern</th><th>Owner</th></tr></thead>
       <tbody>
@@ -659,6 +663,7 @@ function agentsPage() {
         <tr><td>Interactive preview/configuration state</td><td>Limen + Ordo/application</td></tr>
       </tbody>
     </table>
+    </div>
 
     <h2>Do not</h2>
     <ul>

@@ -211,12 +211,21 @@ body {
 }
 
 @media screen and (max-width: 760px) {
+  html,
+  body {
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
   body { padding: 1rem; }
 
   .folio-paper {
     inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
     min-block-size: auto;
     padding: .35in;
+    overflow-wrap: anywhere;
   }
 
   .folio-title-layout,
@@ -227,6 +236,37 @@ body {
 
   .folio-demo .folio-two-up {
     grid-template-columns: 1fr;
+  }
+
+  /* Screen-only mobile inspection mode. These rules never apply to print. */
+  .folio-demo ef-print-columns {
+    column-count: 1;
+  }
+
+  .folio-demo ef-print-sidebar,
+  .folio-demo .folio-sidebar-main,
+  .folio-demo .folio-sidebar-rail {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+
+  .folio-demo ef-print-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .folio-demo .folio-sidebar-rail {
+    margin-block-start: .2in;
+    padding-block-start: .14in;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    border-block-start: 1px solid var(--folio-rule);
+  }
+
+  .folio-demo table {
+    display: block;
+    max-inline-size: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

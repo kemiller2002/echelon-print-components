@@ -72,3 +72,26 @@ test("site artifact contains actual Folio print CSS and Pages marker", async () 
   await fs.access(path.join(site, "assets", "site.css"));
   await fs.access(path.join(site, "assets", "demo.css"));
 });
+
+
+test("Folio site publishes the mobile documentation contract", async () => {
+  const home = await fs.readFile(path.join(site, "index.html"), "utf8");
+  const component = await fs.readFile(path.join(site, "components", "columns", "index.html"), "utf8");
+  const capabilities = await fs.readFile(path.join(site, "capabilities", "index.html"), "utf8");
+  const agents = await fs.readFile(path.join(site, "agents", "index.html"), "utf8");
+  const siteCss = await fs.readFile(path.join(site, "assets", "site.css"), "utf8");
+  const demoCss = await fs.readFile(path.join(site, "assets", "demo.css"), "utf8");
+
+  for (const [name, html] of [["home", home], ["component", component], ["capabilities", capabilities], ["agents", agents]]) {
+    assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/, name);
+  }
+
+  assert.match(component, /class="preview-note"/);
+  assert.match(component, /screen-only inspection layout/i);
+  assert.match(capabilities, /class="table-scroll"/);
+  assert.match(agents, /class="table-scroll"/);
+  assert.match(siteCss, /@media \(max-width: 680px\)/);
+  assert.match(siteCss, /@media \(max-width: 360px\)/);
+  assert.match(demoCss, /Screen-only mobile inspection mode/);
+  assert.match(demoCss, /@media print/);
+});

@@ -105,7 +105,22 @@ Browser tests MUST exercise the site in Chromium, Firefox, and WebKit and verify
 - agent guidance is present;
 - narrow-screen shell does not create page-level horizontal overflow.
 
-## 10. Generated output
+## 10. Mobile and narrow-screen support
+
+Mobile support is a first-class documentation requirement.
+
+- The documentation shell MUST be usable at 320px, 390px, and 430px viewport widths.
+- Home, component, capability, agent, and standalone example pages MUST NOT create page-level horizontal overflow.
+- Header navigation MUST reflow to touch-friendly controls without clipping or overlap.
+- Component navigation MUST remain usable by touch and keyboard on narrow screens.
+- Navigation and example actions SHOULD provide approximately 44 CSS-pixel touch targets where practical.
+- Code samples and wide capability/ownership tables MAY scroll internally, but their containing page MUST NOT overflow.
+- Embedded print previews MUST remain understandable on phones.
+- Screen-only mobile adaptations MAY simplify columns, side rails, or wide tables for inspection, but MUST NOT change Folio's print-media behavior or renderer guarantees.
+- Mobile documentation CSS MUST NOT become a pagination workaround or change the underlying Folio component contract.
+- Cross-browser mobile checks MUST run in Chromium, Firefox, and WebKit.
+
+## 11. Generated output
 
 `site-dist/` is generated output and MUST be gitignored.
 
