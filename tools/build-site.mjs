@@ -651,6 +651,31 @@ function agentsPage() {
       <li>Run the print experiments and site checks before claiming a change is complete.</li>
     </ol>
 
+    <h2>Mobile and screen preview behavior</h2>
+    <p>Folio's public CSS is responsive on screens without changing the physical print contract. No JavaScript is required for responsive behavior.</p>
+    <div class="instruction-grid">
+      <article class="instruction-card">
+        <span class="component-kicker">Adaptive component</span>
+        <h3><code>ef-print-columns</code></h3>
+        <p>At screen widths of 48rem or less, multicolumn content collapses to one readable column. Print media preserves the authored column count.</p>
+      </article>
+      <article class="instruction-card">
+        <span class="component-kicker">Adaptive component</span>
+        <h3><code>ef-print-sidebar</code></h3>
+        <p>At screen widths of 48rem or less, the main/rail layout stacks into one column. Print media preserves the side-rail grid.</p>
+      </article>
+      <article class="instruction-card">
+        <span class="component-kicker">Natural flow</span>
+        <h3>Structural primitives</h3>
+        <p><code>document</code>, <code>title-page</code>, <code>section</code>, <code>back-page</code>, <code>break</code>, and <code>keep</code> already follow normal block flow and do not need special mobile layout overrides.</p>
+      </article>
+      <article class="instruction-card">
+        <span class="component-kicker">Contract boundary</span>
+        <h3>Screen is inspection. Print is output.</h3>
+        <p>Never change pagination rules merely to make a phone preview fit. Screen-only adaptations must disappear under <code>@media print</code>.</p>
+      </article>
+    </div>
+
     <h2>Boundary ownership</h2>
     <div class="table-scroll" role="region" aria-label="Folio boundary ownership" tabindex="0">
     <table>
