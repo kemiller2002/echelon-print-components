@@ -68,5 +68,6 @@ jobs:
             echo "package-lock.json already current"
           else
             git commit -m "Lock print experiment test dependencies"
+            git pull --rebase origin main
             git push
           fi
