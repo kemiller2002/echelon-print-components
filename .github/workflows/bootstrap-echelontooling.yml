@@ -29,6 +29,10 @@ jobs:
         run: npx --yes --package=github:kemiller2002/communication-engineering#4590d2fe6f7e80b339117d3fbee5803f2dd39122 communication-engineering init
       - name: Install Limen
         run: npx --yes @echelon-foundry/typescript-wasm-kernel@0.6.2 init
+      - name: Establish Limen boundary directories
+        run: |
+          mkdir -p src/engine src/kernel
+          touch src/engine/.gitkeep src/kernel/.gitkeep
       - name: Verify installations
         run: |
           npx --yes --package=@echelon-foundry/repository-operating-system@3.1.4 ros verify
