@@ -1,1 +1,55 @@
-[]
+[
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0001",
+    "path": "research/evidence/EV-PRINT-2026-0001--pagination-01-browser-and-pdf-evidence.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-22",
+    "source_author": "echelon-print-components CI",
+    "source_date": "2026-09-22",
+    "source_title": "PAGINATION-01 CI execution",
+    "source_uri": "https://github.com/kemiller2002/echelon-print-components/actions/runs/35692737104",
+    "supports": [
+      "HY-PRINT-2026-0001"
+    ],
+    "tags": [
+      "print",
+      "pagination",
+      "custom-elements",
+      "chromium",
+      "firefox",
+      "webkit"
+    ],
+    "title": "PAGINATION-01 automated browser and Chromium PDF evidence"
+  },
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0002",
+    "path": "research/evidence/EV-PRINT-2026-0002--margin-01-chromium-page-margin-evidence.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-22",
+    "source_author": "echelon-print-components CI",
+    "source_date": "2026-09-22",
+    "source_title": "MARGIN-01 CI execution",
+    "source_uri": "https://github.com/kemiller2002/echelon-print-components/actions/runs/35692737104",
+    "supports": [
+      "HY-PRINT-2026-0002"
+    ],
+    "tags": [
+      "print",
+      "chromium",
+      "page-margin-boxes",
+      "page-numbers",
+      "pdf"
+    ],
+    "title": "MARGIN-01 Chromium page-margin and counter evidence"
+  }
+]

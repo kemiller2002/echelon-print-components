@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "author_agent": "chatgpt",
+    "confidence": "medium",
+    "contradicting_evidence": [],
+    "created": "2026-09-22",
+    "id": "HY-PRINT-2026-0001",
+    "path": "research/hypotheses/HY-PRINT-2026-0001--passive-light-dom-print-wrappers-preserve-layout-behavior.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "supported",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "EV-PRINT-2026-0001"
+    ],
+    "title": "Passive light-DOM print wrappers preserve layout behavior"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "high",
+    "contradicting_evidence": [],
+    "created": "2026-09-22",
+    "id": "HY-PRINT-2026-0002",
+    "path": "research/hypotheses/HY-PRINT-2026-0002--chromium-margin-boxes-provide-running-metadata-and-page-counts.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "supported",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [
+      "EV-PRINT-2026-0002"
+    ],
+    "title": "Chromium margin boxes can provide native running metadata and Page X of Y"
+  }
+]
