@@ -181,7 +181,6 @@ async function rasterInkScore(pdfPath, stem) {
     "-l", "1",
     "-singlefile",
     "-r", "36",
-    "-ppm",
     pdfPath,
     prefix,
   ]);
