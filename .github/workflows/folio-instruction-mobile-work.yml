@@ -1,16 +1,17 @@
-name: Begin Folio instruction and component mobile work
+name: Complete Folio instruction and component mobile work
 
 on:
   push:
     branches: [main]
     paths:
       - ".github/workflows/folio-instruction-mobile-work.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  begin:
+  complete:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -20,17 +21,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Begin GH-9
+      - name: Complete GH-9
         shell: bash
+        env:
+          BASE_SHA: ${{ github.event.before }}
         run: |
           set -euo pipefail
-          ./ros add "Make Folio instructions and remaining components mobile-friendly" --id "GH-9" --tag folio,mobile,components,documentation --priority high --source github-issue --source-reference "https://github.com/kemiller2002/echelon-print-components/issues/9" --actor "agent:chatgpt"
           NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
-          ./ros work backlog-transition --action ready --id "GH-9" --occurred-at "$NOW"
-          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
-          ./ros work start --id "GH-9" --occurred-at "$NOW" --type feature
-          ./ros work context "GH-9"
-      - name: Commit ROS state
+          ROS_BASE_REF="$BASE_SHA" ./ros work complete             --id "GH-9"             --occurred-at "$NOW"             --evidence requirements=docs/requirements/FOLIO-SITE-REQUIREMENTS.md             --evidence implementation=src/styles/print.css             --evidence implementation=tools/build-site.mjs             --evidence documentation=docs/AGENT-USAGE.md             --evidence tests=tests/run-site-browser-tests.mjs             --evidence tests=tests/site-build.test.mjs
+          ./ros registry build
+          ROS_BASE_REF="$BASE_SHA" ./ros validate
+          ./ros status
+      - name: Commit ROS completion
         shell: bash
         run: |
           set -euo pipefail
@@ -38,8 +40,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           if [ -d .ros/telemetry ]; then git add -f .ros/telemetry; fi
-          git reset -- .github/workflows
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Begin GH-9 Folio mobile instruction work"
+          git commit -m "Complete GH-9 Folio mobile instruction work"
           git pull --rebase origin main
           git push
