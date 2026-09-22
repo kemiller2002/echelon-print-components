@@ -18,6 +18,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/3"
+    },
+    {
+      "id": "GH-4",
+      "title": "Build Folio component documentation site",
+      "description": null,
+      "tags": [
+        "folio,print,documentation"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-09-22T16:50:19.654Z",
+      "updatedAt": "2026-09-22T16:50:19.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/4"
     }
   ]
 }
