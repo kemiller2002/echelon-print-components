@@ -48,3 +48,12 @@ Escalation/evidence required:
 - changing pagination-sensitive component behavior;
 - promoting provisional layout behavior to portable;
 - adding a pagination runtime.
+
+
+## Mobile documentation contract
+
+The Folio docs shell is responsive down to 320 CSS pixels.
+
+Embedded demos may use screen-only inspection adaptations on narrow viewports, but those adaptations must never change `@media print` behavior or Folio's renderer capability claims.
+
+Cross-browser site tests cover 320px, 390px, and 430px widths in Chromium, Firefox, and WebKit.
