@@ -81,6 +81,7 @@ test("Folio site publishes the mobile documentation contract", async () => {
   const agents = await fs.readFile(path.join(site, "agents", "index.html"), "utf8");
   const siteCss = await fs.readFile(path.join(site, "assets", "site.css"), "utf8");
   const demoCss = await fs.readFile(path.join(site, "assets", "demo.css"), "utf8");
+  const printCss = await fs.readFile(path.join(site, "assets", "folio-print.css"), "utf8");
 
   for (const [name, html] of [["home", home], ["component", component], ["capabilities", capabilities], ["agents", agents]]) {
     assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/, name);
