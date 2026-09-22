@@ -2,11 +2,15 @@
   "name": "@echelon-foundry/print-components",
   "version": "0.0.0-experimental",
   "private": true,
-  "description": "Standards-first web components and CSS primitives for professional HTML print documents.",
+  "description": "Folio: standards-first web components and CSS primitives for professional HTML print documents.",
   "type": "module",
   "scripts": {
     "test": "node tests/run-print-experiments.mjs",
-    "test:print": "node tests/run-print-experiments.mjs"
+    "test:print": "node tests/run-print-experiments.mjs",
+    "site:build": "node tools/build-site.mjs",
+    "site:test": "node --test tests/site-build.test.mjs",
+    "site:test:browser": "node tests/run-site-browser-tests.mjs",
+    "site:check": "npm run site:build && npm run site:test"
   },
   "devDependencies": {
     "playwright": "1.63.0"
