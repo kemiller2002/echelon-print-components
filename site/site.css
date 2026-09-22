@@ -316,12 +316,16 @@
 
   .docs-shell {
     inline-size: min(var(--site-max), 100%);
+    max-inline-size: 100%;
+    min-inline-size: 0;
     margin-inline: auto;
     display: grid;
     grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
   }
 
   .component-nav {
+    min-inline-size: 0;
+    max-inline-size: 100%;
     padding: 2rem 1.2rem 4rem var(--site-gutter);
     border-inline-end: 1px solid var(--ef-forged-iron);
   }
@@ -329,6 +333,8 @@
   .component-nav-inner {
     position: sticky;
     inset-block-start: 5.5rem;
+    min-inline-size: 0;
+    max-inline-size: 100%;
     max-block-size: calc(100vh - 7rem);
     overflow: auto;
   }
@@ -611,9 +617,11 @@
     }
     .component-nav-inner { position: static; max-block-size: none; }
     .component-nav ul {
+      inline-size: 100%;
+      min-inline-size: 0;
+      max-inline-size: 100%;
       display: flex;
       gap: .35rem;
-      max-inline-size: 100%;
       overflow-x: auto;
       overscroll-behavior-inline: contain;
       scroll-snap-type: inline proximity;
@@ -674,7 +682,15 @@
     .contract-grid,
     .section-heading,
     .example-heading { grid-template-columns: 1fr; }
-    .component-main { padding-inline: 1rem; }
+    .component-main { min-inline-size: 0; max-inline-size: 100%; padding-inline: 1rem; }
+    .examples,
+    .example-block,
+    .example-block details,
+    .example-block pre {
+      min-inline-size: 0;
+      max-inline-size: 100%;
+    }
+    .example-block pre { inline-size: 100%; }
     .print-preview,
     .print-preview iframe { block-size: min(70vh, 32rem); }
     .example-actions {
