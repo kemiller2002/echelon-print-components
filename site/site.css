@@ -692,6 +692,16 @@
     .footer-note span { display: block; margin-block-start: .5rem; }
   }
 
+
+  @media (max-width: 360px) {
+    :root { --site-gutter: .85rem; }
+    .site-nav { grid-template-columns: 1fr 1fr; }
+    .component-main { padding-inline: .85rem; }
+    .hero h1 { font-size: 3.25rem; }
+    .print-preview,
+    .print-preview iframe { block-size: 24rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
   }
@@ -706,12 +716,3 @@
     .print-preview { border: 1px solid CanvasText; }
   }
 }
-
-  @media (max-width: 360px) {
-    :root { --site-gutter: .85rem; }
-    .site-nav { grid-template-columns: 1fr 1fr; }
-    .component-main { padding-inline: .85rem; }
-    .hero h1 { font-size: 3.25rem; }
-    .print-preview,
-    .print-preview iframe { block-size: 24rem; }
-  }
