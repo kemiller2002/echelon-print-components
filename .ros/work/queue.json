@@ -50,6 +50,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/6"
+    },
+    {
+      "id": "GH-8",
+      "title": "Finalize Folio mobile governance cleanup",
+      "description": null,
+      "tags": [
+        "folio,governance,cleanup"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-22T17:27:09.840Z",
+      "updatedAt": "2026-09-22T17:27:10.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/8"
     }
   ]
 }

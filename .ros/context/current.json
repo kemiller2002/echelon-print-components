@@ -4,7 +4,7 @@
   "repository": "echelon-print-components",
   "actor": "ros-bootstrap",
   "startedAt": "2026-09-22T01:08:47.354Z",
-  "updatedAt": "2026-09-22T17:23:32.000Z",
+  "updatedAt": "2026-09-22T17:27:10.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -107,6 +107,31 @@
         "EXE-20260922T171103146Z-1b5a0bc4"
       ],
       "completedAt": "2026-09-22T17:23:32.000Z"
+    },
+    {
+      "id": "GH-8",
+      "type": "maintenance",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".github/workflows/folio-governance-cleanup.yml"
+        },
+        {
+          "type": "requirements",
+          "path": "docs/requirements/FOLIO-SITE-REQUIREMENTS.md"
+        },
+        {
+          "type": "tests",
+          "path": "tests/run-site-browser-tests.mjs"
+        }
+      ],
+      "updatedAt": "2026-09-22T17:27:10.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260922T172710310Z-49ca4c1e"
+      ],
+      "completedAt": "2026-09-22T17:27:10.000Z"
     }
   ]
 }
