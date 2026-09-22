@@ -85,6 +85,18 @@ Controlled export contract:
 
 Optional dedicated publishing-engine integrations for features outside mainstream browser interoperability.
 
+## Mobile and screen-preview behavior
+
+Folio's public stylesheet is responsive on screens and keeps print behavior separate.
+
+- `ef-print-columns` collapses to one column at screen widths of 48rem or less.
+- `ef-print-sidebar` stacks to one column at screen widths of 48rem or less.
+- `ef-print-document`, `ef-print-title-page`, `ef-print-section`, `ef-print-back-page`, `ef-print-break`, and `ef-print-keep` already use ordinary block flow and do not need component-specific mobile overrides.
+- These adaptations are screen-only. Print media preserves the authored column count, side-rail layout, break behavior, and renderer contract.
+- Do not introduce JavaScript solely for responsive behavior.
+- Do not change pagination semantics to make a screen preview fit.
+- If consumer content itself is intrinsically wide, such as a large data table, preserve the content and use an explicit contained scrolling or alternate screen presentation strategy rather than clipping it.
+
 ## Boundary ownership
 
 | Concern | Owner |
