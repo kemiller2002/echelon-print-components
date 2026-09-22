@@ -58,12 +58,10 @@ try {
     assert.equal(await page.locator("[data-example]").count(), 3, `${name}: three examples`);
     assert.match(await page.locator(".contract-grid").innerText(), /P0 portable/i);
 
-    const iframeHandle = await page.locator("iframe").first().elementHandle();
-    assert.ok(iframeHandle, `${name}: columns demo iframe element exists`);
-    const frame = await iframeHandle.contentFrame();
-    assert.ok(frame, `${name}: columns demo iframe loaded`);
-    await frame.waitForLoadState("domcontentloaded");
-    const columnCount = await frame.locator("ef-print-columns").evaluate(element => getComputedStyle(element).columnCount);
+    const preview = page.frameLocator("iframe").first();
+    const columns = preview.locator("ef-print-columns");
+    await columns.waitFor({ state: "attached" });
+    const columnCount = await columns.evaluate(element => getComputedStyle(element).columnCount);
     assert.equal(columnCount, "2", `${name}: Folio print CSS applied inside preview`);
 
     await page.goto(baseURL + "/components/sidebar/");
