@@ -1,0 +1,48 @@
+@import "../../../src/styles/print.css";
+
+:root {
+  --ef-print-page-size: Letter;
+  --ef-print-page-margin: 0.65in;
+}
+
+.doc {
+  display: block;
+}
+
+.section {
+  display: block;
+  margin: 0 0 0.22in;
+}
+
+.section > h2 {
+  margin: 0 0 0.12in;
+  font-size: 16pt;
+  line-height: 1.15;
+  break-after: avoid;
+}
+
+.lead {
+  margin: 0 0 0.16in;
+}
+
+.probe-card {
+  display: block;
+  min-height: 1.72in;
+  margin: 0 0 0.16in;
+  padding: 0.15in;
+  border: 1px solid #777;
+  break-inside: avoid;
+}
+
+.probe-card h3 {
+  margin: 0 0 0.08in;
+  font-size: 11.5pt;
+}
+
+.probe-card p {
+  margin: 0 0 0.08in;
+}
+
+.probe-card p:last-child {
+  margin-bottom: 0;
+}
