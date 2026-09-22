@@ -526,6 +526,17 @@
     border-block-start: 1px solid var(--ef-forged-iron);
   }
 
+  .table-scroll {
+    max-inline-size: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-scroll table {
+    min-inline-size: 38rem;
+  }
+
   .agent-page th,
   .agent-page td,
   .capability-page th,
@@ -547,10 +558,20 @@
 
   .agent-page pre,
   .capability-page pre {
+    max-inline-size: 100%;
     padding: 1rem;
     overflow: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
     background: var(--ef-foundry-charcoal);
     color: var(--ef-parchment);
+  }
+
+  .preview-note {
+    flex: 1 1 20rem;
+    margin: 0;
+    color: var(--ef-forged-iron);
+    font-size: .72rem;
   }
 
   .site-footer {
@@ -589,15 +610,63 @@
       border-block-end: 1px solid var(--ef-forged-iron);
     }
     .component-nav-inner { position: static; max-block-size: none; }
-    .component-nav ul { display: flex; gap: .85rem; overflow-x: auto; }
-    .component-nav li { flex: 0 0 auto; }
+    .component-nav ul {
+      display: flex;
+      gap: .35rem;
+      max-inline-size: 100%;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: inline proximity;
+      scrollbar-gutter: stable;
+      -webkit-overflow-scrolling: touch;
+    }
+    .component-nav li {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+    }
+    .component-nav a {
+      min-block-size: 2.75rem;
+      display: flex;
+      align-items: center;
+      padding: .5rem .65rem;
+      border: 1px solid var(--ef-stone);
+    }
   }
 
   @media (max-width: 680px) {
-    .nav-shell { align-items: flex-start; }
-    .site-nav { flex-wrap: wrap; justify-content: flex-end; }
-    .site-nav a { padding: .4rem; font-size: .7rem; }
+    .nav-shell {
+      flex-direction: column;
+      align-items: stretch;
+      gap: .65rem;
+      padding-block: .65rem;
+    }
+    .brand { justify-content: space-between; }
+    .brand-link { white-space: normal; }
+    .site-nav {
+      inline-size: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .25rem;
+    }
+    .site-nav a {
+      min-block-size: 2.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: .5rem;
+      border: 1px solid var(--ef-stone);
+      font-size: .72rem;
+      text-align: center;
+    }
     .site-nav .pill-link { margin-inline-start: 0; }
+    .hero { padding-block-start: 3rem; }
+    .hero h1 { font-size: clamp(3.5rem, 22vw, 5.5rem); }
+    .component-nav { padding-inline: 1rem; }
+    .component-nav h2 { margin-block: 0 .5rem; }
+    .breadcrumbs { margin-block-end: 2rem; flex-wrap: wrap; }
+    .component-header h1,
+    .agent-page h1,
+    .capability-page h1 { font-size: clamp(2.7rem, 15vw, 4.5rem); }
     .hero-stats,
     .component-grid,
     .principle-grid,
@@ -607,7 +676,18 @@
     .example-heading { grid-template-columns: 1fr; }
     .component-main { padding-inline: 1rem; }
     .print-preview,
-    .print-preview iframe { block-size: 28rem; }
+    .print-preview iframe { block-size: min(70vh, 32rem); }
+    .example-actions {
+      align-items: flex-start;
+      padding: .8rem;
+    }
+    .example-actions a {
+      min-block-size: 2.75rem;
+      display: inline-flex;
+      align-items: center;
+    }
+    .agent-page,
+    .capability-page { inline-size: min(100% - 2rem, 64rem); }
     .footer-grid, .footer-note { display: block; }
     .footer-note span { display: block; margin-block-start: .5rem; }
   }
@@ -626,3 +706,12 @@
     .print-preview { border: 1px solid CanvasText; }
   }
 }
+
+  @media (max-width: 360px) {
+    :root { --site-gutter: .85rem; }
+    .site-nav { grid-template-columns: 1fr 1fr; }
+    .component-main { padding-inline: .85rem; }
+    .hero h1 { font-size: 3.25rem; }
+    .print-preview,
+    .print-preview iframe { block-size: 24rem; }
+  }
