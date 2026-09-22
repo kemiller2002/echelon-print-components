@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - "research/**"
       - ".github/workflows/register-print-research.yml"
   workflow_dispatch:
 
@@ -12,6 +13,7 @@ permissions:
 
 jobs:
   register:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +37,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Registries already current"
           else
-            git commit -m "Register initial print experiment evidence"
+            git commit -m "Rebuild ROS research registries"
             git pull --rebase origin main
             git push
           fi
