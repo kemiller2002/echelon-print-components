@@ -50,12 +50,13 @@
       "tests/fixtures/columns/columns.html"
     ],
     "outputs": [
+      "test-results/print-experiments/columns-01.pdf",
       "test-results/print-experiments/results.json"
     ],
     "path": "research/experiments/EX-PRINT-2026-0003--col-01-multipage-column-fragmentation.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "active",
+    "status": "completed",
     "tests_hypotheses": [
       "HY-PRINT-2026-0003"
     ],
@@ -69,12 +70,13 @@
       "tests/fixtures/sidebar/sidebar.html"
     ],
     "outputs": [
+      "test-results/print-experiments/sidebar-01.pdf",
       "test-results/print-experiments/results.json"
     ],
     "path": "research/experiments/EX-PRINT-2026-0004--sidebar-01-grid-side-rail-fragmentation.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "active",
+    "status": "completed",
     "tests_hypotheses": [
       "HY-PRINT-2026-0004"
     ],
@@ -88,12 +90,13 @@
       "tests/fixtures/table/table.html"
     ],
     "outputs": [
+      "test-results/print-experiments/table-01.pdf",
       "test-results/print-experiments/results.json"
     ],
     "path": "research/experiments/EX-PRINT-2026-0005--table-01-multipage-and-landscape-tables.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "active",
+    "status": "completed",
     "tests_hypotheses": [
       "HY-PRINT-2026-0005"
     ],

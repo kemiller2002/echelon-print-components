@@ -35,17 +35,19 @@
   },
   {
     "author_agent": "chatgpt",
-    "confidence": "medium",
+    "confidence": "high",
     "contradicting_evidence": [],
     "created": "2026-09-22",
     "id": "HY-PRINT-2026-0003",
     "path": "research/hypotheses/HY-PRINT-2026-0003--native-multicolumn-flow-preserves-kept-blocks-across-pages.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "proposed",
+    "status": "supported",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [],
+    "supporting_evidence": [
+      "EV-PRINT-2026-0003"
+    ],
     "title": "Native multicolumn flow preserves kept blocks across pages"
   },
   {
@@ -57,25 +59,29 @@
     "path": "research/hypotheses/HY-PRINT-2026-0004--grid-side-rail-can-fragment-without-content-loss-or-horizontal-overlap.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "proposed",
+    "status": "supported",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [],
+    "supporting_evidence": [
+      "EV-PRINT-2026-0004"
+    ],
     "title": "Grid side rail can fragment without content loss or horizontal overlap"
   },
   {
     "author_agent": "chatgpt",
-    "confidence": "medium",
+    "confidence": "high",
     "contradicting_evidence": [],
     "created": "2026-09-22",
     "id": "HY-PRINT-2026-0005",
     "path": "research/hypotheses/HY-PRINT-2026-0005--native-tables-repeat-headers-and-named-pages-support-landscape-wide-sections.md",
     "related_theories": [],
     "research_area": "print-components",
-    "status": "proposed",
+    "status": "supported",
     "superseded_by": [],
     "supersedes": [],
-    "supporting_evidence": [],
+    "supporting_evidence": [
+      "EV-PRINT-2026-0005"
+    ],
     "title": "Native tables repeat headers and named pages support landscape wide sections"
   }
 ]

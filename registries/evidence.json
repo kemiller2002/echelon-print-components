@@ -51,5 +51,82 @@
       "pdf"
     ],
     "title": "MARGIN-01 Chromium page-margin and counter evidence"
+  },
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0003",
+    "path": "research/evidence/EV-PRINT-2026-0003--col-01-multipage-column-evidence.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-22",
+    "source_author": "echelon-print-components CI",
+    "source_date": "2026-09-22",
+    "source_title": "COL-01 CI execution",
+    "source_uri": "https://github.com/kemiller2002/echelon-print-components/actions/runs/35693518579",
+    "supports": [
+      "HY-PRINT-2026-0003"
+    ],
+    "tags": [
+      "print",
+      "columns",
+      "pagination",
+      "chromium"
+    ],
+    "title": "COL-01 multipage column evidence"
+  },
+  {
+    "confidence": "medium",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0004",
+    "path": "research/evidence/EV-PRINT-2026-0004--sidebar-01-grid-rail-evidence.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-22",
+    "source_author": "echelon-print-components CI",
+    "source_date": "2026-09-22",
+    "source_title": "SIDEBAR-01 CI execution",
+    "source_uri": "https://github.com/kemiller2002/echelon-print-components/actions/runs/35693518579",
+    "supports": [
+      "HY-PRINT-2026-0004"
+    ],
+    "tags": [
+      "print",
+      "grid",
+      "sidebar",
+      "pagination",
+      "chromium"
+    ],
+    "title": "SIDEBAR-01 grid rail evidence"
+  },
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0005",
+    "path": "research/evidence/EV-PRINT-2026-0005--table-01-multipage-and-landscape-evidence.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-22",
+    "source_author": "echelon-print-components CI",
+    "source_date": "2026-09-22",
+    "source_title": "TABLE-01 CI execution",
+    "source_uri": "https://github.com/kemiller2002/echelon-print-components/actions/runs/35693518579",
+    "supports": [
+      "HY-PRINT-2026-0005"
+    ],
+    "tags": [
+      "print",
+      "tables",
+      "named-pages",
+      "landscape",
+      "chromium"
+    ],
+    "title": "TABLE-01 multipage and landscape evidence"
   }
 ]
