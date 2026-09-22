@@ -119,6 +119,10 @@ Mobile support is a first-class documentation requirement.
 - Screen-only mobile adaptations MAY simplify columns, side rails, or wide tables for inspection, but MUST NOT change Folio's print-media behavior or renderer guarantees.
 - Mobile documentation CSS MUST NOT become a pagination workaround or change the underlying Folio component contract.
 - Cross-browser mobile checks MUST run in Chromium, Firefox, and WebKit.
+- Mobile behavior required by shipped Folio components MUST live in the public Folio stylesheet, not only in documentation-demo CSS.
+- `ef-print-columns` MUST collapse to one column on narrow screens while retaining its authored column count in print media.
+- `ef-print-sidebar` MUST stack on narrow screens while retaining its side-rail grid in print media.
+- Structural primitives that already follow normal block flow MUST NOT receive unnecessary mobile-specific behavior.
 
 ## 11. Generated output
 

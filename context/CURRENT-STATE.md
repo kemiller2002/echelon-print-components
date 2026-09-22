@@ -97,3 +97,16 @@ The mobile contract now requires:
 - screen-only inspection adaptations for columns, sidebars, and wide tables;
 - preservation of the original Folio print-media contract under `@media print`;
 - Chromium, Firefox, and WebKit verification.
+
+
+## Core component mobile behavior
+
+Tracked work item GH-9 moves narrow-screen behavior from documentation-only demo CSS into Folio's public stylesheet.
+
+Current mobile posture:
+
+- `ef-print-columns`: screen widths <= 48rem collapse to one column; print preserves the authored column count.
+- `ef-print-sidebar`: screen widths <= 48rem stack main and rail; print preserves the side-rail grid.
+- `ef-print-document`, `ef-print-title-page`, `ef-print-section`, `ef-print-back-page`, `ef-print-break`, and `ef-print-keep`: ordinary block/fragmentation primitives already flow naturally on narrow screens and receive no unnecessary responsive override.
+- responsive behavior is CSS-only; no JavaScript runtime is introduced.
+- browser validation audits every registered component page and a standalone demo for every registered component at 320px, 390px, and 430px in Chromium, Firefox, and WebKit.

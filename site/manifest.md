@@ -57,3 +57,17 @@ The Folio docs shell is responsive down to 320 CSS pixels.
 Embedded demos may use screen-only inspection adaptations on narrow viewports, but those adaptations must never change `@media print` behavior or Folio's renderer capability claims.
 
 Cross-browser site tests cover 320px, 390px, and 430px widths in Chromium, Firefox, and WebKit.
+
+
+## Core responsive component contract
+
+Folio's public stylesheet, not the documentation demo layer, owns component-level responsive behavior.
+
+At screen widths <= 48rem:
+
+- `ef-print-columns` becomes one column.
+- `ef-print-sidebar` becomes one stacked column.
+
+These rules are screen-only. Under print media, the authored column count and side-rail layout remain unchanged.
+
+The other registered Folio primitives use natural block flow and must not gain unnecessary mobile-specific layout rules.

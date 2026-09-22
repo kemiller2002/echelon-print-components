@@ -61,6 +61,9 @@ test("Folio site publishes capability and agent guidance surfaces", async () => 
   assert.match(capabilities, /P3/);
   assert.match(capabilities, /provisional/i);
   assert.match(agents, /not a pagination engine/i);
+  assert.match(agents, /Mobile and screen preview behavior/i);
+  assert.match(agents, /ef-print-columns/);
+  assert.match(agents, /ef-print-sidebar/);
   assert.match(agents, /docs\/AGENT-USAGE\.md/);
 });
 
@@ -81,6 +84,7 @@ test("Folio site publishes the mobile documentation contract", async () => {
   const agents = await fs.readFile(path.join(site, "agents", "index.html"), "utf8");
   const siteCss = await fs.readFile(path.join(site, "assets", "site.css"), "utf8");
   const demoCss = await fs.readFile(path.join(site, "assets", "demo.css"), "utf8");
+  const printCss = await fs.readFile(path.join(site, "assets", "folio-print.css"), "utf8");
 
   for (const [name, html] of [["home", home], ["component", component], ["capabilities", capabilities], ["agents", agents]]) {
     assert.match(html, /<meta name="viewport" content="width=device-width, initial-scale=1">/, name);
@@ -92,6 +96,10 @@ test("Folio site publishes the mobile documentation contract", async () => {
   assert.match(agents, /class="table-scroll"/);
   assert.match(siteCss, /@media \(max-width: 680px\)/);
   assert.match(siteCss, /@media \(max-width: 360px\)/);
-  assert.match(demoCss, /Screen-only mobile inspection mode/);
+  assert.match(siteCss, /instruction-grid/);
+  assert.match(printCss, /@media screen and \(max-width: 48rem\)/);
+  assert.match(printCss, /ef-print-columns\s*\{[\s\S]*?column-count:\s*1;/);
+  assert.match(printCss, /ef-print-sidebar\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\);/);
+  assert.doesNotMatch(demoCss, /ef-print-columns\s*\{\s*column-count:\s*1;/);
   assert.match(demoCss, /@media print/);
 });

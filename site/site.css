@@ -580,6 +580,34 @@
     font-size: .72rem;
   }
 
+  .instruction-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-block: 1.5rem 3rem;
+    border: 1px solid var(--ef-stone);
+    background: var(--ef-stone);
+  }
+
+  .instruction-card {
+    min-inline-size: 0;
+    padding: 1.2rem;
+    background: var(--ef-parchment);
+  }
+
+  .instruction-card h3 {
+    margin-block-end: .55rem;
+  }
+
+  .instruction-card p {
+    margin: 0;
+    color: var(--ef-forged-iron);
+  }
+
+  .instruction-card code {
+    overflow-wrap: anywhere;
+  }
+
   .site-footer {
     background: var(--ef-foundry-charcoal);
     color: var(--ef-parchment);
@@ -681,7 +709,8 @@
     .capability-grid,
     .contract-grid,
     .section-heading,
-    .example-heading { grid-template-columns: 1fr; }
+    .example-heading,
+    .instruction-grid { grid-template-columns: 1fr; }
     .component-main { min-inline-size: 0; max-inline-size: 100%; padding-inline: 1rem; }
     .examples,
     .example-block,

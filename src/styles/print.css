@@ -82,6 +82,25 @@
     grid-template-columns: minmax(0, 1fr) var(--ef-print-sidebar-width, 1.65in);
     gap: var(--ef-print-sidebar-gap, 0.24in);
   }
+
+  /*
+   * Screen-only responsive inspection behavior.
+   * Folio's print contract remains unchanged because these rules never match print media.
+   */
+  @media screen and (max-width: 48rem) {
+    ef-print-columns {
+      column-count: 1;
+    }
+
+    ef-print-sidebar {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    ef-print-sidebar > * {
+      min-inline-size: 0;
+      max-inline-size: 100%;
+    }
+  }
 }
 
 @media print {

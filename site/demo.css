@@ -238,20 +238,14 @@ body {
     grid-template-columns: 1fr;
   }
 
-  /* Screen-only mobile inspection mode. These rules never apply to print. */
-  .folio-demo ef-print-columns {
-    column-count: 1;
-  }
-
-  .folio-demo ef-print-sidebar,
+  /*
+   * Folio core owns responsive columns/sidebar behavior.
+   * Demo CSS only refines the visual rail treatment for narrow-screen inspection.
+   */
   .folio-demo .folio-sidebar-main,
   .folio-demo .folio-sidebar-rail {
     min-inline-size: 0;
     max-inline-size: 100%;
-  }
-
-  .folio-demo ef-print-sidebar {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .folio-demo .folio-sidebar-rail {
