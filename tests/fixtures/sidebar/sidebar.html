@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SIDEBAR-01 Grid Side Rail</title>
+<link rel="stylesheet" href="../../../src/styles/print.css">
+<script type="module" src="../../../src/components/register.js"></script>
+<style>
+@page { size: Letter; margin: .65in; }
+body { margin:0; }
+ef-print-document { display:block; }
+ef-print-sidebar { --ef-print-sidebar-width: 1.65in; --ef-print-sidebar-gap: .28in; align-items:start; }
+.main-block { border-bottom:1px solid #aaa; padding:0 0 .12in; margin:0 0 .12in; min-height:.93in; break-inside:avoid; }
+.main-block h2 { font-size:12pt; margin:.04in 0; }
+.main-block p, .side-note p { margin:.04in 0; }
+.side-note { border-left:3px solid #666; padding-left:.1in; margin-bottom:.18in; break-inside:avoid; }
+</style>
+</head>
+<body>
+<ef-print-document>
+<h1>SIDEBAR-01 Grid Side Rail</h1>
+<ef-print-sidebar>
+<main><section class="main-block"><strong>MAIN-01</strong><h2>Main block 1</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-02</strong><h2>Main block 2</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-03</strong><h2>Main block 3</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-04</strong><h2>Main block 4</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-05</strong><h2>Main block 5</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-06</strong><h2>Main block 6</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-07</strong><h2>Main block 7</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-08</strong><h2>Main block 8</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-09</strong><h2>Main block 9</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section>
+<section class="main-block"><strong>MAIN-10</strong><h2>Main block 10</h2><p>This main-column block tests whether a grid-based side rail can coexist with page fragmentation without clipping or horizontal overlap.</p><p>All marker text must survive PDF generation.</p></section></main>
+<aside><section class="side-note"><strong>SIDE-01</strong><p>Side note 1. Short metadata belongs in the rail while the main narrative remains first in source order.</p></section>
+<section class="side-note"><strong>SIDE-02</strong><p>Side note 2. Short metadata belongs in the rail while the main narrative remains first in source order.</p></section>
+<section class="side-note"><strong>SIDE-03</strong><p>Side note 3. Short metadata belongs in the rail while the main narrative remains first in source order.</p></section>
+<section class="side-note"><strong>SIDE-04</strong><p>Side note 4. Short metadata belongs in the rail while the main narrative remains first in source order.</p></section></aside>
+</ef-print-sidebar>
+</ef-print-document>
+</body>
+</html>

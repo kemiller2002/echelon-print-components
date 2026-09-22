@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>COL-01 Multi-page Columns</title>
+<link rel="stylesheet" href="../../../src/styles/print.css">
+<script type="module" src="../../../src/components/register.js"></script>
+<style>
+@page { size: Letter; margin: .65in; }
+body { margin: 0; }
+ef-print-document { display:block; }
+ef-print-columns { --ef-print-column-count: 2; --ef-print-column-gap: .28in; display:block; }
+.column-card { border:1px solid #777; padding:.12in; margin:0 0 .13in; min-height:1.45in; break-inside:avoid; }
+.column-card p { margin:.06in 0; }
+.column-span { column-span:all; border-top:2px solid #333; border-bottom:1px solid #999; padding:.1in 0; margin:.08in 0 .15in; break-after:avoid; }
+</style>
+</head>
+<body>
+<ef-print-document>
+<h1>COL-01 Multi-page Columns</h1>
+<ef-print-columns>
+<article class="column-card"><strong>COL-01-START</strong><p>Column item 1 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-01-END</strong></article>
+<article class="column-card"><strong>COL-02-START</strong><p>Column item 2 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-02-END</strong></article>
+<article class="column-card"><strong>COL-03-START</strong><p>Column item 3 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-03-END</strong></article>
+<article class="column-card"><strong>COL-04-START</strong><p>Column item 4 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-04-END</strong></article>
+<article class="column-card"><strong>COL-05-START</strong><p>Column item 5 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-05-END</strong></article>
+<article class="column-card"><strong>COL-06-START</strong><p>Column item 6 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-06-END</strong></article>
+<div class="column-span"><strong>COL-SPAN-MARKER</strong> Full-width content inside the multi-column flow.</div>
+<article class="column-card"><strong>COL-07-START</strong><p>Column item 7 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-07-END</strong></article>
+<article class="column-card"><strong>COL-08-START</strong><p>Column item 8 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-08-END</strong></article>
+<article class="column-card"><strong>COL-09-START</strong><p>Column item 9 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-09-END</strong></article>
+<article class="column-card"><strong>COL-10-START</strong><p>Column item 10 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-10-END</strong></article>
+<article class="column-card"><strong>COL-11-START</strong><p>Column item 11 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-11-END</strong></article>
+<article class="column-card"><strong>COL-12-START</strong><p>Column item 12 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-12-END</strong></article>
+<article class="column-card"><strong>COL-13-START</strong><p>Column item 13 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-13-END</strong></article>
+<article class="column-card"><strong>COL-14-START</strong><p>Column item 14 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-14-END</strong></article>
+<article class="column-card"><strong>COL-15-START</strong><p>Column item 15 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-15-END</strong></article>
+<article class="column-card"><strong>COL-16-START</strong><p>Column item 16 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-16-END</strong></article>
+<article class="column-card"><strong>COL-17-START</strong><p>Column item 17 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-17-END</strong></article>
+<article class="column-card"><strong>COL-18-START</strong><p>Column item 18 exercises native multi-column fragmentation. This block is intentionally kept together and contains enough text to create page pressure.</p><p>The renderer must preserve all content without manual page coordinates.</p><strong>COL-18-END</strong></article>
+<div class="column-span"><strong>COL-SPAN-MARKER</strong> Full-width content inside the multi-column flow.</div>
+</ef-print-columns>
+</ef-print-document>
+</body>
+</html>

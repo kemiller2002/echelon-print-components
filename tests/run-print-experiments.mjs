@@ -22,6 +22,9 @@ const results = {
     chromiumPdf: {},
   },
   margin: {},
+  columns: {},
+  sidebar: {},
+  table: {},
 };
 
 function mimeType(path) {
@@ -167,6 +170,59 @@ function pdfText(path) {
   return execFileSync("pdftotext", ["-layout", path, "-"], { encoding: "utf8" });
 }
 
+function pdfPagesText(path) {
+  const pages = pdfText(path).split("\f").map((page) => normalizeText(page));
+  while (pages.length && pages.at(-1) === "") pages.pop();
+  return pages;
+}
+
+function pageContaining(pages, needle) {
+  const matches = pages
+    .map((page, index) => page.includes(needle) ? index + 1 : null)
+    .filter(Boolean);
+  assert.equal(matches.length, 1, `Expected "${needle}" on exactly one page, observed on ${matches.join(", ") || "none"}`);
+  return matches[0];
+}
+
+function assertMarkerOnce(text, marker) {
+  assert.equal(occurrenceCount(text, marker), 1, `Expected marker ${marker} exactly once`);
+}
+
+function assertPairOnSamePage(pages, start, end) {
+  const startPage = pageContaining(pages, start);
+  const endPage = pageContaining(pages, end);
+  assert.equal(endPage, startPage, `${start}/${end} split across pages ${startPage} and ${endPage}`);
+  return startPage;
+}
+
+function pdfBboxPages(path) {
+  const raw = execFileSync("pdftotext", ["-bbox", path, "-"], { encoding: "utf8" });
+  const pages = [];
+  const pageRegex = /<page width="([^"]+)" height="([^"]+)">([\s\S]*?)<\/page>/g;
+  for (const pageMatch of raw.matchAll(pageRegex)) {
+    const words = [];
+    const wordRegex = /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]*)<\/word>/g;
+    for (const wordMatch of pageMatch[3].matchAll(wordRegex)) {
+      words.push({
+        xMin: Number(wordMatch[1]),
+        yMin: Number(wordMatch[2]),
+        xMax: Number(wordMatch[3]),
+        yMax: Number(wordMatch[4]),
+        text: wordMatch[5],
+      });
+    }
+    pages.push({ width: Number(pageMatch[1]), height: Number(pageMatch[2]), words });
+  }
+  return pages;
+}
+
+function pdfPageSize(path, pageNumber) {
+  const info = execFileSync("pdfinfo", ["-f", String(pageNumber), "-l", String(pageNumber), path], { encoding: "utf8" });
+  const match = info.match(/^Page\s+\d+\s+size:\s+(.+)$/m) ?? info.match(/^Page size:\s+(.+)$/m);
+  if (!match) throw new Error(`Unable to read page ${pageNumber} size from ${path}`);
+  return match[1].trim();
+}
+
 function normalizeText(value) {
   return value.replace(/\f/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -295,6 +351,116 @@ async function run() {
       runningFooterBodyPageCount: occurrenceCount(marginText, "Confidential"),
       countersObserved: ["Page 2 of 4", "Page 3 of 4", "Page 4 of 4"],
       titlePageCounterSuppressed: true,
+    };
+
+    const columnsPdf = resolve(outputDir, "columns-01.pdf");
+    const columnsChromiumVersion = await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/columns/columns.html",
+      columnsPdf,
+    );
+    const columnsInfo = pdfInfo(columnsPdf);
+    const columnsText = normalizeText(pdfText(columnsPdf));
+    const columnsPages = pdfPagesText(columnsPdf);
+    assert.ok(columnsInfo.pages >= 2, `Expected columns fixture to span at least 2 pages, observed ${columnsInfo.pages}`);
+    assertMarkerOnce(columnsText, "COL-SPAN-MARKER");
+    const keptColumnPages = [];
+    for (let index = 1; index <= 18; index += 1) {
+      const id = String(index).padStart(2, "0");
+      const start = `COL-${id}-START`;
+      const end = `COL-${id}-END`;
+      assertMarkerOnce(columnsText, start);
+      assertMarkerOnce(columnsText, end);
+      keptColumnPages.push(assertPairOnSamePage(columnsPages, start, end));
+    }
+    results.columns = {
+      browserVersion: columnsChromiumVersion,
+      pages: columnsInfo.pages,
+      pageSize: columnsInfo.pageSize,
+      keptBlockCount: 18,
+      keptBlocksSplitAcrossPages: 0,
+      columnSpanMarkerPresent: true,
+      blockPages: keptColumnPages,
+    };
+
+    const sidebarPdf = resolve(outputDir, "sidebar-01.pdf");
+    const sidebarChromiumVersion = await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/sidebar/sidebar.html",
+      sidebarPdf,
+    );
+    const sidebarInfo = pdfInfo(sidebarPdf);
+    const sidebarText = normalizeText(pdfText(sidebarPdf));
+    assert.ok(sidebarInfo.pages >= 2, `Expected sidebar fixture to span at least 2 pages, observed ${sidebarInfo.pages}`);
+    for (let index = 1; index <= 10; index += 1) {
+      assertMarkerOnce(sidebarText, `MAIN-${String(index).padStart(2, "0")}`);
+    }
+    for (let index = 1; index <= 4; index += 1) {
+      assertMarkerOnce(sidebarText, `SIDE-${String(index).padStart(2, "0")}`);
+    }
+    const bboxPages = pdfBboxPages(sidebarPdf);
+    let pagesWithBothColumns = 0;
+    let minimumHorizontalGapPt = Number.POSITIVE_INFINITY;
+    for (const page of bboxPages) {
+      const mainWords = page.words.filter((word) => /^MAIN-\d{2}$/.test(word.text));
+      const sideWords = page.words.filter((word) => /^SIDE-\d{2}$/.test(word.text));
+      if (mainWords.length && sideWords.length) {
+        pagesWithBothColumns += 1;
+        const maxMainX = Math.max(...mainWords.map((word) => word.xMax));
+        const minSideX = Math.min(...sideWords.map((word) => word.xMin));
+        const gap = minSideX - maxMainX;
+        minimumHorizontalGapPt = Math.min(minimumHorizontalGapPt, gap);
+        assert.ok(gap > 6, `Sidebar/main marker columns overlap or are too close: gap=${gap}pt`);
+      }
+    }
+    assert.ok(pagesWithBothColumns >= 1, "No page contained both main and sidebar markers for separation analysis");
+    results.sidebar = {
+      browserVersion: sidebarChromiumVersion,
+      pages: sidebarInfo.pages,
+      pageSize: sidebarInfo.pageSize,
+      mainMarkers: 10,
+      sidebarMarkers: 4,
+      pagesWithBothColumns,
+      minimumHorizontalGapPt,
+      allMarkerTextPreserved: true,
+    };
+
+    const tablePdf = resolve(outputDir, "table-01.pdf");
+    const tableChromiumVersion = await renderChromiumPdf(
+      baseUrl,
+      "tests/fixtures/table/table.html",
+      tablePdf,
+    );
+    const tableInfo = pdfInfo(tablePdf);
+    const tableRawText = pdfText(tablePdf);
+    const tableText = normalizeText(tableRawText);
+    const tablePages = tableRawText.split("\f").map((page) => normalizeText(page)).filter(Boolean);
+    for (let index = 1; index <= 72; index += 1) {
+      assertMarkerOnce(tableText, `ROW-${String(index).padStart(3, "0")}`);
+    }
+    for (let index = 1; index <= 12; index += 1) {
+      assertMarkerOnce(tableText, `WIDE-ROW-${String(index).padStart(2, "0")}`);
+    }
+    const portraitRowPages = tablePages
+      .map((page, index) => page.includes("ROW-") && !page.includes("WIDE-ROW-") ? index + 1 : null)
+      .filter(Boolean);
+    assert.ok(portraitRowPages.length >= 2, "Portrait table did not span at least two pages");
+    for (const pageNumber of portraitRowPages) {
+      assert.ok(tablePages[pageNumber - 1].includes("PORTRAIT-HEADER-ROWID"), `Repeated table header missing on page ${pageNumber}`);
+    }
+    const widePageNumber = pageContaining(tablePages, "WIDE-SECTION-MARKER");
+    const widePageSize = pdfPageSize(tablePdf, widePageNumber);
+    assert.ok(/792\s+x\s+612/.test(widePageSize), `Wide named page is not Letter landscape: ${widePageSize}`);
+    results.table = {
+      browserVersion: tableChromiumVersion,
+      pages: tableInfo.pages,
+      portraitRowCount: 72,
+      portraitPagesWithRows: portraitRowPages,
+      repeatedHeaderPages: portraitRowPages.length,
+      wideRowCount: 12,
+      widePageNumber,
+      widePageSize,
+      allMarkerTextPreserved: true,
     };
 
     results.status = "passed";
