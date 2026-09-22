@@ -28,7 +28,7 @@ npm at bootstrap time.
 - Current Firefox and Safari do not provide the same page-margin-box capability.
 - Mainstream browsers do not implement page-box background descriptors or
   paged-media bleed/crop marks.
-- No product component implementation has been accepted yet.
+- The first passive light-DOM component slice is implemented: document, title page, section, back page, columns, sidebar, page break, and keep-together.
 
 ## Current decision posture
 
@@ -64,3 +64,21 @@ The architecture baseline is ordinary semantic HTML/CSS print styling without th
 library. Experiments should compare the component abstraction against that baseline
 for correctness, complexity, portability, and rework rather than merely proving
 that a browser can print HTML.
+
+
+## Folio documentation work
+
+Tracked work item GH-4 is building the Folio documentation/showcase site.
+
+The site contract:
+
+- Echelon Foundry visual language;
+- one page per currently registered Folio component;
+- at least three standalone print-ready examples per component;
+- actual `src/styles/print.css` used inside isolated preview documents;
+- explicit P0/P1/P2/P3 capability teaching;
+- no browser JavaScript in generated documentation;
+- explicit agent usage contract;
+- GitHub Pages deployment after validation.
+
+The site deliberately does not create pages for merely planned components.
