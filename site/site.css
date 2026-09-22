@@ -1,0 +1,628 @@
+@layer folio.site {
+  :root {
+    --ef-foundry-charcoal: #202421;
+    --ef-forged-iron: #3a403c;
+    --ef-parchment: #f2efe7;
+    --ef-oxide-bronze: #905831;
+    --ef-verdigris: #47756b;
+    --ef-carbon: #171a18;
+    --ef-graphite: #686d68;
+    --ef-stone: #e3e0d7;
+    --site-max: 1440px;
+    --site-gutter: clamp(1rem, 4vw, 4.5rem);
+    --display: "Newsreader", Georgia, serif;
+    --sans: "Manrope", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    color-scheme: light;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-inline-size: 320px;
+    margin: 0;
+    background: var(--ef-parchment);
+    color: var(--ef-carbon);
+    font-family: var(--sans);
+    line-height: 1.65;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: .18;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgb(23 26 24 / .06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(23 26 24 / .06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  a {
+    color: var(--ef-oxide-bronze);
+    text-underline-offset: .2em;
+    text-decoration-thickness: .08em;
+  }
+
+  p { color: var(--ef-graphite); }
+
+  h1, h2, h3 {
+    margin-block-start: 0;
+    color: var(--ef-foundry-charcoal);
+  }
+
+  h1, h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: .98;
+  }
+
+  h3 { line-height: 1.25; }
+
+  code, pre { font-family: var(--mono); }
+
+  .skip-link {
+    position: fixed;
+    inset-block-start: .5rem;
+    inset-inline-start: .5rem;
+    z-index: 100;
+    padding: .7rem 1rem;
+    background: var(--ef-parchment);
+    color: var(--ef-carbon);
+    transform: translateY(-150%);
+  }
+
+  .skip-link:focus { transform: translateY(0); }
+
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    border-block-end: 1px solid var(--ef-forged-iron);
+    background: rgb(242 239 231 / .94);
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-shell {
+    inline-size: min(var(--site-max), 100%);
+    margin-inline: auto;
+    padding: .85rem var(--site-gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    min-inline-size: 0;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    color: var(--ef-carbon);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand-mark {
+    inline-size: 2.35rem;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: var(--ef-foundry-charcoal);
+    color: var(--ef-parchment);
+    font-family: var(--mono);
+    font-size: .72rem;
+  }
+
+  .brand-subtitle {
+    color: var(--ef-graphite);
+    font-family: var(--mono);
+    font-size: .65rem;
+    line-height: 1.3;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    font-size: .8rem;
+    font-weight: 600;
+  }
+
+  .site-nav a {
+    padding: .55rem .7rem;
+    border-block-end: 2px solid transparent;
+    color: var(--ef-carbon);
+    text-decoration: none;
+  }
+
+  .site-nav a:hover { border-color: var(--ef-oxide-bronze); }
+
+  .site-nav .pill-link {
+    margin-inline-start: .4rem;
+    background: var(--ef-foundry-charcoal);
+    color: var(--ef-parchment);
+  }
+
+  .eyebrow,
+  .component-kicker,
+  .category-label,
+  .capability-label {
+    color: var(--ef-verdigris);
+    font-family: var(--mono);
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  .metric-label {
+    color: var(--ef-forged-iron);
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .hero,
+  .content-section {
+    inline-size: min(var(--site-max), 100%);
+    margin-inline: auto;
+    padding-inline: var(--site-gutter);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(18rem, .8fr);
+    gap: clamp(2rem, 7vw, 8rem);
+    align-items: end;
+    padding-block: clamp(4rem, 10vw, 9rem) 4rem;
+    border-block-end: 1px solid var(--ef-forged-iron);
+  }
+
+  .hero h1 {
+    max-inline-size: 10ch;
+    margin: 1rem 0 2rem;
+    font-size: clamp(4rem, 9vw, 8rem);
+  }
+
+  .hero .lead,
+  .component-header .lead,
+  .agent-page .lead,
+  .capability-page .lead {
+    max-inline-size: 64ch;
+    color: var(--ef-carbon);
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    line-height: 1.5;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-block-start: 1px solid var(--ef-stone);
+    border-inline-start: 1px solid var(--ef-stone);
+  }
+
+  .hero-stat {
+    padding: 1.1rem;
+    border-inline-end: 1px solid var(--ef-stone);
+    border-block-end: 1px solid var(--ef-stone);
+  }
+
+  .hero-stat strong {
+    display: block;
+    margin-block-start: .25rem;
+    color: var(--ef-carbon);
+    font-size: 1rem;
+  }
+
+  .content-section {
+    margin-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(14rem, .34fr);
+    gap: 2rem;
+    align-items: end;
+    margin-block-end: 2.5rem;
+    padding-block-end: 1.5rem;
+    border-block-end: 1px solid var(--ef-forged-iron);
+  }
+
+  .section-heading h2 {
+    max-inline-size: 16ch;
+    margin: .5rem 0 0;
+    font-size: clamp(2.25rem, 4.8vw, 4.6rem);
+  }
+
+  .principle-grid,
+  .component-grid,
+  .capability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block-start: 1px solid var(--ef-stone);
+    border-inline-start: 1px solid var(--ef-stone);
+  }
+
+  .principle,
+  .component-card,
+  .capability-card {
+    min-inline-size: 0;
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    border-inline-end: 1px solid var(--ef-stone);
+    border-block-end: 1px solid var(--ef-stone);
+    background: var(--ef-stone);
+  }
+
+  .component-card a {
+    color: var(--ef-carbon);
+    text-decoration: none;
+  }
+
+  .component-card a::after {
+    content: " →";
+    color: var(--ef-oxide-bronze);
+  }
+
+  .component-card:hover { background: var(--ef-parchment); }
+
+  .component-card p,
+  .principle p,
+  .capability-card p {
+    color: var(--ef-carbon);
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-block-start: .7rem;
+    padding: .25rem .45rem;
+    border: 1px solid var(--ef-forged-iron);
+    color: var(--ef-forged-iron);
+    font-family: var(--mono);
+    font-size: .62rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  .status[data-status="provisional"] { border-style: dashed; }
+
+  .button-link {
+    display: inline-flex;
+    min-block-size: 3.1rem;
+    align-items: center;
+    padding: .7rem 1.1rem;
+    border: 1px solid var(--ef-forged-iron);
+    color: var(--ef-carbon);
+    font-size: .84rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .button-link:hover { background: var(--ef-stone); }
+
+  .docs-shell {
+    inline-size: min(var(--site-max), 100%);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(13rem, 17rem) minmax(0, 1fr);
+  }
+
+  .component-nav {
+    padding: 2rem 1.2rem 4rem var(--site-gutter);
+    border-inline-end: 1px solid var(--ef-forged-iron);
+  }
+
+  .component-nav-inner {
+    position: sticky;
+    inset-block-start: 5.5rem;
+    max-block-size: calc(100vh - 7rem);
+    overflow: auto;
+  }
+
+  .component-nav h2 {
+    font-family: var(--mono);
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  .component-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .component-nav a {
+    display: block;
+    padding: .38rem 0;
+    border-inline-start: 2px solid transparent;
+    color: var(--ef-graphite);
+    font-size: .8rem;
+    text-decoration: none;
+  }
+
+  .component-nav a:hover { color: var(--ef-carbon); }
+
+  .component-nav a[aria-current="page"] {
+    padding-inline-start: .6rem;
+    border-color: var(--ef-oxide-bronze);
+    color: var(--ef-carbon);
+    font-weight: 700;
+  }
+
+  .component-main {
+    min-inline-size: 0;
+    padding: clamp(3rem, 7vw, 7rem) var(--site-gutter) 6rem;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-block-end: 3rem;
+    font-family: var(--mono);
+    font-size: .7rem;
+  }
+
+  .component-header {
+    padding-block-end: 3rem;
+    border-block-end: 1px solid var(--ef-forged-iron);
+  }
+
+  .component-header h1,
+  .agent-page h1,
+  .capability-page h1 {
+    max-inline-size: 12ch;
+    margin: 1rem 0 2rem;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+  }
+
+  .contract-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-block-start: 3rem;
+    border-block-start: 1px solid var(--ef-stone);
+    border-inline-start: 1px solid var(--ef-stone);
+  }
+
+  .contract-item {
+    min-inline-size: 0;
+    padding: 1rem;
+    border-inline-end: 1px solid var(--ef-stone);
+    border-block-end: 1px solid var(--ef-stone);
+  }
+
+  .contract-item strong {
+    display: block;
+    margin-block-start: .25rem;
+    color: var(--ef-carbon);
+    font-size: .82rem;
+    overflow-wrap: anywhere;
+  }
+
+  .examples { padding-block-start: 4rem; }
+
+  .example-block + .example-block { margin-block-start: 5rem; }
+
+  .example-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(14rem, .34fr);
+    gap: 2rem;
+    align-items: end;
+    margin-block-end: 1.25rem;
+    padding-block-end: 1rem;
+    border-block-end: 1px solid var(--ef-stone);
+  }
+
+  .example-heading h2 {
+    margin: .5rem 0 0;
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 500;
+  }
+
+  .example-heading p {
+    margin: 0;
+    font-size: .82rem;
+  }
+
+  .print-preview {
+    min-block-size: 34rem;
+    border: 1px solid var(--ef-forged-iron);
+    background: var(--ef-forged-iron);
+  }
+
+  .print-preview iframe {
+    display: block;
+    inline-size: 100%;
+    block-size: 34rem;
+    border: 0;
+    background: white;
+  }
+
+  .example-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: .65rem .8rem;
+    border-inline: 1px solid var(--ef-forged-iron);
+    background: var(--ef-stone);
+  }
+
+  .example-actions a {
+    color: var(--ef-carbon);
+    font-family: var(--mono);
+    font-size: .68rem;
+  }
+
+  .example-block details {
+    border: 1px solid var(--ef-forged-iron);
+    background: var(--ef-foundry-charcoal);
+    color: var(--ef-parchment);
+  }
+
+  .example-block summary {
+    min-block-size: 2.75rem;
+    padding: .75rem 1rem;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: .72rem;
+  }
+
+  .example-block pre {
+    margin: 0;
+    padding: 1rem;
+    overflow: auto;
+    border-block-start: 1px solid var(--ef-forged-iron);
+    font-size: .74rem;
+    line-height: 1.55;
+    white-space: pre;
+  }
+
+  .warning {
+    margin-block: 2rem;
+    padding: 1rem 1.2rem;
+    border-inline-start: 5px solid var(--ef-oxide-bronze);
+    background: var(--ef-stone);
+  }
+
+  .warning p {
+    margin: 0;
+    color: var(--ef-forged-iron);
+  }
+
+  .agent-page,
+  .capability-page {
+    inline-size: min(64rem, calc(100% - 2rem));
+    margin-inline: auto;
+    padding-block: clamp(5rem, 11vw, 10rem) 6rem;
+  }
+
+  .agent-page h2,
+  .capability-page h2 {
+    margin-block: 4rem 1.3rem;
+    font-size: 2.4rem;
+  }
+
+  .agent-page table,
+  .capability-page table {
+    inline-size: 100%;
+    border-collapse: collapse;
+    border-block-start: 1px solid var(--ef-forged-iron);
+  }
+
+  .agent-page th,
+  .agent-page td,
+  .capability-page th,
+  .capability-page td {
+    padding: .8rem;
+    border-block-end: 1px solid var(--ef-stone);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .agent-page th,
+  .capability-page th {
+    color: var(--ef-carbon);
+    font-family: var(--mono);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .agent-page pre,
+  .capability-page pre {
+    padding: 1rem;
+    overflow: auto;
+    background: var(--ef-foundry-charcoal);
+    color: var(--ef-parchment);
+  }
+
+  .site-footer {
+    background: var(--ef-foundry-charcoal);
+    color: var(--ef-parchment);
+    padding: clamp(2rem, 5vw, 5rem) max(1rem, calc((100vw - 1440px)/2 + 4.5rem));
+  }
+
+  .site-footer p,
+  .site-footer a { color: var(--ef-parchment); }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .footer-note {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0 0;
+    padding-block-start: 1rem;
+    border-block-start: 1px solid var(--ef-forged-iron);
+    font-family: var(--mono);
+    font-size: .65rem;
+  }
+
+  @media (max-width: 960px) {
+    .brand-subtitle { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .component-grid, .principle-grid, .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .docs-shell { grid-template-columns: 1fr; }
+    .component-nav {
+      padding: 1rem var(--site-gutter);
+      border-inline-end: 0;
+      border-block-end: 1px solid var(--ef-forged-iron);
+    }
+    .component-nav-inner { position: static; max-block-size: none; }
+    .component-nav ul { display: flex; gap: .85rem; overflow-x: auto; }
+    .component-nav li { flex: 0 0 auto; }
+  }
+
+  @media (max-width: 680px) {
+    .nav-shell { align-items: flex-start; }
+    .site-nav { flex-wrap: wrap; justify-content: flex-end; }
+    .site-nav a { padding: .4rem; font-size: .7rem; }
+    .site-nav .pill-link { margin-inline-start: 0; }
+    .hero-stats,
+    .component-grid,
+    .principle-grid,
+    .capability-grid,
+    .contract-grid,
+    .section-heading,
+    .example-heading { grid-template-columns: 1fr; }
+    .component-main { padding-inline: 1rem; }
+    .print-preview,
+    .print-preview iframe { block-size: 28rem; }
+    .footer-grid, .footer-note { display: block; }
+    .footer-note span { display: block; margin-block-start: .5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  @media (forced-colors: active) {
+    .brand-mark,
+    .site-nav .pill-link,
+    .site-footer,
+    .component-card,
+    .principle,
+    .capability-card,
+    .print-preview { border: 1px solid CanvasText; }
+  }
+}
