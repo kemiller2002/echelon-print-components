@@ -16,6 +16,7 @@ on:
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/folio-site-validation.yml"
+      - ".github/workflows/deploy-folio-pages.yml"
   workflow_dispatch:
 
 permissions:
