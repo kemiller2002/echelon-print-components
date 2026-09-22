@@ -1,0 +1,41 @@
+name: Register print research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/register-print-research.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build ROS registries
+        run: |
+          ./ros registry build
+          ./ros validate
+
+      - name: Commit generated registries
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registries/
+          if git diff --cached --quiet; then
+            echo "Registries already current"
+          else
+            git commit -m "Register initial print experiment evidence"
+            git pull --rebase origin main
+            git push
+          fi
