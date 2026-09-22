@@ -1,4 +1,4 @@
-name: Begin Folio documentation work
+name: Complete Folio documentation work
 
 on:
   push:
@@ -10,28 +10,37 @@ permissions:
   contents: write
 
 jobs:
-  begin:
+  complete:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - name: Begin GH-4
+          node-version: "24"
+
+      - name: Verify merged Folio site
+        run: |
+          npm ci
+          npm run site:check
+
+      - name: Complete GH-4 and remove temporary tracker
         shell: bash
         run: |
           set -euo pipefail
           WORK_ID="GH-4"
-          ./ros add "Build Folio component documentation site"             --id "$WORK_ID"             --tag folio,print,documentation             --priority high             --source github-issue             --source-reference "https://github.com/kemiller2002/echelon-print-components/issues/4"             --actor "agent:chatgpt"
+          git rm .github/workflows/folio-site-work.yml
           NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
-          ./ros work backlog-transition --action ready --id "$WORK_ID" --occurred-at "$NOW"
-          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
-          ./ros work start --id "$WORK_ID" --occurred-at "$NOW" --type feature
-          ./ros work context "$WORK_ID"
-      - name: Commit ROS state
+          ./ros work complete             --id "$WORK_ID"             --occurred-at "$NOW"             --evidence requirements=docs/requirements/FOLIO-SITE-REQUIREMENTS.md             --evidence implementation=tools/build-site.mjs             --evidence tests=tests/site-build.test.mjs             --evidence tests=tests/run-site-browser-tests.mjs             --evidence documentation=docs/AGENT-USAGE.md
+          ./ros registry build
+          ./ros validate
+          ./ros status
+
+      - name: Commit completed work
         shell: bash
         run: |
           set -euo pipefail
@@ -39,8 +48,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           if [ -d .ros/telemetry ]; then git add -f .ros/telemetry; fi
-          git reset -- .github/workflows
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Begin GH-4 Folio documentation site"
+          if git diff --cached --quiet; then
+            echo "No completion changes to commit"
+            exit 0
+          fi
+          git commit -m "Complete GH-4 Folio documentation site"
           git pull --rebase origin main
           git push
