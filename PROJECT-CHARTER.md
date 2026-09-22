@@ -1,8 +1,8 @@
 ---
 id: PROJECT-CHARTER-echelon-print-components
 title: Echelon Print Components Project Charter
-status: draft
-version: 0.1.0
+status: active
+version: 0.2.0
 created: 2026-09-22
 updated: 2026-09-22
 ---
@@ -11,48 +11,87 @@ updated: 2026-09-22
 
 ## Purpose
 
-Define the practical problem this project will solve. Do not assume that
-“Echelon Print Components” already names a distinct discipline; that is a research
-question, not a starting fact.
+Create an installable, standards-first set of web components, print CSS, themes,
+and renderer contracts that let applications build professional HTML documents
+with a consistent look and feel for paper and PDF output.
+
+The project should make difficult print-document behavior reusable without
+turning the component library into a second browser layout engine.
 
 ## Intended users
 
-Not yet established.
+- Echelon Foundry applications that need reports, research documents, proposals,
+  invoices, decision memos, manuals, handouts, or other printed/PDF output.
+- Other web applications that want framework-independent printable document
+  primitives.
+- Engineers who need deterministic browser-to-PDF output without coupling their
+  application to a full publishing framework.
 
 ## First bounded outcome
 
-Not yet selected. Choose one outcome that can be delivered and evaluated in
-two to four weeks.
+Deliver one canonical document and the smallest reusable component/theme surface
+that can produce it.
+
+The canonical document must exercise title and back pages, named page profiles,
+page artwork, two-column content, a side panel, figures, a multipage table, code,
+a landscape section, explicit page breaks, and Chromium Page X of Y output,
+while retaining all meaningful content in the portable-browser fallback.
 
 ## Included
 
-- Definition of the first user and communication problem.
-- A working vertical slice.
-- Evidence and decision traceability.
-- Evaluation of the Repository Operating System pilot.
+- Semantic light-DOM web components for print/layout intent.
+- Professional default typography and visual tokens.
+- Letter and A4 page profiles, portrait and landscape.
+- Title, body, back, and wide/named page profiles.
+- Header/footer/page-number intent with explicit renderer capability.
+- Multi-column layouts and in-flow side panels.
+- Page art/background/watermark patterns.
+- Print-safe tables, figures, code, callouts, notes, and TOC structure.
+- Deterministic Chromium PDF export as a separate adapter/tool boundary.
+- Browser/renderer conformance research and tests.
+- Accessibility constraints for source HTML and preview UI.
+- Optional research into enhanced paged-media engines.
 
-## Excluded
+## Excluded from the first release
 
-- Broad discipline claims without comparative evidence.
-- An exhaustive communication taxonomy.
-- Autonomous acceptance of research or policy.
-- Production handling of secrets or sensitive communication data before a
-  privacy and threat review.
+- A word processor or WYSIWYG page editor.
+- A JavaScript reimplementation of general-purpose pagination.
+- Pixel-identical output across every browser and printer.
+- CMYK/prepress guarantees from ordinary browser printing.
+- Browser-native bleed/crop-mark claims where browsers do not implement them.
+- A guarantee that browser-generated PDFs are PDF/UA tagged without a separately
+  validated renderer.
+- Business/domain logic inside presentation components.
+- A bundled charting system.
 
 ## Success criteria
 
-- The first vertical slice has observable acceptance tests.
-- Material decisions cite their evidence and alternatives.
-- A successor can continue from repository records without chat history.
-- Pilot measurements can compare the operating approach with a declared
-  lightweight baseline.
+- A clean consumer can install the package and create the canonical document.
+- Basic document output remains meaningful with JavaScript disabled.
+- Deterministic Chromium PDF output has no clipped/missing content in canonical fixtures.
+- Firefox and Safari/WebKit portable output retain all meaningful content even
+  when Chromium-only page-margin boxes are unavailable.
+- Public renderer differences are documented rather than hidden.
+- Page layout is driven by CSS/paged-media semantics rather than DOM-height pagination.
+- Theme overrides do not require modifying package source.
+- Core remains framework independent and low dependency.
+- Material browser/renderer claims have a dated fixture or source.
+- ROS/SDE/Visual Engineering/Communication Engineering/Limen verification stays green.
 
 ## Constraints and assumptions
 
-- Constraints: not yet established.
-- Assumption: a bounded communication problem can be selected without first
-  resolving the full disciplinary boundary.
+- Standards-first implementation and minimal runtime dependencies.
+- Semantic HTML/source order is authoritative.
+- Core printable content uses light DOM unless an experiment proves a stronger alternative.
+- Browser print settings remain partly controlled by the user; deterministic output
+  requires a controlled renderer path.
+- Chromium-specific page-margin features must not be described as portable.
+- Advanced publishing capabilities belong behind explicit adapters.
+- Print content and application data are not transmitted or persisted by the core library.
 
 ## Owners and decision authority
 
-Not yet assigned.
+Project owner: repository owner.
+
+Public API, renderer capability contracts, and dependency additions are
+costly-to-reverse decisions and require explicit repository decision records.
