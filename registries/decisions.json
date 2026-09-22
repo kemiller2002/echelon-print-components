@@ -1,1 +1,73 @@
-[]
+[
+  {
+    "created": "2026-09-22",
+    "id": "DF-PRINT-2026-0001",
+    "path": "research/decisions/DF-PRINT-2026-0001--adopt-standards-first-browser-pagination-and-light-dom-components.md",
+    "related_documents": [
+      "research/evidence/EV-PRINT-2026-0001--pagination-01-browser-and-pdf-evidence.md",
+      "research/evidence/EV-PRINT-2026-0003--col-01-multipage-column-evidence.md",
+      "research/evidence/EV-PRINT-2026-0005--table-01-multipage-and-landscape-evidence.md",
+      "docs/architecture/PRINT-ARCHITECTURE.md"
+    ],
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "tags": [
+      "architecture",
+      "print",
+      "web-components",
+      "pagination",
+      "light-dom"
+    ],
+    "title": "Adopt standards-first browser pagination and light-DOM print components",
+    "type": "decision-record",
+    "updated": "2026-09-22"
+  },
+  {
+    "created": "2026-09-22",
+    "id": "DF-PRINT-2026-0002",
+    "path": "research/decisions/DF-PRINT-2026-0002--adopt-explicit-renderer-capability-tiers-and-chromium-margin-boxes.md",
+    "related_documents": [
+      "research/evidence/EV-PRINT-2026-0002--margin-01-chromium-page-margin-evidence.md",
+      "docs/architecture/PRINT-ARCHITECTURE.md",
+      "docs/research/PRINT-WEB-CAPABILITY-BASELINE-2026-09.md"
+    ],
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "tags": [
+      "architecture",
+      "renderer",
+      "chromium",
+      "page-numbers",
+      "headers",
+      "footers"
+    ],
+    "title": "Adopt explicit renderer capability tiers and Chromium margin boxes",
+    "type": "decision-record",
+    "updated": "2026-09-22"
+  },
+  {
+    "created": "2026-09-22",
+    "id": "DF-PRINT-2026-0003",
+    "path": "research/decisions/DF-PRINT-2026-0003--adopt-native-columns-tables-and-named-landscape-pages-while-keeping-grid-sidebar-provisional.md",
+    "related_documents": [
+      "research/evidence/EV-PRINT-2026-0003--col-01-multipage-column-evidence.md",
+      "research/evidence/EV-PRINT-2026-0004--sidebar-01-grid-rail-evidence.md",
+      "research/evidence/EV-PRINT-2026-0005--table-01-multipage-and-landscape-evidence.md"
+    ],
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "tags": [
+      "architecture",
+      "columns",
+      "tables",
+      "sidebar",
+      "named-pages"
+    ],
+    "title": "Adopt native columns, tables, and named landscape pages while keeping grid sidebar provisional",
+    "type": "decision-record",
+    "updated": "2026-09-22"
+  }
+]
