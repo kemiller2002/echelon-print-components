@@ -34,6 +34,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/4"
+    },
+    {
+      "id": "GH-6",
+      "title": "Harden Folio documentation site for mobile",
+      "description": null,
+      "tags": [
+        "folio,mobile,documentation"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-09-22T17:11:02.556Z",
+      "updatedAt": "2026-09-22T17:11:02.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/6"
     }
   ]
 }
