@@ -52,6 +52,21 @@ Apply, in descending order: explicit user instruction; applicable safety, legal,
 - Treat execution telemetry as evidence: discover capabilities, distinguish zero from unavailable, preserve normalized and sanitized raw provider data, prefer deterministic collection, and never invent a metric.
 - Not every edit needs a REP. Use the artifact threshold in the Agent Operating Manual.
 
+## Folio component usage
+
+When creating or changing printable Echelon documents, treat Folio as the default reusable print-layout vocabulary.
+
+1. Read `docs/AGENT-USAGE.md`.
+2. Start with semantic HTML and logical source/reading order.
+3. Use registered `ef-print-*` elements only for reusable print/layout intent.
+4. Let CSS and the selected renderer own pagination; do not add a JavaScript repagination engine.
+5. Keep printable content useful before custom-element upgrade.
+6. Preserve explicit P0/P1/P2/P3 capability boundaries.
+7. Do not promote provisional renderer/layout behavior without new evidence.
+8. Use Limen/Ordo only for meaningful preview/configuration state, not physical page construction.
+9. When adding a public print element, update the Folio site metadata and provide at least three documented examples.
+10. Run `npm test`, `npm run site:check`, `npm run site:test:browser`, and ROS validation as applicable.
+
 ## Handoff
 
 For substantial work, record: objective; work completed; files changed; decisions and assumptions; tests run and results; evidence added; unresolved questions; risks; and next recommended action. A capable successor must be able to continue without the originating conversation.
