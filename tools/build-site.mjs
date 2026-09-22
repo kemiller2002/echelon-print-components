@@ -539,7 +539,7 @@ function exampleBlock(component, example, index) {
       <p>${escapeHtml(example.note)}</p>
     </div>
     <div class="print-preview">
-      <iframe src="${demoPath}" title="${escapeHtml(component.title)} example ${index + 1}: ${escapeHtml(example.title)}" loading="lazy"></iframe>
+      <iframe src="${demoPath}" title="${escapeHtml(component.title)} example ${index + 1}: ${escapeHtml(example.title)}"></iframe>
     </div>
     <div class="example-actions">
       <a href="${demoPath}" target="_blank" rel="noopener">Open standalone print preview</a>
