@@ -76,14 +76,13 @@ const engines = [
   ["webkit", webkit]
 ];
 const phoneWidths = [320, 390, 430];
+const siteManifest = JSON.parse(fs.readFileSync(path.join(site, "site-manifest.json"), "utf8"));
 const mobileRoutes = [
   "/",
-  "/components/columns/",
-  "/components/sidebar/",
   "/capabilities/",
   "/agents/",
-  "/demos/columns/1.html",
-  "/demos/sidebar/1.html"
+  ...siteManifest.components.map(component => `/components/${component.slug}/`),
+  ...siteManifest.components.map(component => `/demos/${component.slug}/1.html`)
 ];
 
 try {
@@ -111,6 +110,7 @@ try {
 
     await page.goto(baseURL + "/agents/");
     assert.match(await page.locator("h1").innerText(), /not a pagination engine/i, `${name}: agent boundary`);
+    assert.equal(await page.locator(".instruction-card").count(), 4, `${name}: mobile instruction cards`);
 
     for (const width of phoneWidths) {
       await page.setViewportSize({ width, height: 844 });
@@ -159,6 +159,10 @@ try {
 
       await page.goto(baseURL + "/agents/");
       await assertNoPageOverflow(page, `${name} ${width}px agents`);
+      const instructionColumns = await page.locator(".instruction-grid").evaluate(element =>
+        getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean).length
+      );
+      assert.equal(instructionColumns, 1, `${name} ${width}px: instruction cards stack to one column`);
       const ownershipTable = page.locator(".table-scroll").first();
       await ownershipTable.focus();
       assert.equal(await ownershipTable.getAttribute("tabindex"), "0", `${name} ${width}px: ownership table is keyboard-scrollable`);
