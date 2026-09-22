@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MARGIN-01 Chromium Margin Boxes</title>
+  <style>
+    @page {
+      size: Letter;
+      margin: 0.72in;
+    }
+
+    @page title {
+      @top-left { content: none; }
+      @top-right { content: none; }
+      @bottom-left { content: none; }
+      @bottom-right { content: none; }
+    }
+
+    @page body {
+      @top-left {
+        content: "EPC Margin Experiment";
+        font: 9pt Arial, sans-serif;
+      }
+
+      @top-right {
+        content: "MARGIN-01";
+        font: 9pt Arial, sans-serif;
+      }
+
+      @bottom-left {
+        content: "Confidential";
+        font: 8.5pt Arial, sans-serif;
+      }
+
+      @bottom-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font: 8.5pt Arial, sans-serif;
+      }
+    }
+
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      line-height: 1.45;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .title-page {
+      page: title;
+      break-after: page;
+      min-height: 8.5in;
+      display: grid;
+      place-content: center;
+      text-align: center;
+    }
+
+    .title-page h1 {
+      font-size: 28pt;
+      margin: 0 0 0.18in;
+    }
+
+    .body-page {
+      page: body;
+      break-after: page;
+    }
+
+    .body-page:last-child {
+      break-after: auto;
+    }
+
+    .body-page h2 {
+      margin-top: 0;
+      font-size: 19pt;
+    }
+
+    .block {
+      border: 1px solid #888;
+      padding: 0.18in;
+      margin: 0 0 0.18in;
+      min-height: 1.5in;
+      break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+  <section class="title-page">
+    <div>
+      <h1>MARGIN-01</h1>
+      <p>Chromium page-margin boxes and page counters</p>
+    </div>
+  </section>
+
+  <section class="body-page">
+    <h2>Body page one</h2>
+    <div class="block"><strong>BODY-ONE-A</strong><p>The title page intentionally suppresses all authored margin boxes.</p></div>
+    <div class="block"><strong>BODY-ONE-B</strong><p>The first body page should be numbered as physical page 2 of the four-page document.</p></div>
+  </section>
+
+  <section class="body-page">
+    <h2>Body page two</h2>
+    <div class="block"><strong>BODY-TWO-A</strong><p>Running content should repeat without JavaScript pagination.</p></div>
+    <div class="block"><strong>BODY-TWO-B</strong><p>Total page count should remain four because the unnumbered title page is still part of the document.</p></div>
+  </section>
+
+  <section class="body-page">
+    <h2>Body page three</h2>
+    <div class="block"><strong>BODY-THREE-A</strong><p>The final page should carry Page 4 of 4.</p></div>
+    <div class="block"><strong>BODY-THREE-B</strong><p>This fixture tests static running text and counters, not dynamic section-title running strings.</p></div>
+  </section>
+</body>
+</html>
