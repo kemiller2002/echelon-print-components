@@ -42,7 +42,7 @@ The registered component list is authoritative:
 - `ef-print-break`;
 - `ef-print-keep`.
 
-The Folio documentation generator fails if a newly registered public element lacks site metadata and three examples.
+The Folio documentation generator fails if a newly registered public element lacks site metadata and three examples. Documentation examples must also remain usable at phone widths without changing the component's print-media contract.
 
 ## Capability tiers
 
@@ -140,7 +140,8 @@ When adding a registered public component:
 5. add structural/print tests;
 6. add Folio site metadata and at least three examples;
 7. update capability/maturity guidance;
-8. run ROS attribution and validation.
+8. verify the documentation examples at narrow mobile widths as well as print media;
+9. run ROS attribution and validation.
 
 ## Documentation site
 
