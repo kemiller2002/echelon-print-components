@@ -1,12 +1,12 @@
-# Echelon Print Components
+# Folio
 
-Reusable, installable web components and print-layout primitives for building professional documents in HTML and printing them to paper or PDF with a consistent visual system.
+**Folio** is the Echelon Foundry print component system: reusable, installable web components and print-layout primitives for building professional documents in HTML and printing them to paper or PDF with a consistent visual system.
 
 The project is **standards first**: semantic HTML and CSS express document and pagination intent, while renderer-specific capabilities are explicit. The goal is not to build a second pagination engine in JavaScript.
 
 ## Current status
 
-Requirements and architecture research are established. Product implementation has not started yet.
+Requirements, architecture research, renderer experiments, and the first passive light-DOM component slice are established.
 
 Installed engineering foundation:
 
@@ -41,3 +41,37 @@ Limen is installed for a future interactive preview/configuration application. I
 ## First vertical slice
 
 The first implementation must exercise difficult print behavior rather than a trivial component demo: title page, page art, normal body pages, repeated Chromium header/footer with Page X of Y, portable fallback, two-column content, side panel, multipage table, code block, landscape section, and back page, with deterministic PDF tests.
+
+
+## Implemented component slice
+
+The currently registered Folio components are:
+
+- `ef-print-document`
+- `ef-print-title-page`
+- `ef-print-section`
+- `ef-print-back-page`
+- `ef-print-columns`
+- `ef-print-sidebar` (provisional portability posture)
+- `ef-print-break`
+- `ef-print-keep`
+
+The package identifier remains `@echelon-foundry/print-components`.
+
+## Folio documentation site
+
+Build the generated Folio site with:
+
+```bash
+npm run site:check
+```
+
+Run the documentation browser checks after installing Playwright browsers:
+
+```bash
+npm run site:test:browser
+```
+
+The generated artifact is written to `site-dist/` and is not committed.
+
+Agent usage rules are in [docs/AGENT-USAGE.md](docs/AGENT-USAGE.md).

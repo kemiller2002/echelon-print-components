@@ -42,3 +42,6 @@ logs/*
 
 # Print experiment output
 test-results/
+
+# Generated Folio documentation
+site-dist/
