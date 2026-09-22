@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PAGINATION-01 Native Baseline</title>
+  <link rel="stylesheet" href="./common.css">
+</head>
+<body>
+  <main class="doc" data-document-kind="native">
+    <section class="section">
+      <h1>PAGINATION-01 Native Baseline</h1>
+      <p class="lead">This fixture uses ordinary HTML wrappers. The paired fixture changes only the wrapper element names.</p>
+
+      <div class="probe-card" data-probe="card-1">
+        <h3>Card 1</h3>
+        <p>Print layout should remain governed by CSS fragmentation rather than by the wrapper tag name.</p>
+        <p>The content is intentionally long enough to create natural page pressure without assigning synthetic page coordinates.</p>
+      </div>
+
+      <div class="probe-card" data-probe="card-2">
+        <h3>Card 2</h3>
+        <p>Semantic content remains ordinary headings and paragraphs. Only layout intent is abstracted.</p>
+        <p>Each card requests break-inside avoidance so browser pagination has a meaningful fragmentation decision to make.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-probe="heading-2">Second section</h2>
+      <div class="probe-card" data-probe="card-3">
+        <h3>Card 3</h3>
+        <p>The experiment compares print-media geometry in Chromium, Firefox, and WebKit.</p>
+        <p>Actual paginated PDF equivalence is additionally checked in Chromium, whose automation API exposes PDF generation.</p>
+      </div>
+
+      <div class="probe-card" data-probe="card-4">
+        <h3>Card 4</h3>
+        <p>A passing result does not prove all custom elements are pagination-neutral. It supports this deliberately passive light-DOM wrapper model.</p>
+        <p>Later experiments add columns, sidebars, tables, artwork, and named page profiles independently.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-probe="heading-3">Third section</h2>
+      <div class="probe-card" data-probe="card-5">
+        <h3>Card 5</h3>
+        <p>The library should expose document intent while leaving the browser or publishing engine responsible for actual page construction.</p>
+        <p>This separation is the architectural claim being challenged by the first experiment.</p>
+      </div>
+
+      <div class="probe-card" data-probe="card-6">
+        <h3>Card 6</h3>
+        <p>Font fallback, browser differences, and long-document behavior remain separate risks and are intentionally not collapsed into one result.</p>
+        <p>The evidence record must retain those limitations even if this fixture passes.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
