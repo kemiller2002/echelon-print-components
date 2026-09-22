@@ -1,0 +1,80 @@
+name: Finalize Folio governance cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/folio-governance-cleanup.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Attribute governance cleanup
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          ./ros add "Finalize Folio mobile governance cleanup"             --id "GH-8"             --tag folio,governance,cleanup             --priority normal             --source github-issue             --source-reference "https://github.com/kemiller2002/echelon-print-components/issues/8"             --actor "agent:chatgpt"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work backlog-transition --action ready --id "GH-8" --occurred-at "$NOW"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work start --id "GH-8" --occurred-at "$NOW" --type maintenance
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path(".github/workflows/folio-governance-cleanup.yml")
+          p.write_text("""name: Folio governance maintenance
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify ROS state
+        run: |
+          ./ros registry check
+          ./ros validate
+""")
+          PY
+
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ROS_BASE_REF="$BASE_SHA" ./ros work complete             --id "GH-8"             --occurred-at "$NOW"             --evidence implementation=.github/workflows/folio-governance-cleanup.yml             --evidence requirements=docs/requirements/FOLIO-SITE-REQUIREMENTS.md             --evidence tests=tests/run-site-browser-tests.mjs
+          ./ros registry build
+          ROS_BASE_REF="$BASE_SHA" ./ros validate
+          ./ros status
+
+      - name: Commit attributed cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if [ -d .ros/telemetry ]; then git add -f .ros/telemetry; fi
+          git commit -m "Finalize GH-8 Folio governance cleanup"
+          git pull --rebase origin main
+          git push
