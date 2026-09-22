@@ -38,11 +38,35 @@ function serve() {
   });
 }
 
+async function assertNoPageOverflow(page, label) {
+  const widths = await page.evaluate(() => ({
+    scroll: document.documentElement.scrollWidth,
+    client: document.documentElement.clientWidth
+  }));
+  assert.ok(widths.scroll <= widths.client + 1, `${label}: page-level horizontal overflow (${widths.scroll} > ${widths.client})`);
+}
+
+async function assertMinTarget(page, locator, minimum, label) {
+  const box = await locator.boundingBox();
+  assert.ok(box, `${label}: target has a box`);
+  assert.ok(box.height >= minimum - 0.5, `${label}: target height ${box.height}px is below ${minimum}px`);
+}
+
 const { server, baseURL } = await serve();
 const engines = [
   ["chromium", chromium],
   ["firefox", firefox],
   ["webkit", webkit]
+];
+const phoneWidths = [320, 390, 430];
+const mobileRoutes = [
+  "/",
+  "/components/columns/",
+  "/components/sidebar/",
+  "/capabilities/",
+  "/agents/",
+  "/demos/columns/1.html",
+  "/demos/sidebar/1.html"
 ];
 
 try {
@@ -57,12 +81,13 @@ try {
     await page.goto(baseURL + "/components/columns/");
     assert.equal(await page.locator("[data-example]").count(), 3, `${name}: three examples`);
     assert.match(await page.locator(".contract-grid").innerText(), /P0 portable/i);
+    assert.match(await page.locator(".preview-note").first().innerText(), /narrow screens/i, `${name}: mobile preview guidance`);
 
     const preview = page.frameLocator("iframe").first();
     const columns = preview.locator("ef-print-columns");
     await columns.waitFor({ state: "attached" });
     const columnCount = await columns.evaluate(element => getComputedStyle(element).columnCount);
-    assert.equal(columnCount, "2", `${name}: Folio print CSS applied inside preview`);
+    assert.equal(columnCount, "2", `${name}: Folio print CSS applied inside desktop preview`);
 
     await page.goto(baseURL + "/components/sidebar/");
     assert.match(await page.locator(".warning").innerText(), /provisional/i, `${name}: capability caveat visible`);
@@ -70,18 +95,86 @@ try {
     await page.goto(baseURL + "/agents/");
     assert.match(await page.locator("h1").innerText(), /not a pagination engine/i, `${name}: agent boundary`);
 
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto(baseURL + "/");
-    const widths = await page.evaluate(() => ({
-      scroll: document.documentElement.scrollWidth,
-      client: document.documentElement.clientWidth
-    }));
-    assert.ok(widths.scroll <= widths.client + 1, `${name}: narrow page does not overflow`);
+    for (const width of phoneWidths) {
+      await page.setViewportSize({ width, height: 844 });
+
+      for (const route of mobileRoutes) {
+        await page.emulateMedia({ media: "screen" });
+        await page.goto(baseURL + route);
+        await assertNoPageOverflow(page, `${name} ${width}px ${route}`);
+      }
+
+      await page.goto(baseURL + "/");
+      const brandBox = await page.locator(".brand").boundingBox();
+      const navBox = await page.locator(".site-nav").boundingBox();
+      assert.ok(brandBox && navBox, `${name} ${width}px: header boxes available`);
+      assert.ok(navBox.y >= brandBox.y + brandBox.height - 1, `${name} ${width}px: primary nav follows brand without overlap`);
+      for (let index = 0; index < await page.locator(".site-nav a").count(); index += 1) {
+        await assertMinTarget(page, page.locator(".site-nav a").nth(index), 44, `${name} ${width}px primary nav ${index}`);
+      }
+
+      await page.goto(baseURL + "/components/columns/");
+      await assertNoPageOverflow(page, `${name} ${width}px columns component`);
+      const componentNav = page.locator(".component-nav ul");
+      const navMetrics = await componentNav.evaluate(element => ({
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth
+      }));
+      assert.ok(navMetrics.scrollWidth >= navMetrics.clientWidth, `${name} ${width}px: component nav remains horizontally navigable`);
+      await assertMinTarget(page, page.locator(".component-nav a").first(), 44, `${name} ${width}px component nav target`);
+      await assertMinTarget(page, page.locator(".example-actions a").first(), 44, `${name} ${width}px example action`);
+      const frameBox = await page.locator(".print-preview iframe").first().boundingBox();
+      assert.ok(frameBox && frameBox.width <= width + 1, `${name} ${width}px: preview iframe fits viewport`);
+      const codeMetrics = await page.locator(".example-block pre").first().evaluate(element => ({
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth
+      }));
+      assert.ok(codeMetrics.clientWidth > 0, `${name} ${width}px: code sample is visible`);
+
+      await page.goto(baseURL + "/capabilities/");
+      await assertNoPageOverflow(page, `${name} ${width}px capabilities`);
+      const capabilityTable = page.locator(".table-scroll").first();
+      const capabilityMetrics = await capabilityTable.evaluate(element => ({
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth
+      }));
+      assert.ok(capabilityMetrics.scrollWidth >= capabilityMetrics.clientWidth, `${name} ${width}px: capability table scroll is contained`);
+
+      await page.goto(baseURL + "/agents/");
+      await assertNoPageOverflow(page, `${name} ${width}px agents`);
+      const ownershipTable = page.locator(".table-scroll").first();
+      await ownershipTable.focus();
+      assert.equal(await ownershipTable.getAttribute("tabindex"), "0", `${name} ${width}px: ownership table is keyboard-scrollable`);
+
+      await page.goto(baseURL + "/demos/columns/1.html");
+      await page.emulateMedia({ media: "screen" });
+      const mobileColumnCount = await page.locator("ef-print-columns").evaluate(element => getComputedStyle(element).columnCount);
+      assert.equal(mobileColumnCount, "1", `${name} ${width}px: mobile screen inspection collapses columns`);
+      await assertNoPageOverflow(page, `${name} ${width}px standalone columns demo`);
+
+      await page.emulateMedia({ media: "print" });
+      const printColumnCount = await page.locator("ef-print-columns").evaluate(element => getComputedStyle(element).columnCount);
+      assert.equal(printColumnCount, "2", `${name} ${width}px: print media keeps Folio column contract`);
+
+      await page.emulateMedia({ media: "screen" });
+      await page.goto(baseURL + "/demos/sidebar/1.html");
+      const mobileSidebarTracks = await page.locator("ef-print-sidebar").evaluate(element =>
+        getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean).length
+      );
+      assert.equal(mobileSidebarTracks, 1, `${name} ${width}px: mobile screen inspection collapses sidebar`);
+      await assertNoPageOverflow(page, `${name} ${width}px standalone sidebar demo`);
+
+      await page.emulateMedia({ media: "print" });
+      const printSidebarTracks = await page.locator("ef-print-sidebar").evaluate(element =>
+        getComputedStyle(element).gridTemplateColumns.split(" ").filter(Boolean).length
+      );
+      assert.ok(printSidebarTracks >= 2, `${name} ${width}px: print media restores side-rail columns`);
+    }
 
     await browser.close();
   }
 
-  console.log("Folio site browser checks passed in Chromium, Firefox, and WebKit.");
+  console.log("Folio site browser checks passed at desktop and 320/390/430px in Chromium, Firefox, and WebKit.");
 } finally {
   await new Promise(resolve => server.close(resolve));
 }
