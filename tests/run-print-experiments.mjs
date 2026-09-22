@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+// GH-3: ART-01 and ACCESS-PDF-01 final harness attribution.
 import { execFileSync } from "node:child_process";
 import { createServer } from "node:http";
 import { readFile, mkdir, rm, writeFile, stat } from "node:fs/promises";
