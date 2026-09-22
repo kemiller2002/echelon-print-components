@@ -41,5 +41,62 @@
       "HY-PRINT-2026-0002"
     ],
     "title": "MARGIN-01 Chromium margin boxes and page counters"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-22",
+    "id": "EX-PRINT-2026-0003",
+    "inputs": [
+      "tests/fixtures/columns/columns.html"
+    ],
+    "outputs": [
+      "test-results/print-experiments/results.json"
+    ],
+    "path": "research/experiments/EX-PRINT-2026-0003--col-01-multipage-column-fragmentation.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PRINT-2026-0003"
+    ],
+    "title": "COL-01 multipage column fragmentation"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-22",
+    "id": "EX-PRINT-2026-0004",
+    "inputs": [
+      "tests/fixtures/sidebar/sidebar.html"
+    ],
+    "outputs": [
+      "test-results/print-experiments/results.json"
+    ],
+    "path": "research/experiments/EX-PRINT-2026-0004--sidebar-01-grid-side-rail-fragmentation.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PRINT-2026-0004"
+    ],
+    "title": "SIDEBAR-01 grid side-rail fragmentation"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-22",
+    "id": "EX-PRINT-2026-0005",
+    "inputs": [
+      "tests/fixtures/table/table.html"
+    ],
+    "outputs": [
+      "test-results/print-experiments/results.json"
+    ],
+    "path": "research/experiments/EX-PRINT-2026-0005--table-01-multipage-and-landscape-tables.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PRINT-2026-0005"
+    ],
+    "title": "TABLE-01 multipage and landscape tables"
   }
 ]
