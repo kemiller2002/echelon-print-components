@@ -211,12 +211,21 @@ body {
 }
 
 @media screen and (max-width: 760px) {
+  html,
+  body {
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
   body { padding: 1rem; }
 
   .folio-paper {
     inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
     min-block-size: auto;
     padding: .35in;
+    overflow-wrap: anywhere;
   }
 
   .folio-title-layout,
@@ -234,8 +243,15 @@ body {
     column-count: 1;
   }
 
+  .folio-demo ef-print-sidebar,
+  .folio-demo .folio-sidebar-main,
+  .folio-demo .folio-sidebar-rail {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+
   .folio-demo ef-print-sidebar {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .folio-demo .folio-sidebar-rail {
