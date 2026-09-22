@@ -66,6 +66,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/8"
+    },
+    {
+      "id": "GH-9",
+      "title": "Make Folio instructions and remaining components mobile-friendly",
+      "description": null,
+      "tags": [
+        "folio,mobile,components,documentation"
+      ],
+      "priority": "high",
+      "status": "ready",
+      "attachments": [],
+      "createdAt": "2026-09-22T18:58:39.838Z",
+      "updatedAt": "2026-09-22T18:58:39.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/echelon-print-components/issues/9"
     }
   ]
 }
