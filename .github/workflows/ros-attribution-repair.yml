@@ -32,7 +32,7 @@ jobs:
           WORK_ID="GH-3"
           NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
           ./ros add "Attribute and complete ART-01 / ACCESS-PDF-01 work"             --id "$WORK_ID"             --tag print,governance,experiments             --priority high             --source github-issue             --source-reference "https://github.com/kemiller2002/echelon-print-components/issues/3"             --actor "agent:chatgpt"
-          ./ros work ready --id "$WORK_ID" --occurred-at "$NOW"
+          ./ros work backlog-transition --action ready --id "$WORK_ID" --occurred-at "$NOW"
           NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
           ./ros work start --id "$WORK_ID" --occurred-at "$NOW" --type feature
           ./ros work context "$WORK_ID"
