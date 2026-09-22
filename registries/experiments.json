@@ -101,5 +101,47 @@
       "HY-PRINT-2026-0005"
     ],
     "title": "TABLE-01 multipage and landscape tables"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-22",
+    "id": "EX-PRINT-2026-0006",
+    "inputs": [
+      "tests/fixtures/artwork/artwork.html"
+    ],
+    "outputs": [
+      "test-results/print-experiments/art-01-backgrounds-on.pdf",
+      "test-results/print-experiments/art-01-backgrounds-off.pdf",
+      "test-results/print-experiments/results.json"
+    ],
+    "path": "research/experiments/EX-PRINT-2026-0006--art-01-background-artwork-degradation.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PRINT-2026-0006"
+    ],
+    "title": "ART-01 background artwork degradation"
+  },
+  {
+    "author_agent": "chatgpt",
+    "created": "2026-09-22",
+    "id": "EX-PRINT-2026-0007",
+    "inputs": [
+      "tests/fixtures/accessibility/semantic.html"
+    ],
+    "outputs": [
+      "test-results/print-experiments/access-pdf-01-untagged.pdf",
+      "test-results/print-experiments/access-pdf-01-tagged.pdf",
+      "test-results/print-experiments/results.json"
+    ],
+    "path": "research/experiments/EX-PRINT-2026-0007--access-pdf-01-tagged-chromium-pdf.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "active",
+    "tests_hypotheses": [
+      "HY-PRINT-2026-0007"
+    ],
+    "title": "ACCESS-PDF-01 tagged Chromium PDF"
   }
 ]

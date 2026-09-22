@@ -83,5 +83,35 @@
       "EV-PRINT-2026-0005"
     ],
     "title": "Native tables repeat headers and named pages support landscape wide sections"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "medium",
+    "contradicting_evidence": [],
+    "created": "2026-09-22",
+    "id": "HY-PRINT-2026-0006",
+    "path": "research/hypotheses/HY-PRINT-2026-0006--element-layer-page-artwork-degrades-without-losing-essential-content.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "proposed",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "title": "Element-layer page artwork degrades without losing essential content when print backgrounds are disabled"
+  },
+  {
+    "author_agent": "chatgpt",
+    "confidence": "medium",
+    "contradicting_evidence": [],
+    "created": "2026-09-22",
+    "id": "HY-PRINT-2026-0007",
+    "path": "research/hypotheses/HY-PRINT-2026-0007--deterministic-chromium-export-can-produce-a-tagged-pdf.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "status": "proposed",
+    "superseded_by": [],
+    "supersedes": [],
+    "supporting_evidence": [],
+    "title": "Deterministic Chromium export can deliberately produce a tagged PDF"
   }
 ]
