@@ -30,6 +30,10 @@ const expectedElements = [
 
 assert.deepEqual(registeredElementNames, expectedElements, "Node-safe module import exposes the complete public registry");
 
+const declarationSource = fs.readFileSync(path.join(root, "src/components/register.d.ts"), "utf8");
+const declaredElements = [...new Set([...declarationSource.matchAll(/"(ef-print-[a-z-]+)"/g)].map(match => match[1]))];
+assert.deepEqual(declaredElements, expectedElements, "TypeScript declarations match the runtime public registry");
+
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
