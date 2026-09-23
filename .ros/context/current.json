@@ -4,7 +4,7 @@
   "repository": "echelon-print-components",
   "actor": "ros-bootstrap",
   "startedAt": "2026-09-22T01:08:47.354Z",
-  "updatedAt": "2026-09-23T17:01:31.000Z",
+  "updatedAt": "2026-09-23T17:05:32.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -267,6 +267,27 @@
         "EXE-20260923T165922883Z-422cde00"
       ],
       "completedAt": "2026-09-23T17:01:31.000Z"
+    },
+    {
+      "id": "GH-14",
+      "type": "maintenance",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "implementation",
+          "path": ".github/workflows/deploy-folio-pages.yml"
+        },
+        {
+          "type": "tests",
+          "path": "tests/site-build.test.mjs"
+        }
+      ],
+      "updatedAt": "2026-09-23T17:05:32.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260923T170528378Z-d7cde504"
+      ],
+      "completedAt": "2026-09-23T17:05:32.000Z"
     }
   ]
 }

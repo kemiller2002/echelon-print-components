@@ -114,6 +114,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/folio/issues/13"
+    },
+    {
+      "id": "GH-14",
+      "title": "Keep canonical report documentation deployment in sync",
+      "description": null,
+      "tags": [
+        "folio,documentation,deployment,reports"
+      ],
+      "priority": "medium",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-23T17:05:27.759Z",
+      "updatedAt": "2026-09-23T17:05:32.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/folio/issues/14"
     }
   ]
 }
