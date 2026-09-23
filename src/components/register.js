@@ -26,7 +26,7 @@ export function registerPrintElements(registry = globalThis.customElements) {
 
   for (const name of elementNames) {
     if (!registry.get(name)) {
-      registry.define(name, EchelonPrintElement);
+      registry.define(name, class extends EchelonPrintElement {});
     }
   }
 }
