@@ -214,6 +214,12 @@ docs/
 
 The exact directories can change after experiments, but the dependency direction should remain.
 
+## 3.1 Implemented core surface
+
+As of Folio 0.2.0, the original core surface is registered and styled: document, title-page, section, back-page, header, footer, page-number intent, columns, sidebar, layer, break, keep, callout, figure, table, code, TOC, and note.
+
+This does not collapse renderer tiers. In particular, repeated page-margin headers/footers, physical current/total page counters, automatic target-page TOC counters, automatic footnotes/sidenotes, bleed, and marks remain capability-specific. Core components express semantic/layout intent and preserve useful fallback content; they do not synthesize unsupported paged-media behavior.
+
 ## 4. Public component philosophy
 
 Do not create custom replacements for ordinary semantic HTML.
