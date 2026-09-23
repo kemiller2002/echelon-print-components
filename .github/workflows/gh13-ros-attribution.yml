@@ -1,0 +1,100 @@
+name: GH-13 ROS attribution
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/gh13-ros-attribution.yml
+
+permissions:
+  contents: write
+
+jobs:
+  attribute:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Begin GH-13 through ROS
+        shell: bash
+        run: |
+          set -euo pipefail
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros add "Implement canonical Signal results report fixture" \
+            --id GH-13 \
+            --tag folio,print,reports,signal \
+            --priority high \
+            --source github-issue \
+            --source-reference "https://github.com/kemiller2002/folio/issues/13" \
+            --actor "agent:chatgpt"
+          ./ros work backlog-transition --action ready --id GH-13 --occurred-at "$NOW"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work start --id GH-13 --occurred-at "$NOW" --type feature
+          ./ros work context GH-13
+
+      - name: Validate report implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+          npm ci
+          npx playwright install --with-deps chromium firefox webkit
+          npm test
+          npm run site:check
+          npm run site:test:browser
+
+      - name: Complete GH-13 and validate ROS
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/gh13-ros-attribution.yml
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
+          ./ros work complete --id GH-13 --occurred-at "$NOW" \
+            --evidence requirements=docs/requirements/PRINT-COMPONENTS-REQUIREMENTS.md \
+            --evidence implementation=src/components/register.js \
+            --evidence implementation=src/components/register.d.ts \
+            --evidence implementation=src/styles/print.css \
+            --evidence implementation=tools/core-component-metadata.mjs \
+            --evidence implementation=tools/build-site.mjs \
+            --evidence implementation=tests/fixtures/reports/signal-results.html \
+            --evidence implementation=tests/fixtures/reports/signal-results.css \
+            --evidence tests=tests/run-primitive-component-tests.mjs \
+            --evidence tests=tests/run-report-fixture-tests.mjs \
+            --evidence tests=tests/site-build.test.mjs \
+            --evidence tests=tests/run-site-browser-tests.mjs \
+            --evidence documentation=docs/recipes/SIGNAL-RESULTS-REPORT.md
+          ./ros registry build
+          ./ros validate
+          ./ros status
+
+      - name: Commit attributed ROS state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A .ros registries .github/workflows/gh13-ros-attribution.yml
+          if [ -d .ros/telemetry ]; then
+            git add -f .ros/telemetry
+          fi
+          if git diff --cached --quiet; then
+            echo "ROS produced no attribution changes."
+            exit 1
+          fi
+          git commit -m "chore(ros): complete GH-13 work attribution"
+          git pull --rebase origin main
+          git push origin HEAD:main
