@@ -113,7 +113,7 @@ try {
     await page.goto(baseURL + "/reports/signal-results/");
     assert.match(await page.locator("h1").innerText(), /Signal results report/i, `${name}: report example title`);
     const reportPreview = page.frameLocator("iframe").first();
-    await reportPreview.locator("ef-print-integrity").waitFor({state: "attached"});
+    await reportPreview.locator("ef-print-integrity").first().waitFor({state: "attached"});
     assert.equal(await reportPreview.locator("ef-print-metric").count() >= 4, true, `${name}: report preview exposes metrics`);
 
     await page.goto(baseURL + "/agents/");
