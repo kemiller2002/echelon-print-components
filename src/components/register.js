@@ -19,7 +19,8 @@ const elementNames = [
   "ef-print-note",
 ];
 
-class EchelonPrintElement extends HTMLElement {}
+const HTMLElementBase = globalThis.HTMLElement ?? class {};
+class EchelonPrintElement extends HTMLElementBase {}
 
 export function registerPrintElements(registry = globalThis.customElements) {
   if (!registry) return;
