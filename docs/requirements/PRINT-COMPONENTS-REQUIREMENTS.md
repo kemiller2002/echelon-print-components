@@ -529,3 +529,187 @@ A single example document MUST contain:
 14. Which physical-output assertions can be automated from PDF page boxes and coordinates?
 15. What minimum public primitive set covers most document layouts without becoming a parallel HTML vocabulary?
 
+## 26. Standard report composition profile
+
+Folio must provide a reusable presentation contract for professional result reports without taking ownership of domain scoring, interpretation, privacy, or recommendation logic. Signal is the first concrete consumer, but this profile must remain useful for diagnostics, research reports, business reviews, audit reports, and other evidence-oriented documents.
+
+### 26.1 Ownership and composition boundary
+
+- **EPC-RPT-001 MUST** treat the application as the owner of report meaning and Folio as the owner of reusable document presentation.
+- **EPC-RPT-002 MUST NOT** calculate scores, classifications, recommendations, confidence, benchmark applicability, statistical significance, or domain conclusions.
+- **EPC-RPT-003 MUST** accept already-prepared semantic content and preserve it through print/PDF rendering.
+- **EPC-RPT-004 MUST** permit a consumer to construct the standard report profile from Folio primitives without a separate pagination engine.
+- **EPC-RPT-005 MUST** preserve logical source order independently of visual page composition.
+- **EPC-RPT-006 MUST** support both US Letter and A4 for the standard report profile.
+- **EPC-RPT-007 MUST** allow the same semantic report content to render at P0/P1/P2/P3 capability levels with explicit, documented degradation.
+- **EPC-RPT-008 MUST NOT** make PDF the canonical report representation.
+- **EPC-RPT-009 MUST** keep report composition useful in semantic HTML before custom-element upgrade.
+- **EPC-RPT-010 SHOULD** provide a documented recipe and canonical fixture for the standard report profile.
+
+### 26.2 Standard report anatomy
+
+The profile MUST be able to compose, in logical reading order:
+
+1. Cover/title page
+2. Executive summary
+3. Results/metrics at a glance
+4. Integrity/quality/limitations summary
+5. Repeating detail sections
+6. Cross-section findings
+7. Domain-specific analysis
+8. Decision-support/action sections
+9. Distribution/evidence tables and figures
+10. Comparisons/trends
+11. Methodology
+12. Appendix/provenance
+
+- **EPC-RPT-011 MUST** allow sections to be omitted without blank artifacts or broken numbering.
+- **EPC-RPT-012 MUST** support long documents with natural fragmentation.
+- **EPC-RPT-013 MUST** support explicit major-section break intent.
+- **EPC-RPT-014 SHOULD** support TOC generation/composition where renderer capability allows it, with a useful manual/static fallback.
+- **EPC-RPT-015 MUST** support a cover that suppresses ordinary running header/footer content.
+- **EPC-RPT-016 MUST** support body-page running-content intent independently from the cover.
+- **EPC-RPT-017 MUST** support landscape page profiles inside an otherwise portrait report.
+- **EPC-RPT-018 MUST** allow appendices to use the same document identity and page-number sequence unless the consumer explicitly selects a different profile.
+
+### 26.3 Reusable report presentation patterns
+
+Folio SHOULD provide reusable presentation patterns, recipes, or narrowly justified primitives for:
+
+- report cover metadata;
+- key metrics/results;
+- compact integrity/quality summaries;
+- findings;
+- observation/implication/action/evidence-required sequences;
+- comparison rows/cards;
+- dimension/section summaries;
+- warning/limitation callouts;
+- provenance/methodology metadata.
+
+- **EPC-RPT-019 MUST** keep these patterns domain-neutral.
+- **EPC-RPT-020 MUST NOT** introduce a Signal-specific score model into Folio.
+- **EPC-RPT-021 MUST** prefer semantic native HTML inside report patterns.
+- **EPC-RPT-022 MUST** require evidence before adding a new public custom element where a documented composition recipe using existing primitives is sufficient.
+- **EPC-RPT-023 MAY** introduce report-specific public primitives when repeated implementation demonstrates a stable reusable layout contract.
+- **EPC-RPT-024 MUST** document whether each report pattern is a primitive, CSS recipe, or higher-level composition.
+- **EPC-RPT-025 MUST** keep report-specific patterns compatible with consumer themes.
+
+Candidate elements such as `ef-print-report`, `ef-print-report-cover`, `ef-print-metric`, `ef-print-finding`, and `ef-print-integrity` remain architecture candidates until usage evidence justifies their public API. This requirement intentionally avoids prematurely expanding the custom-element surface.
+
+### 26.4 Result-integrity presentation
+
+- **EPC-RPT-026 MUST** provide a standard visual composition for integrity, confidence, coverage, completeness, comparability, warnings, and known limitations supplied by the consumer.
+- **EPC-RPT-027 MUST** visually distinguish integrity/quality metadata from the primary performance/result metric.
+- **EPC-RPT-028 MUST** support explicit states such as complete, partial, insufficient data, not comparable, suppressed, unavailable, and low confidence.
+- **EPC-RPT-029 MUST NOT** style an unavailable or suppressed value as if it were numeric zero.
+- **EPC-RPT-030 MUST** allow material limitations to remain visible in print rather than existing only as interactive tooltips.
+- **EPC-RPT-031 MUST** permit a compact integrity block on executive reports and an expanded form on technical reports using the same semantic source content.
+
+### 26.5 Charts, figures, and data presentation
+
+- **EPC-RPT-032 MUST** support consumer-provided radar/spider, bar, range, distribution, trend, and comparison figures through the generic figure contract.
+- **EPC-RPT-033 MUST NOT** bundle a charting library into Folio core.
+- **EPC-RPT-034 MUST** support captions and accompanying textual/tabular equivalents.
+- **EPC-RPT-035 MUST** keep figure captions with their figures where renderer behavior permits.
+- **EPC-RPT-036 MUST** support grayscale-safe figure framing and legends.
+- **EPC-RPT-037 MUST** provide theme tokens that permit chart series to be distinguished by more than color.
+- **EPC-RPT-038 MUST** support direct labels/patterns/line styles supplied by the consumer.
+- **EPC-RPT-039 MUST** support wide data tables through an explicit landscape or wide-page profile rather than clipping content.
+- **EPC-RPT-040 MUST** test multi-page table header repetition under each supported renderer profile.
+
+### 26.6 Page identity and running content
+
+- **EPC-RPT-041 SHOULD** provide a standard running-header recipe for report title/section context.
+- **EPC-RPT-042 SHOULD** provide a standard running-footer recipe for report identifier/version context plus page number.
+- **EPC-RPT-043 MUST** support current-page numbering where the selected renderer can guarantee it.
+- **EPC-RPT-044 SHOULD** support `Page X of Y` in capability profiles that guarantee total-page counters.
+- **EPC-RPT-045 MUST** provide a meaningful fallback when total-page counters are unavailable.
+- **EPC-RPT-046 MUST** permit the consumer to suppress confidential or identifying metadata from running content.
+- **EPC-RPT-047 MUST** prevent decorative running content from becoming the only location of essential report meaning.
+- **EPC-RPT-048 MUST** keep report identity stable when a document switches to a landscape page profile.
+
+### 26.7 Letter/A4 portability
+
+- **EPC-RPT-049 MUST** include canonical standard-report fixtures for both US Letter and A4.
+- **EPC-RPT-050 SHOULD** define a common logical content grid/token set that keeps the two page-size variants compositionally similar.
+- **EPC-RPT-051 MUST** allow page-size-specific margin tuning without changing report semantics.
+- **EPC-RPT-052 MUST** test page-size variants for clipping, awkward single-line spill pages, table overflow, and heading orphans.
+- **EPC-RPT-053 MUST** record page-count differences between Letter and A4 as permissible renderer/layout differences rather than semantic differences.
+- **EPC-RPT-054 MUST NOT** require consumers to maintain separate report markup for Letter and A4.
+
+### 26.8 Typography, branding, and white labeling
+
+- **EPC-RPT-055 MUST** use Folio theme tokens for report typography, spacing, rules, page margins, accents, and running content.
+- **EPC-RPT-056 MUST** support a restrained professional default report theme.
+- **EPC-RPT-057 MUST** support white-label logo/name/accent/typography overrides without forking core.
+- **EPC-RPT-058 MUST** preserve accessibility constraints under consumer themes.
+- **EPC-RPT-059 MUST** preserve warning, limitation, and integrity visibility under consumer themes.
+- **EPC-RPT-060 MUST** separate branding from report semantics.
+- **EPC-RPT-061 SHOULD** provide a theme/version identifier suitable for formal report provenance.
+- **EPC-RPT-062 MUST** provide a backgrounds-disabled fallback in which essential branding and document identity remain legible.
+
+### 26.9 Accessibility for result reports
+
+- **EPC-RPT-063 MUST** preserve semantic heading hierarchy and table semantics in the source DOM.
+- **EPC-RPT-064 MUST** support text alternatives/descriptions for meaningful figures.
+- **EPC-RPT-065 MUST** require a non-chart equivalent when a chart carries information not otherwise available in the document.
+- **EPC-RPT-066 MUST** keep the standard report understandable without color.
+- **EPC-RPT-067 MUST** test the standard report in color, grayscale, and backgrounds-disabled output.
+- **EPC-RPT-068 MUST** keep accessibility assertions about browser-generated PDFs within the validated capability of the renderer.
+- **EPC-RPT-069 MUST NOT** claim tagged-PDF or PDF/UA conformance merely because source HTML is semantic.
+- **EPC-RPT-070 SHOULD** allow a separately validated accessible-PDF renderer adapter to consume the same semantic report markup.
+
+### 26.10 Privacy-safe presentation
+
+- **EPC-RPT-071 MUST** render only content supplied by the consumer and MUST NOT derive hidden detail from aggregate data.
+- **EPC-RPT-072 MUST NOT** serialize hidden/suppressed application values into data attributes, generated CSS, comments, accessibility-only text, diagnostics, or metadata.
+- **EPC-RPT-073 MUST** allow confidentiality labels without implying that document labeling is access control.
+- **EPC-RPT-074 MUST** avoid embedding network credentials, authorization material, or secret-bearing URLs in generated document metadata.
+- **EPC-RPT-075 MUST** support deterministic diagnostics without logging document content by default.
+
+### 26.11 Provenance and formal export
+
+- **EPC-RPT-076 MUST** permit consumer-supplied report/profile/version identifiers to be rendered or embedded as non-secret provenance.
+- **EPC-RPT-077 SHOULD** expose renderer name/version and Folio version to the deterministic export caller so the application can record report-snapshot provenance.
+- **EPC-RPT-078 MUST** distinguish semantic-equivalence reproducibility from byte-for-byte PDF reproducibility.
+- **EPC-RPT-079 MUST** support deterministic P2 export fixtures for the standard report profile.
+- **EPC-RPT-080 MUST** treat a byte-different PDF as potentially valid when semantic/layout invariants remain satisfied and renderer provenance explains the difference.
+- **EPC-RPT-081 MUST** make strict versus permissive capability behavior explicit for formal exports.
+- **EPC-RPT-082 MUST** fail strict export when a consumer-declared required report feature is unavailable.
+
+### 26.12 Canonical report fixtures and acceptance
+
+The Folio test suite MUST add canonical fixtures for at least:
+
+- executive summary report;
+- full technical report;
+- long repeating detail sections;
+- integrity states including partial/insufficient/not-comparable;
+- radar/spider figure plus textual equivalent;
+- distribution-heavy content;
+- multi-page tables;
+- landscape wide-table section;
+- Letter and A4 variants;
+- color and grayscale variants;
+- backgrounds-disabled output;
+- white-label theme;
+- long methodology/provenance appendix.
+
+- **EPC-RPT-083 MUST** assert required text presence after deterministic export.
+- **EPC-RPT-084 MUST** detect clipped or overlapping report blocks.
+- **EPC-RPT-085 MUST** test heading orphan/fragmentation behavior for canonical report sections.
+- **EPC-RPT-086 MUST** test running header/footer fallbacks at P0 and current/total page behavior at P1/P2 where supported.
+- **EPC-RPT-087 MUST** test that landscape sections return correctly to the body page profile.
+- **EPC-RPT-088 MUST** test that a white-label theme cannot make mandatory warnings or integrity text unreadable.
+- **EPC-RPT-089 MUST** test meaningful output with JavaScript disabled.
+- **EPC-RPT-090 MUST** provide at least three documentation examples for every new public component added specifically for report composition.
+
+### 26.13 Initial implementation boundary
+
+- **EPC-RPT-091 MUST** first implement the standard report using existing Folio primitives wherever they are sufficient.
+- **EPC-RPT-092 MUST** use the standard report fixture as evidence for whether candidate report-specific custom elements are necessary.
+- **EPC-RPT-093 SHOULD** add only the smallest stable public report-component surface justified by repeated composition.
+- **EPC-RPT-094 MUST** keep Signal-specific data contracts out of Folio core.
+- **EPC-RPT-095 MUST** document the Signal integration as a consumer recipe rather than make Signal a runtime dependency.
+- **EPC-RPT-096 MUST** preserve Folio's standards-first, semantic-HTML, CSS-pagination architecture while adding report composition support.
+
