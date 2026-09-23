@@ -3,6 +3,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium, firefox, webkit } from "playwright";
+import { elementNames as registeredElementNames } from "../src/components/register.js";
 
 const root = process.cwd();
 const fixture = "/tests/fixtures/primitives/primitives.html";
@@ -26,6 +27,8 @@ const expectedElements = [
   "ef-print-toc",
   "ef-print-note",
 ];
+
+assert.deepEqual(registeredElementNames, expectedElements, "Node-safe module import exposes the complete public registry");
 
 const mime = {
   ".html": "text/html; charset=utf-8",
