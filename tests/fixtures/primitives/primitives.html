@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Folio primitive contract fixture</title>
+  <link rel="stylesheet" href="../../../src/styles/print.css">
+  <script type="module" src="../../../src/components/register.js"></script>
+  <style>
+    body { padding: 16px; }
+    ef-print-section { min-height: 260px; }
+    .wide-table { min-width: 760px; }
+  </style>
+</head>
+<body>
+<ef-print-document>
+  <ef-print-header data-probe="header">
+    <span slot="left">Folio</span>
+    <span slot="center">Primitive contract</span>
+    <span slot="right">Header</span>
+  </ef-print-header>
+
+  <ef-print-section>
+    <ef-print-layer data-probe="layer" decorative aria-hidden="true" style="--ef-print-art-opacity:.25; --ef-print-art-image:linear-gradient(135deg,#ddd,#fff)"></ef-print-layer>
+    <h1>Primitive evidence</h1>
+
+    <ef-print-callout data-probe="callout">
+      <strong>Decision.</strong> The renderer owns physical pagination.
+    </ef-print-callout>
+
+    <ef-print-figure data-probe="figure">
+      <figure>
+        <svg role="img" aria-label="Three architecture stages" viewBox="0 0 300 70">
+          <rect x="1" y="10" width="80" height="45"></rect>
+          <rect x="110" y="10" width="80" height="45"></rect>
+          <rect x="219" y="10" width="80" height="45"></rect>
+        </svg>
+        <figcaption>Figure 1. Semantic content, Folio intent, renderer output.</figcaption>
+      </figure>
+    </ef-print-figure>
+
+    <ef-print-table data-probe="table">
+      <table class="wide-table">
+        <caption>Evidence matrix</caption>
+        <thead><tr><th>Primitive</th><th>Portable</th><th>Renderer</th><th>Evidence</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Callout</td><td>Yes</td><td>Browser</td><td>Cross-browser CSS</td><td>Implemented</td></tr>
+          <tr><td>Page number</td><td>Intent only</td><td>P1/P2</td><td>MARGIN-01</td><td>Capability-bound</td></tr>
+        </tbody>
+      </table>
+    </ef-print-table>
+
+    <ef-print-code data-probe="code"><pre><code>const render = (documentIntent) =&gt; renderer.print(documentIntent);</code></pre></ef-print-code>
+
+    <ef-print-toc data-probe="toc">
+      <nav aria-label="Contents">
+        <ol>
+          <li><a href="#one">Architecture</a><span data-page>2</span></li>
+          <li><a href="#two">Evidence</a><span data-page>7</span></li>
+        </ol>
+      </nav>
+    </ef-print-toc>
+
+    <ef-print-note data-probe="note" role="note">Page-aware automatic TOC numbering remains an enhanced renderer capability.</ef-print-note>
+  </ef-print-section>
+
+  <ef-print-footer data-probe="footer" repeat="page">
+    <span slot="left">Confidential</span>
+    <span slot="right"><ef-print-page-number data-probe="page-number" format="page-of-pages">Page counter supplied by renderer</ef-print-page-number></span>
+  </ef-print-footer>
+</ef-print-document>
+</body>
+</html>
