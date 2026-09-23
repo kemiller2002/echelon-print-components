@@ -376,7 +376,9 @@
     }
 
     ef-print-header > *,
-    ef-print-footer > * {
+    ef-print-footer > *,
+    ef-print-header > [slot],
+    ef-print-footer > [slot] {
       grid-column: 1;
       text-align: left;
     }
