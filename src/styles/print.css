@@ -8,8 +8,23 @@
     --ef-print-font-size: 10.5pt;
     --ef-print-line-height: 1.45;
     --ef-print-text: #161616;
+    --ef-print-muted: #5d6470;
     --ef-print-rule: #9a9a9a;
+    --ef-print-accent: #253f56;
+    --ef-print-surface: #f5f7f8;
+    --ef-print-code-surface: #f2f3f4;
     --ef-print-space: 0.18in;
+    --ef-print-header-gap: 0.16in;
+    --ef-print-footer-gap: 0.16in;
+    --ef-print-art-inset: 0;
+    --ef-print-art-opacity: 1;
+    --ef-print-art-image: none;
+    --ef-print-art-fit: cover;
+    --ef-print-art-position: center;
+    --ef-print-callout-accent: var(--ef-print-accent);
+    --ef-print-callout-surface: var(--ef-print-surface);
+    --ef-print-note-accent: var(--ef-print-rule);
+    --ef-print-code-font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
 
   @page {
@@ -45,11 +60,40 @@
   ef-print-title-page,
   ef-print-section,
   ef-print-back-page,
+  ef-print-header,
+  ef-print-footer,
   ef-print-columns,
   ef-print-sidebar,
+  ef-print-layer,
   ef-print-break,
-  ef-print-keep {
+  ef-print-keep,
+  ef-print-callout,
+  ef-print-figure,
+  ef-print-table,
+  ef-print-code,
+  ef-print-toc,
+  ef-print-note {
     display: block;
+  }
+
+  ef-print-page-number {
+    display: inline;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  ef-print-title-page,
+  ef-print-section,
+  ef-print-back-page {
+    position: relative;
+    isolation: isolate;
+  }
+
+  ef-print-title-page > :not(ef-print-layer),
+  ef-print-section > :not(ef-print-layer),
+  ef-print-back-page > :not(ef-print-layer) {
+    position: relative;
+    z-index: 1;
   }
 
   ef-print-title-page {
@@ -68,19 +112,243 @@
     break-after: page;
   }
 
+  ef-print-break[column] {
+    break-after: column;
+  }
+
   ef-print-keep {
     break-inside: avoid;
+  }
+
+  ef-print-header,
+  ef-print-footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--ef-print-header-gap);
+    align-items: baseline;
+    color: var(--ef-print-muted);
+    font-size: 0.86em;
+  }
+
+  ef-print-footer {
+    gap: var(--ef-print-footer-gap);
+  }
+
+  ef-print-header > [slot="left"],
+  ef-print-footer > [slot="left"] {
+    text-align: left;
+  }
+
+  ef-print-header > [slot="center"],
+  ef-print-footer > [slot="center"] {
+    text-align: center;
+  }
+
+  ef-print-header > [slot="right"],
+  ef-print-footer > [slot="right"] {
+    text-align: right;
+  }
+
+  ef-print-header > :not([slot]),
+  ef-print-footer > :not([slot]) {
+    grid-column: 1 / -1;
+  }
+
+  /*
+   * Header/footer elements are in-flow P0 primitives. A repeat="page" attribute
+   * expresses running-content intent for renderer profiles that support it; core
+   * CSS deliberately does not fake repeated page-margin content.
+   */
+  ef-print-header[repeat="page"],
+  ef-print-footer[repeat="page"] {
+    --ef-print-running-intent: page;
+  }
+
+  /*
+   * Page-number is an explicit renderer-capability marker. Authored fallback
+   * text remains visible in P0; P1/P2/P3 adapters may replace/map it to a real
+   * page counter without estimating pages from DOM height.
+   */
+  ef-print-page-number[format="page"] {
+    --ef-print-page-number-format: page;
+  }
+
+  ef-print-page-number[format="page-of-pages"] {
+    --ef-print-page-number-format: page-of-pages;
   }
 
   ef-print-columns {
     column-count: var(--ef-print-column-count, 2);
     column-gap: var(--ef-print-column-gap, 0.28in);
+    column-rule: var(--ef-print-column-rule, none);
   }
 
   ef-print-sidebar {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--ef-print-sidebar-width, 1.65in);
     gap: var(--ef-print-sidebar-gap, 0.24in);
+  }
+
+  ef-print-sidebar[position="left"] {
+    grid-template-columns: var(--ef-print-sidebar-width, 1.65in) minmax(0, 1fr);
+  }
+
+  ef-print-layer {
+    position: absolute;
+    inset: var(--ef-print-art-inset);
+    z-index: 0;
+    opacity: var(--ef-print-art-opacity);
+    background-image: var(--ef-print-art-image);
+    background-size: var(--ef-print-art-fit);
+    background-position: var(--ef-print-art-position);
+    background-repeat: var(--ef-print-art-repeat, no-repeat);
+    pointer-events: none;
+  }
+
+  ef-print-layer[mode="watermark"] {
+    display: grid;
+    place-items: center;
+    color: var(--ef-print-art-color, var(--ef-print-muted));
+    font-size: var(--ef-print-art-font-size, 30pt);
+    font-weight: var(--ef-print-art-font-weight, 700);
+    letter-spacing: var(--ef-print-art-letter-spacing, 0.08em);
+    text-transform: var(--ef-print-art-text-transform, uppercase);
+  }
+
+  ef-print-callout {
+    margin-block: var(--ef-print-space);
+    padding: var(--ef-print-callout-padding, 0.14in 0.18in);
+    border-inline-start: var(--ef-print-callout-rule-width, 0.04in) solid var(--ef-print-callout-accent);
+    background: var(--ef-print-callout-surface);
+    break-inside: avoid;
+  }
+
+  ef-print-callout[variant="plain"] {
+    background: transparent;
+  }
+
+  ef-print-figure {
+    margin-block: var(--ef-print-space);
+    break-inside: avoid;
+  }
+
+  ef-print-figure > figure {
+    margin: 0;
+  }
+
+  ef-print-figure figcaption {
+    margin-block-start: 0.08in;
+    color: var(--ef-print-muted);
+    font-size: 0.86em;
+    line-height: 1.35;
+  }
+
+  ef-print-table {
+    max-inline-size: 100%;
+    margin-block: var(--ef-print-space);
+  }
+
+  ef-print-table > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  ef-print-table caption {
+    margin-block-end: 0.08in;
+    text-align: start;
+    font-weight: 700;
+  }
+
+  ef-print-table thead {
+    display: table-header-group;
+  }
+
+  ef-print-table tfoot {
+    display: table-footer-group;
+  }
+
+  ef-print-table tr {
+    break-inside: avoid;
+  }
+
+  ef-print-table th,
+  ef-print-table td {
+    padding: var(--ef-print-table-cell-padding, 0.055in 0.07in);
+    border-bottom: 1px solid var(--ef-print-rule);
+    text-align: start;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
+
+  ef-print-table th {
+    font-weight: 700;
+  }
+
+  ef-print-table [data-align="number"] {
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ef-print-code {
+    margin-block: var(--ef-print-space);
+  }
+
+  ef-print-code pre {
+    margin: 0;
+    padding: var(--ef-print-code-padding, 0.14in);
+    border: 1px solid var(--ef-print-rule);
+    background: var(--ef-print-code-surface);
+    font-family: var(--ef-print-code-font-family);
+    font-size: var(--ef-print-code-font-size, 0.88em);
+    line-height: var(--ef-print-code-line-height, 1.45);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: var(--ef-print-code-tab-size, 2);
+  }
+
+  ef-print-code code {
+    font: inherit;
+  }
+
+  ef-print-toc {
+    margin-block: var(--ef-print-space);
+  }
+
+  ef-print-toc ol,
+  ef-print-toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ef-print-toc li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.12in;
+    align-items: end;
+    padding-block: 0.035in;
+    border-bottom: 1px dotted var(--ef-print-rule);
+    break-inside: avoid;
+  }
+
+  ef-print-toc a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ef-print-toc [data-page] {
+    min-inline-size: 2ch;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  ef-print-note {
+    margin-block: var(--ef-print-space);
+    padding-inline-start: var(--ef-print-note-padding, 0.12in);
+    border-inline-start: 2px solid var(--ef-print-note-accent);
+    color: var(--ef-print-muted);
+    font-size: var(--ef-print-note-font-size, 0.9em);
+    break-inside: avoid;
   }
 
   /*
@@ -100,11 +368,44 @@
       min-inline-size: 0;
       max-inline-size: 100%;
     }
+
+    ef-print-header,
+    ef-print-footer {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    ef-print-header > *,
+    ef-print-footer > * {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    ef-print-table {
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+
+    ef-print-table > table {
+      min-inline-size: var(--ef-print-table-screen-min-width, 34rem);
+    }
+
+    ef-print-code {
+      max-inline-size: 100%;
+    }
   }
 }
 
 @media print {
   [data-screen-only] {
     display: none !important;
+  }
+
+  ef-print-header,
+  ef-print-footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  ef-print-table {
+    overflow: visible;
   }
 }
