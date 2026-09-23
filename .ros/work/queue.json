@@ -98,6 +98,22 @@
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/folio/issues/11"
+    },
+    {
+      "id": "GH-13",
+      "title": "Implement canonical Signal results report fixture",
+      "description": null,
+      "tags": [
+        "folio,print,reports,signal"
+      ],
+      "priority": "high",
+      "status": "complete",
+      "attachments": [],
+      "createdAt": "2026-09-23T16:59:22.388Z",
+      "updatedAt": "2026-09-23T17:01:31.000Z",
+      "createdBy": "agent:chatgpt",
+      "source": "github-issue",
+      "sourceReference": "https://github.com/kemiller2002/folio/issues/13"
     }
   ]
 }

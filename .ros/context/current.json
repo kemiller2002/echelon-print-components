@@ -4,7 +4,7 @@
   "repository": "echelon-print-components",
   "actor": "ros-bootstrap",
   "startedAt": "2026-09-22T01:08:47.354Z",
-  "updatedAt": "2026-09-23T16:03:18.000Z",
+  "updatedAt": "2026-09-23T17:01:31.000Z",
   "baselineDirtyPaths": [],
   "workItems": [
     {
@@ -202,6 +202,71 @@
         "EXE-20260923T155922165Z-57b1a30d"
       ],
       "completedAt": "2026-09-23T16:03:18.000Z"
+    },
+    {
+      "id": "GH-13",
+      "type": "feature",
+      "state": "complete",
+      "semanticState": "complete",
+      "evidence": [
+        {
+          "type": "requirements",
+          "path": "docs/requirements/PRINT-COMPONENTS-REQUIREMENTS.md"
+        },
+        {
+          "type": "implementation",
+          "path": "src/components/register.js"
+        },
+        {
+          "type": "implementation",
+          "path": "src/components/register.d.ts"
+        },
+        {
+          "type": "implementation",
+          "path": "src/styles/print.css"
+        },
+        {
+          "type": "implementation",
+          "path": "tools/core-component-metadata.mjs"
+        },
+        {
+          "type": "implementation",
+          "path": "tools/build-site.mjs"
+        },
+        {
+          "type": "implementation",
+          "path": "tests/fixtures/reports/signal-results.html"
+        },
+        {
+          "type": "implementation",
+          "path": "tests/fixtures/reports/signal-results.css"
+        },
+        {
+          "type": "tests",
+          "path": "tests/run-primitive-component-tests.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/run-report-fixture-tests.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/site-build.test.mjs"
+        },
+        {
+          "type": "tests",
+          "path": "tests/run-site-browser-tests.mjs"
+        },
+        {
+          "type": "documentation",
+          "path": "docs/recipes/SIGNAL-RESULTS-REPORT.md"
+        }
+      ],
+      "updatedAt": "2026-09-23T17:01:31.000Z",
+      "telemetryExecutionIds": [
+        "EXE-20260923T165922883Z-422cde00"
+      ],
+      "completedAt": "2026-09-23T17:01:31.000Z"
     }
   ]
 }
