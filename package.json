@@ -5,7 +5,11 @@
   "description": "Folio: standards-first web components and CSS primitives for professional HTML print documents.",
   "type": "module",
   "exports": {
-    ".": "./src/components/register.js",
+    ".": {
+      "types": "./src/components/register.d.ts",
+      "import": "./src/components/register.js",
+      "default": "./src/components/register.js"
+    },
     "./print.css": "./src/styles/print.css"
   },
   "files": [
@@ -38,5 +42,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kemiller2002/folio.git"
-  }
+  },
+  "types": "./src/components/register.d.ts"
 }
