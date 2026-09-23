@@ -34,7 +34,7 @@ jobs:
           ./ros add "Keep canonical report documentation deployment in sync" \
             --id GH-14 \
             --tag folio,documentation,deployment,reports \
-            --priority normal \
+            --priority medium \
             --source github-issue \
             --source-reference "https://github.com/kemiller2002/folio/issues/14" \
             --actor "agent:chatgpt"
