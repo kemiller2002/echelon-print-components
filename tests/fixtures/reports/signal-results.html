@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signal canonical results report · Folio</title>
+  <link rel="stylesheet" href="../../../src/styles/print.css">
+  <link rel="stylesheet" href="./signal-results.css">
+  <script type="module" src="../../../src/components/register.js"></script>
+</head>
+<body data-print-mode="color">
+<ef-print-document data-document-kind="signal-results-report">
+  <ef-print-title-page>
+    <ef-print-layer decorative aria-hidden="true" style="--ef-print-art-image:linear-gradient(145deg,transparent 0 62%,var(--signal-accent-soft) 62% 100%); --ef-print-art-opacity:.9"></ef-print-layer>
+    <div class="signal-cover" data-report-block>
+      <div class="signal-cover-rule" aria-hidden="true"></div>
+      <p class="signal-kicker">Echelon Signal · Organizational assessment</p>
+      <h1>SIGNAL-COVER Software Delivery Reality Assessment</h1>
+      <p>Canonical full results report demonstrating the Signal Results Print Profile through Folio.</p>
+      <div class="signal-cover-meta">
+        <p><strong>Report type</strong><br>Organizational Results</p>
+        <p><strong>Report date</strong><br>23 September 2026</p>
+        <p><strong>Assessment</strong><br>SDRA 1.0</p>
+        <p><strong>Report ID</strong><br>SIG-RPT-2026-001</p>
+      </div>
+      <p class="signal-small">Illustrative, non-PII fixture data. Values exist to exercise the report contract, not to claim psychometric validation.</p>
+    </div>
+  </ef-print-title-page>
+
+  <ef-print-section class="signal-report-section" id="contents" data-report-block>
+    <p class="signal-overline">Report navigation</p>
+    <h1>SIGNAL-TOC Contents</h1>
+    <ef-print-toc>
+      <nav aria-label="Report contents">
+        <ol>
+          <li><a href="#summary">Executive summary</a></li>
+          <li><a href="#profile">Results at a glance</a></li>
+          <li><a href="#dimensions">Dimension detail</a></li>
+          <li><a href="#findings">Cross-dimension findings</a></li>
+          <li><a href="#distributions">Response distribution</a></li>
+          <li><a href="#comparison">Comparative detail</a></li>
+          <li><a href="#methodology">Methodology and provenance</a></li>
+        </ol>
+      </nav>
+    </ef-print-toc>
+    <ef-print-note role="note">Automatic target-page numbers remain capability-bound. This P0-compatible contents list remains useful without them.</ef-print-note>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="summary" break-before="page" data-report-block>
+    <p class="signal-overline">Executive summary</p>
+    <h1>SIGNAL-SUMMARY Delivery behavior is mixed and governance-heavy</h1>
+    <p class="signal-section-intro">The observed profile combines iterative team practices with approval, testing, and release controls that remain substantially stage-gated. The report separates that observation from any judgment about whether the operating model is appropriate.</p>
+
+    <div class="signal-metric-grid">
+      <ef-print-metric emphasis="strong">
+        <span data-label>Observed model</span>
+        <strong data-value>Hybrid</strong>
+        <span data-detail>Iterative delivery + stage gates</span>
+      </ef-print-metric>
+      <ef-print-metric>
+        <span data-label>Empirical adaptation</span>
+        <strong data-value>78 / 100</strong>
+        <span data-detail>Strongest dimension</span>
+      </ef-print-metric>
+      <ef-print-metric>
+        <span data-label>Release autonomy</span>
+        <strong data-value>42 / 100</strong>
+        <span data-detail>Material constraint</span>
+      </ef-print-metric>
+      <ef-print-metric>
+        <span data-label>Accepted responses</span>
+        <strong data-value>42 / 45</strong>
+        <span data-detail>93% response completion</span>
+      </ef-print-metric>
+    </div>
+
+    <ef-print-integrity status="complete" aria-labelledby="signal-integrity">
+      <h2 id="signal-integrity">SIGNAL-INTEGRITY Result integrity</h2>
+      <dl>
+        <div><dt>Report status</dt><dd>Complete</dd></div>
+        <div><dt>Scoring coverage</dt><dd>94%</dd></div>
+        <div><dt>Confidence</dt><dd>Moderate</dd></div>
+        <div><dt>Benchmark</dt><dd>Not applied</dd></div>
+        <div><dt>Comparability</dt><dd>Established for prior period</dd></div>
+        <div><dt>Suppression</dt><dd>2 small cohorts suppressed</dd></div>
+      </dl>
+      <p data-limitations><strong>Known limitation.</strong> Two role cohorts did not meet the configured minimum count. Their subgroup values are not present in this report or its hidden markup.</p>
+    </ef-print-integrity>
+
+    <ef-print-callout>
+      <strong>Interpretive boundary.</strong>
+      The assessment identifies observed operating patterns. It does not establish that one methodology is universally preferable or that a specific process caused the reported outcomes.
+    </ef-print-callout>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="profile" break-before="page" data-report-block>
+    <p class="signal-overline">Results at a glance</p>
+    <h1>SIGNAL-PROFILE Claimed and observed delivery profile</h1>
+    <p class="signal-section-intro">Solid line: observed behavioral profile. Dashed line: claimed operating model. The adjacent table is the complete non-visual equivalent.</p>
+
+    <div class="signal-radar-layout">
+      <ef-print-figure class="signal-radar">
+        <figure>
+          <svg role="img" aria-labelledby="radar-title radar-desc" viewBox="0 0 520 390">
+            <title id="radar-title">Claimed and observed delivery profile radar</title>
+            <desc id="radar-desc">Observed scores: adaptation 78, flow 64, autonomy 48, quality ownership 69, governance flexibility 38, continuous delivery 45. Claimed scores: 85, 80, 82, 78, 75, 74.</desc>
+            <polygon class="ring" points="260,55 382,125 382,265 260,335 138,265 138,125"></polygon>
+            <polygon class="ring" points="260,90 352,143 352,247 260,300 168,247 168,143"></polygon>
+            <polygon class="ring" points="260,125 321,160 321,230 260,265 199,230 199,160"></polygon>
+            <line class="axis" x1="260" y1="195" x2="260" y2="55"></line>
+            <line class="axis" x1="260" y1="195" x2="382" y2="125"></line>
+            <line class="axis" x1="260" y1="195" x2="382" y2="265"></line>
+            <line class="axis" x1="260" y1="195" x2="260" y2="335"></line>
+            <line class="axis" x1="260" y1="195" x2="138" y2="265"></line>
+            <line class="axis" x1="260" y1="195" x2="138" y2="125"></line>
+            <polygon class="series-claimed" points="260,76 358,139 360,252 260,304 169,247 170,144"></polygon>
+            <polygon class="series-observed" points="260,86 338,150 319,229 260,258 214,221 182,150"></polygon>
+            <text x="260" y="38" text-anchor="middle">Adaptation</text>
+            <text x="397" y="122">Flow</text>
+            <text x="397" y="277">Autonomy</text>
+            <text x="260" y="360" text-anchor="middle">Quality ownership</text>
+            <text x="16" y="277">Governance flexibility</text>
+            <text x="10" y="122">Continuous delivery</text>
+          </svg>
+          <div class="signal-legend" aria-hidden="true"><span>Observed</span><span>Claimed</span></div>
+          <figcaption>Figure 1. Behavioral profile versus self-described methodology. Shape and line style duplicate color distinctions.</figcaption>
+        </figure>
+      </ef-print-figure>
+
+      <ef-print-table>
+        <table aria-label="Textual equivalent of the delivery profile radar">
+          <caption>SIGNAL-RADAR-TABLE Profile values</caption>
+          <thead><tr><th>Dimension</th><th data-align="number">Observed</th><th data-align="number">Claimed</th></tr></thead>
+          <tbody>
+            <tr><td>Empirical adaptation</td><td data-align="number">78</td><td data-align="number">85</td></tr>
+            <tr><td>Flow discipline</td><td data-align="number">64</td><td data-align="number">80</td></tr>
+            <tr><td>Team autonomy</td><td data-align="number">48</td><td data-align="number">82</td></tr>
+            <tr><td>Quality ownership</td><td data-align="number">69</td><td data-align="number">78</td></tr>
+            <tr><td>Governance flexibility</td><td data-align="number">38</td><td data-align="number">75</td></tr>
+            <tr><td>Continuous delivery</td><td data-align="number">45</td><td data-align="number">74</td></tr>
+          </tbody>
+        </table>
+      </ef-print-table>
+    </div>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="dimensions" break-before="page" data-report-block>
+    <p class="signal-overline">Dimension detail</p>
+    <h1>SIGNAL-DIMENSIONS Four representative dimensions</h1>
+    <div class="signal-dimension-grid">
+      <article class="signal-dimension">
+        <h3>Empirical adaptation</h3>
+        <ef-print-metric><span data-label>Score</span><strong data-value>78 / 100</strong><span data-detail>Coverage 97%</span></ef-print-metric>
+        <p>Teams report frequent inspection and adjustment of plans based on working increments and stakeholder feedback.</p>
+        <p class="signal-small"><strong>Limitation:</strong> this measures reported behavior, not causal effectiveness.</p>
+      </article>
+      <article class="signal-dimension">
+        <h3>Release autonomy</h3>
+        <ef-print-metric><span data-label>Score</span><strong data-value>42 / 100</strong><span data-detail>Coverage 92%</span></ef-print-metric>
+        <p>Release decisions depend on approval functions outside the delivery team and are commonly batched into scheduled windows.</p>
+        <p class="signal-small"><strong>Evidence:</strong> release approval, QA signoff, and deployment-window items.</p>
+      </article>
+      <article class="signal-dimension">
+        <h3>Quality ownership</h3>
+        <ef-print-metric><span data-label>Score</span><strong data-value>69 / 100</strong><span data-detail>Coverage 95%</span></ef-print-metric>
+        <p>Developers and QA share substantial quality responsibility, while final acceptance remains partially centralized.</p>
+      </article>
+      <article class="signal-dimension">
+        <h3>Governance flexibility</h3>
+        <ef-print-metric><span data-label>Score</span><strong data-value>38 / 100</strong><span data-detail>Coverage 91%</span></ef-print-metric>
+        <p>Scope and milestone changes often require formal approval outside the team, even when new evidence emerges during delivery.</p>
+      </article>
+    </div>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="findings" break-before="page" data-report-block>
+    <p class="signal-overline">Cross-dimension findings</p>
+    <h1>SIGNAL-FINDINGS Patterns that emerge across dimensions</h1>
+
+    <ef-print-finding compact>
+      <h2>Claimed Scrum, observed hybrid execution</h2>
+      <dl>
+        <div><dt>Observation</dt><dd>Teams report Scrum terminology and recurring ceremonies, while release, QA acceptance, and scope governance remain externally gated.</dd></div>
+        <div><dt>Implication</dt><dd>The operating model is better represented as iterative team delivery inside a stage-gated governance system than as a pure framework match.</dd></div>
+        <div><dt>Possible action</dt><dd>Map which gates are regulatory, contractual, risk-based, or historical before changing them.</dd></div>
+        <div><dt>Evidence needed</dt><dd>Gate purpose, lead-time contribution, exception rate, and change-failure data by release class.</dd></div>
+      </dl>
+    </ef-print-finding>
+
+    <ef-print-finding>
+      <h2>Quality responsibility is shared, but final authority is not</h2>
+      <dl>
+        <div><dt>Observation</dt><dd>Developers test their work and QA participates early, yet final release acceptance is still a downstream control.</dd></div>
+        <div><dt>Implication</dt><dd>Quality practices may be more integrated than the release governance model suggests.</dd></div>
+        <div><dt>Possible action</dt><dd>Test risk-tiered release authority rather than removing quality controls wholesale.</dd></div>
+        <div><dt>Evidence needed</dt><dd>Defect escape rate, rollback rate, approval wait time, and risk classification for candidate changes.</dd></div>
+      </dl>
+    </ef-print-finding>
+
+    <ef-print-integrity status="not-comparable" aria-labelledby="finding-integrity">
+      <h2 id="finding-integrity">Finding boundary</h2>
+      <dl>
+        <div><dt>Causality</dt><dd>Not established</dd></div>
+        <div><dt>External benchmark</dt><dd>Not applied</dd></div>
+        <div><dt>Small cohorts</dt><dd>Suppressed</dd></div>
+      </dl>
+      <p data-limitations>These findings describe response patterns and their possible operational implications. They do not rank methodologies or prove that changing a gate will improve outcomes.</p>
+    </ef-print-integrity>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="distributions" break-before="page" data-report-block>
+    <p class="signal-overline">Response distribution</p>
+    <h1>SIGNAL-DISTRIBUTIONS Agreement matters as much as the average</h1>
+    <ef-print-table>
+      <table>
+        <caption>Selected item distributions</caption>
+        <thead><tr><th>Item</th><th data-align="number">Strongly disagree</th><th data-align="number">Disagree</th><th data-align="number">Neutral</th><th data-align="number">Agree</th><th data-align="number">Strongly agree</th><th data-align="number">N/A / Don't know</th></tr></thead>
+        <tbody>
+          <tr><td>Teams can alter execution plans when evidence changes.</td><td data-align="number">2</td><td data-align="number">4</td><td data-align="number">5</td><td data-align="number">19</td><td data-align="number">11</td><td data-align="number">1</td></tr>
+          <tr><td>Release approval is controlled within the delivery team.</td><td data-align="number">13</td><td data-align="number">12</td><td data-align="number">5</td><td data-align="number">8</td><td data-align="number">2</td><td data-align="number">2</td></tr>
+          <tr><td>QA participates before implementation is complete.</td><td data-align="number">3</td><td data-align="number">5</td><td data-align="number">4</td><td data-align="number">18</td><td data-align="number">10</td><td data-align="number">2</td></tr>
+          <tr><td>Scope can change through normal prioritization.</td><td data-align="number">8</td><td data-align="number">10</td><td data-align="number">8</td><td data-align="number">11</td><td data-align="number">3</td><td data-align="number">2</td></tr>
+          <tr><td>Each iteration produces something usable.</td><td data-align="number">3</td><td data-align="number">7</td><td data-align="number">7</td><td data-align="number">17</td><td data-align="number">6</td><td data-align="number">2</td></tr>
+          <tr><td>Teams pull work based on available capacity.</td><td data-align="number">4</td><td data-align="number">8</td><td data-align="number">10</td><td data-align="number">14</td><td data-align="number">4</td><td data-align="number">2</td></tr>
+          <tr><td>Release windows create meaningful waiting time.</td><td data-align="number">2</td><td data-align="number">4</td><td data-align="number">5</td><td data-align="number">17</td><td data-align="number">12</td><td data-align="number">2</td></tr>
+          <tr><td>Retrospectives produce observable changes.</td><td data-align="number">2</td><td data-align="number">6</td><td data-align="number">8</td><td data-align="number">17</td><td data-align="number">7</td><td data-align="number">2</td></tr>
+        </tbody>
+      </table>
+    </ef-print-table>
+    <ef-print-note>Aggregate distributions are shown only where the configured privacy threshold is satisfied. Suppressed subgroup values are absent, not merely visually hidden.</ef-print-note>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="comparison" page-profile="wide" data-report-block>
+    <p class="signal-overline">Comparative detail</p>
+    <h1>SIGNAL-WIDE-COMPARISON Current versus prior comparable administration</h1>
+    <ef-print-table>
+      <table class="signal-wide-table">
+        <caption>Comparable dimension results</caption>
+        <thead><tr><th>Dimension</th><th>Current</th><th>Prior</th><th>Delta</th><th>Comparability</th><th>Coverage</th><th>Interpretation boundary</th></tr></thead>
+        <tbody>
+          <tr><td>Empirical adaptation</td><td>78</td><td>72</td><td>+6</td><td>Comparable</td><td>97%</td><td>Magnitude shown; statistical significance not established.</td></tr>
+          <tr><td>Flow discipline</td><td>64</td><td>61</td><td>+3</td><td>Comparable</td><td>94%</td><td>Small directional change only.</td></tr>
+          <tr><td>Team autonomy</td><td>48</td><td>51</td><td>-3</td><td>Comparable</td><td>93%</td><td>Small directional change only.</td></tr>
+          <tr><td>Quality ownership</td><td>69</td><td>63</td><td>+6</td><td>Comparable</td><td>95%</td><td>Magnitude shown; causal source unknown.</td></tr>
+          <tr><td>Governance flexibility</td><td>38</td><td>39</td><td>-1</td><td>Comparable</td><td>91%</td><td>No meaningful interpretation assigned.</td></tr>
+          <tr><td>Continuous delivery</td><td>45</td><td>40</td><td>+5</td><td>Comparable</td><td>90%</td><td>Magnitude shown; benchmark not applied.</td></tr>
+        </tbody>
+      </table>
+    </ef-print-table>
+  </ef-print-section>
+
+  <ef-print-section class="signal-report-section" id="methodology" data-report-block>
+    <p class="signal-overline">Methodology and provenance</p>
+    <h1>SIGNAL-METHODOLOGY Reproducible report context</h1>
+    <p>This fixture demonstrates how an issued report identifies the versions that produced it without turning PDF into the canonical result model.</p>
+    <dl class="signal-provenance">
+      <dt>Assessment</dt><dd>software-delivery-reality-assessment / 1.0.0</dd>
+      <dt>Scoring model</dt><dd>sdra-scoring / 1.0.0-draft</dd>
+      <dt>Result schema</dt><dd>signal-report-data / 1.0.0</dd>
+      <dt>Report profile</dt><dd>signal-results-print-profile / 1.0.0</dd>
+      <dt>Folio composition</dt><dd>@echelon-foundry/print-components / 0.3.0</dd>
+      <dt>Benchmark</dt><dd>None applied</dd>
+      <dt>Missing data</dt><dd>N/A excluded from performance denominator; Don't Know contributes to coverage/confidence only.</dd>
+      <dt>Comparison</dt><dd>Prior-period values shown only where result semantics are declared compatible.</dd>
+      <dt>Snapshot</dt><dd>SIG-SNAPSHOT-2026-001</dd>
+    </dl>
+
+    <ef-print-callout variant="plain">
+      <strong>Psychometric boundary.</strong>
+      SIGNAL-PSYCHOMETRIC-LIMIT This illustrative fixture does not claim validated reliability, normative percentile meaning, or causal validity. Production assessments must state their evidence level explicitly.
+    </ef-print-callout>
+
+    <ef-print-note role="note">Renderer name/version and output hash are export-time provenance and are recorded by the deterministic export caller rather than invented in document content.</ef-print-note>
+  </ef-print-section>
+
+  <ef-print-footer>
+    <span slot="left">SIG-RPT-2026-001 · SRPP 1.0</span>
+    <span slot="center">Canonical Folio report fixture</span>
+    <span slot="right"><ef-print-page-number format="page-of-pages">Physical pagination supplied by P1/P2 renderer</ef-print-page-number></span>
+  </ef-print-footer>
+</ef-print-document>
+</body>
+</html>

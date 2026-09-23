@@ -444,5 +444,151 @@ export const coreComponentMetadata = {
         )
       }
     ]
+  },
+
+  "ef-print-metric": {
+    slug: "metric",
+    title: "Metric",
+    category: "Report composition",
+    capability: "P0 portable",
+    maturity: "implemented / report-fixture evidence",
+    summary: "A compact domain-neutral label/value/detail block for scores, counts, deltas, coverage, financial values, or other report metrics without calculating their meaning.",
+    caution: "The application supplies the authoritative value, label, units, and interpretation. Folio only presents them and never rescales, rounds, or classifies the metric.",
+    examples: [
+      {
+        title: "Overall result",
+        note: "The value is application-owned; Folio provides a consistent printable hierarchy.",
+        html: h(
+          "<ef-print-metric emphasis='strong'>",
+          "  <span data-label>Overall result</span>",
+          "  <strong data-value>74 / 100</strong>",
+          "  <span data-detail>Assessment-defined composite</span>",
+          "</ef-print-metric>"
+        )
+      },
+      {
+        title: "Coverage",
+        note: "Metrics are equally suitable for integrity and operational data because the component has no scoring semantics.",
+        html: h(
+          "<ef-print-metric>",
+          "  <span data-label>Scoring coverage</span>",
+          "  <strong data-value>94%</strong>",
+          "  <span data-detail>42 accepted responses</span>",
+          "</ef-print-metric>"
+        )
+      },
+      {
+        title: "Categorical result",
+        note: "The value need not be numeric.",
+        html: h(
+          "<ef-print-metric>",
+          "  <span data-label>Observed delivery model</span>",
+          "  <strong data-value>Hybrid / stage-gated</strong>",
+          "  <span data-detail>Behavioral profile, not self-label</span>",
+          "</ef-print-metric>"
+        )
+      }
+    ]
+  },
+
+  "ef-print-integrity": {
+    slug: "integrity",
+    title: "Integrity",
+    category: "Report composition",
+    capability: "P0 portable",
+    maturity: "implemented / report-fixture evidence",
+    summary: "A compact report-quality block for completeness, coverage, confidence, comparability, suppression, warnings, and limitations supplied by the consuming application.",
+    caution: "Integrity presentation is not validation logic. The consumer must decide the status and must never pass suppressed or private values into the DOM.",
+    examples: [
+      {
+        title: "Complete result",
+        note: "Use a semantic heading and definition list so the report remains understandable without Folio styling.",
+        html: h(
+          "<ef-print-integrity status='complete' aria-labelledby='integrity-complete'>",
+          "  <h2 id='integrity-complete'>Result integrity</h2>",
+          "  <dl>",
+          "    <div><dt>Coverage</dt><dd>94%</dd></div>",
+          "    <div><dt>Status</dt><dd>Complete</dd></div>",
+          "    <div><dt>Comparability</dt><dd>Established</dd></div>",
+          "  </dl>",
+          "</ef-print-integrity>"
+        )
+      },
+      {
+        title: "Partial result",
+        note: "Status is textual; the dashed rule is only redundant visual reinforcement.",
+        html: h(
+          "<ef-print-integrity status='partial' aria-labelledby='integrity-partial'>",
+          "  <h2 id='integrity-partial'>Result integrity</h2>",
+          "  <dl><div><dt>Status</dt><dd>Partial</dd></div><div><dt>Responses</dt><dd>18 of 30</dd></div></dl>",
+          "  <p data-limitations>Interpret trends cautiously until the response window closes.</p>",
+          "</ef-print-integrity>"
+        )
+      },
+      {
+        title: "Not comparable",
+        note: "Missing or incompatible evidence is stated explicitly rather than rendered as zero.",
+        html: h(
+          "<ef-print-integrity status='not-comparable' aria-labelledby='integrity-compare'>",
+          "  <h2 id='integrity-compare'>Comparison integrity</h2>",
+          "  <dl><div><dt>Prior period</dt><dd>Not comparable</dd></div><div><dt>Reason</dt><dd>Scoring semantics changed</dd></div></dl>",
+          "</ef-print-integrity>"
+        )
+      }
+    ]
+  },
+
+  "ef-print-finding": {
+    slug: "finding",
+    title: "Finding",
+    category: "Report composition",
+    capability: "P0 portable",
+    maturity: "implemented / report-fixture evidence",
+    summary: "A structured evidence-oriented finding block that keeps observation, implication, possible action, and evidence-needed content distinct without inventing domain conclusions.",
+    caution: "Folio does not generate findings or recommendations. The consuming application owns every claim and should distinguish observation from inference and action.",
+    examples: [
+      {
+        title: "Observation to action",
+        note: "A definition list keeps the reasoning stages explicit in source order.",
+        html: h(
+          "<ef-print-finding compact>",
+          "  <h3>Release governance</h3>",
+          "  <dl>",
+          "    <div><dt>Observation</dt><dd>Release approval occurs outside the delivery team.</dd></div>",
+          "    <div><dt>Implication</dt><dd>Batching pressure may increase lead time.</dd></div>",
+          "    <div><dt>Possible action</dt><dd>Test a narrower approval policy for low-risk changes.</dd></div>",
+          "    <div><dt>Evidence needed</dt><dd>Lead-time and change-failure data before and after the trial.</dd></div>",
+          "  </dl>",
+          "</ef-print-finding>"
+        )
+      },
+      {
+        title: "Evidence-limited finding",
+        note: "The component supports uncertainty instead of forcing a recommendation.",
+        html: h(
+          "<ef-print-finding>",
+          "  <h3>Cross-team consistency</h3>",
+          "  <dl>",
+          "    <div><dt>Observation</dt><dd>Two cohorts report materially different workflow behavior.</dd></div>",
+          "    <div><dt>Implication</dt><dd>The organization-wide aggregate may hide local operating models.</dd></div>",
+          "    <div><dt>Evidence needed</dt><dd>Additional responses from the underrepresented cohort.</dd></div>",
+          "  </dl>",
+          "</ef-print-finding>"
+        )
+      },
+      {
+        title: "Comparison finding",
+        note: "Labels remain authored text so a grayscale or assistive-technology reader receives the same structure.",
+        html: h(
+          "<ef-print-finding compact>",
+          "  <h3>Claimed versus observed process</h3>",
+          "  <dl>",
+          "    <div><dt>Observation</dt><dd>The team self-labels as Scrum while approvals and testing remain stage-gated.</dd></div>",
+          "    <div><dt>Interpretation</dt><dd>The observed profile is hybrid rather than a pure framework match.</dd></div>",
+          "  </dl>",
+          "</ef-print-finding>"
+        )
+      }
+    ]
   }
 };

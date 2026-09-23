@@ -24,6 +24,12 @@
     --ef-print-callout-accent: var(--ef-print-accent);
     --ef-print-callout-surface: var(--ef-print-surface);
     --ef-print-note-accent: var(--ef-print-rule);
+    --ef-print-metric-surface: transparent;
+    --ef-print-metric-rule: var(--ef-print-rule);
+    --ef-print-metric-value-size: 1.65em;
+    --ef-print-integrity-surface: var(--ef-print-surface);
+    --ef-print-integrity-accent: var(--ef-print-accent);
+    --ef-print-finding-rule: var(--ef-print-rule);
     --ef-print-code-font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   }
 
@@ -67,6 +73,9 @@
   ef-print-layer,
   ef-print-break,
   ef-print-keep,
+  ef-print-metric,
+  ef-print-integrity,
+  ef-print-finding,
   ef-print-callout,
   ef-print-figure,
   ef-print-table,
@@ -215,6 +224,141 @@
     text-transform: var(--ef-print-art-text-transform, uppercase);
   }
 
+
+  ef-print-metric {
+    display: grid;
+    gap: 0.035in;
+    min-inline-size: 0;
+    padding: var(--ef-print-metric-padding, 0.13in 0.15in);
+    border: 1px solid var(--ef-print-metric-rule);
+    border-radius: var(--ef-print-metric-radius, 0.045in);
+    background: var(--ef-print-metric-surface);
+    break-inside: avoid;
+  }
+
+  ef-print-metric[emphasis="strong"] {
+    border-block-start: var(--ef-print-metric-accent-width, 0.035in) solid var(--ef-print-accent);
+  }
+
+  ef-print-metric [data-label] {
+    color: var(--ef-print-muted);
+    font-size: var(--ef-print-metric-label-size, 0.76em);
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  ef-print-metric [data-value] {
+    font-size: var(--ef-print-metric-value-size);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+  }
+
+  ef-print-metric [data-detail] {
+    color: var(--ef-print-muted);
+    font-size: var(--ef-print-metric-detail-size, 0.86em);
+    line-height: 1.3;
+  }
+
+  ef-print-integrity {
+    display: block;
+    margin-block: var(--ef-print-space);
+    padding: var(--ef-print-integrity-padding, 0.16in 0.18in);
+    border-block-start: var(--ef-print-integrity-accent-width, 0.035in) solid var(--ef-print-integrity-accent);
+    border-block-end: 1px solid var(--ef-print-rule);
+    background: var(--ef-print-integrity-surface);
+    break-inside: avoid;
+  }
+
+  ef-print-integrity > :first-child {
+    margin-block-start: 0;
+  }
+
+  ef-print-integrity > dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(1.45in, 100%), 1fr));
+    gap: var(--ef-print-integrity-gap, 0.12in);
+    margin: var(--ef-print-integrity-list-margin, 0.11in 0 0);
+  }
+
+  ef-print-integrity > dl > div {
+    min-inline-size: 0;
+    break-inside: avoid;
+  }
+
+  ef-print-integrity dt {
+    color: var(--ef-print-muted);
+    font-size: 0.76em;
+    font-weight: 700;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+  }
+
+  ef-print-integrity dd {
+    margin: 0.025in 0 0;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  ef-print-integrity [data-limitations] {
+    margin-block: 0.12in 0;
+    padding-block-start: 0.1in;
+    border-block-start: 1px solid var(--ef-print-rule);
+    color: var(--ef-print-muted);
+    font-size: 0.88em;
+  }
+
+  ef-print-integrity[status="partial"] {
+    border-block-start-style: dashed;
+  }
+
+  ef-print-integrity[status="insufficient"],
+  ef-print-integrity[status="not-comparable"] {
+    border-block-start-style: double;
+  }
+
+  ef-print-finding {
+    display: block;
+    margin-block: var(--ef-print-space);
+    padding-inline-start: var(--ef-print-finding-padding, 0.16in);
+    border-inline-start: var(--ef-print-finding-rule-width, 2px) solid var(--ef-print-finding-rule);
+  }
+
+  ef-print-finding[compact] {
+    break-inside: avoid;
+  }
+
+  ef-print-finding > :first-child {
+    margin-block-start: 0;
+  }
+
+  ef-print-finding > dl {
+    display: grid;
+    grid-template-columns: var(--ef-print-finding-label-width, 1.08in) minmax(0, 1fr);
+    gap: var(--ef-print-finding-row-gap, 0.075in) var(--ef-print-finding-column-gap, 0.14in);
+    margin: 0;
+  }
+
+  ef-print-finding > dl > div {
+    display: contents;
+  }
+
+  ef-print-finding dt {
+    color: var(--ef-print-muted);
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+
+  ef-print-finding dd {
+    min-inline-size: 0;
+    margin: 0;
+  }
+
   ef-print-callout {
     margin-block: var(--ef-print-space);
     padding: var(--ef-print-callout-padding, 0.14in 0.18in);
@@ -359,6 +503,24 @@
   @media screen and (max-width: 48rem) {
     ef-print-columns {
       column-count: 1;
+    }
+
+    ef-print-integrity > dl,
+    ef-print-finding > dl {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    ef-print-finding > dl > div {
+      display: block;
+    }
+
+    ef-print-finding dt {
+      margin-block-end: 0.025in;
+    }
+
+    ef-print-finding dd + dt,
+    ef-print-finding > dl > div + div {
+      margin-block-start: 0.09in;
     }
 
     ef-print-sidebar {

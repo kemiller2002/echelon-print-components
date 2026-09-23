@@ -81,6 +81,8 @@ const mobileRoutes = [
   "/",
   "/capabilities/",
   "/agents/",
+  "/reports/signal-results/",
+  "/reports/signal-results/preview.html",
   ...siteManifest.components.map(component => `/components/${component.slug}/`),
   ...siteManifest.components.map(component => `/demos/${component.slug}/1.html`)
 ];
@@ -107,6 +109,12 @@ try {
 
     await page.goto(baseURL + "/components/sidebar/");
     assert.match(await page.locator(".warning").innerText(), /provisional/i, `${name}: capability caveat visible`);
+
+    await page.goto(baseURL + "/reports/signal-results/");
+    assert.match(await page.locator("h1").innerText(), /Signal results report/i, `${name}: report example title`);
+    const reportPreview = page.frameLocator("iframe").first();
+    await reportPreview.locator("ef-print-integrity").waitFor({state: "attached"});
+    assert.equal(await reportPreview.locator("ef-print-metric").count() >= 4, true, `${name}: report preview exposes metrics`);
 
     await page.goto(baseURL + "/agents/");
     assert.match(await page.locator("h1").innerText(), /not a pagination engine/i, `${name}: agent boundary`);

@@ -71,3 +71,15 @@ At screen widths <= 48rem:
 These rules are screen-only. Under print media, the authored column count and side-rail layout remain unchanged.
 
 The other registered Folio primitives use natural block flow and must not gain unnecessary mobile-specific layout rules.
+
+## Canonical report example
+
+The generated site publishes `reports/signal-results/` from the canonical fixture at `tests/fixtures/reports/signal-results.html`.
+
+The example:
+
+- uses the actual Folio print stylesheet;
+- contains no browser JavaScript in the generated documentation artifact;
+- demonstrates Letter/A4-compatible composition, result integrity, report metrics, findings, chart accessibility fallback, distributions, landscape comparison, and provenance;
+- remains a consumer example, not a Signal runtime dependency;
+- must stay synchronized with `docs/recipes/SIGNAL-RESULTS-REPORT.md`.

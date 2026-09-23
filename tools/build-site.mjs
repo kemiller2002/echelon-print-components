@@ -483,6 +483,7 @@ function header(rootPath) {
     <nav class="site-nav" aria-label="Primary">
       <a href="${rootPath}">Overview</a>
       <a href="${rootPath}#components">Components</a>
+      <a href="${rootPath}reports/signal-results/">Report example</a>
       <a href="${rootPath}capabilities/">Capabilities</a>
       <a class="pill-link" href="${rootPath}agents/">Agent use</a>
     </nav>
@@ -721,12 +722,45 @@ npm run site:test:browser
   </main>`);
 }
 
+function signalResultsPage() {
+  const rootPath = "../../";
+  return page("Signal results report", rootPath, `<main id="main" class="capability-page">
+    <span class="eyebrow">Canonical report composition</span>
+    <h1>Signal results report</h1>
+    <p class="lead">A full organizational assessment report built from semantic HTML and Folio primitives. Signal owns the result meaning; Folio owns reusable print presentation and renderer capability behavior.</p>
+
+    <div class="contract-grid">
+      <div class="contract-item"><span class="metric-label">Profile</span><strong>Signal Results Print Profile 1.0</strong></div>
+      <div class="contract-item"><span class="metric-label">Page sizes</span><strong>Letter + A4</strong></div>
+      <div class="contract-item"><span class="metric-label">Charts</span><strong>SVG + textual/table equivalent</strong></div>
+      <div class="contract-item"><span class="metric-label">Canonical fixture</span><strong>tests/fixtures/reports/signal-results.html</strong></div>
+    </div>
+
+    <div class="warning"><p><strong>Fixture boundary.</strong> The values are illustrative non-PII data used to exercise report composition. They are not a validated assessment result or benchmark.</p></div>
+
+    <div class="print-preview report-preview">
+      <iframe src="./preview.html" title="Canonical Signal results report preview"></iframe>
+    </div>
+    <div class="example-actions">
+      <a href="./preview.html" target="_blank" rel="noopener">Open standalone report preview</a>
+      <p class="preview-note">The screen preview adapts to narrow viewports. Printing keeps the physical Folio page profiles, including the landscape comparison section.</p>
+    </div>
+
+    <h2>Why only three new components?</h2>
+    <p>The fixture uses existing document, title-page, section, figure, table, TOC, note, callout, artwork, and page-number primitives. Repeated report-specific structure justified only <code>ef-print-metric</code>, <code>ef-print-integrity</code>, and <code>ef-print-finding</code>.</p>
+
+    <h2>What remains application-owned?</h2>
+    <p>Scoring, confidence, suppression, comparability, findings, recommendations, benchmark validity, and chart values. Folio never derives those from the report markup.</p>
+  </main>`);
+}
+
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(path.join(output, "assets"), { recursive: true });
 fs.mkdirSync(path.join(output, "components"), { recursive: true });
 fs.mkdirSync(path.join(output, "demos"), { recursive: true });
 fs.mkdirSync(path.join(output, "agents"), { recursive: true });
 fs.mkdirSync(path.join(output, "capabilities"), { recursive: true });
+fs.mkdirSync(path.join(output, "reports", "signal-results"), { recursive: true });
 
 const registeredSet = new Set(uniqueRegistered);
 const metadataSet = new Set(Object.keys(components));
@@ -755,6 +789,12 @@ for (const [name, component] of Object.entries(components)) {
 fs.copyFileSync(path.join(root, "site/site.css"), path.join(output, "assets/site.css"));
 fs.copyFileSync(path.join(root, "site/demo.css"), path.join(output, "assets/demo.css"));
 fs.copyFileSync(path.join(root, "src/styles/print.css"), path.join(output, "assets/folio-print.css"));
+fs.copyFileSync(path.join(root, "tests/fixtures/reports/signal-results.css"), path.join(output, "assets/signal-results.css"));
+const signalReportPreview = fs.readFileSync(path.join(root, "tests/fixtures/reports/signal-results.html"), "utf8")
+  .replace('<link rel="stylesheet" href="../../../src/styles/print.css">', '<link rel="stylesheet" href="../../assets/folio-print.css">')
+  .replace('<link rel="stylesheet" href="./signal-results.css">', '<link rel="stylesheet" href="../../assets/signal-results.css">')
+  .replace(/\s*<script type="module" src="\.\.\/\.\.\/\.\.\/src\/components\/register\.js"><\/script>/, "");
+fs.writeFileSync(path.join(output, "reports", "signal-results", "preview.html"), signalReportPreview);
 fs.writeFileSync(path.join(output, ".nojekyll"), "");
 
 const ordered = uniqueRegistered.map(name => ({ name, ...components[name] }));
@@ -824,6 +864,7 @@ const indexBody = `<main id="main">
 fs.writeFileSync(path.join(output, "index.html"), page("Overview", "./", indexBody));
 fs.writeFileSync(path.join(output, "capabilities/index.html"), capabilitiesPage());
 fs.writeFileSync(path.join(output, "agents/index.html"), agentsPage());
+fs.writeFileSync(path.join(output, "reports/signal-results/index.html"), signalResultsPage());
 
 const manifest = {
   generatedAt: new Date().toISOString(),
@@ -831,6 +872,7 @@ const manifest = {
   exampleCount: ordered.reduce((total, item) => total + item.examples.length, 0),
   registeredElements: uniqueRegistered,
   runtime: "static-documentation-no-browser-script",
+  reportExamples: ["signal-results"],
   components: ordered.map(item => ({
     element: item.name,
     slug: item.slug,

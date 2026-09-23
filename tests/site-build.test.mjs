@@ -41,6 +41,23 @@ test("Folio site has one component page and three examples for every registered 
   }
 });
 
+test("Folio site publishes the canonical Signal results report", async () => {
+  const page = await fs.readFile(path.join(site, "reports", "signal-results", "index.html"), "utf8");
+  const preview = await fs.readFile(path.join(site, "reports", "signal-results", "preview.html"), "utf8");
+  const manifest = JSON.parse(await fs.readFile(path.join(site, "site-manifest.json"), "utf8"));
+
+  assert.match(page, /Signal results report/);
+  assert.match(page, /Signal Results Print Profile 1\.0/);
+  assert.match(preview, /SIGNAL-INTEGRITY/);
+  assert.match(preview, /<ef-print-metric/);
+  assert.match(preview, /<ef-print-integrity/);
+  assert.match(preview, /<ef-print-finding/);
+  assert.match(preview, /Textual equivalent of the delivery profile radar/);
+  assert.doesNotMatch(preview, /<script\b/i);
+  assert.deepEqual(manifest.reportExamples, ["signal-results"]);
+  await fs.access(path.join(site, "assets", "signal-results.css"));
+});
+
 test("generated Folio documentation contains no browser scripts", async () => {
   const files = await walk(site);
   for (const file of files.filter(file => file.endsWith(".html"))) {

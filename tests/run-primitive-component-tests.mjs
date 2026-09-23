@@ -20,6 +20,9 @@ const expectedElements = [
   "ef-print-layer",
   "ef-print-break",
   "ef-print-keep",
+  "ef-print-metric",
+  "ef-print-integrity",
+  "ef-print-finding",
   "ef-print-callout",
   "ef-print-figure",
   "ef-print-table",
@@ -92,6 +95,9 @@ try {
         footer: value("ef-print-footer"),
         pageNumber: value("ef-print-page-number"),
         layer: value("ef-print-layer"),
+        metric: value("ef-print-metric"),
+        integrity: value("ef-print-integrity"),
+        finding: value("ef-print-finding"),
         callout: value("ef-print-callout"),
         figure: value("ef-print-figure"),
         table: value("ef-print-table"),
@@ -108,6 +114,10 @@ try {
     assert.equal(styles.pageNumber.display, "inline", `${name}: page number remains inline intent`);
     assert.equal(styles.layer.position, "absolute", `${name}: artwork layer is out of flow`);
     assert.equal(styles.layer.opacity, "0.25", `${name}: artwork opacity token applies independently`);
+    assert.equal(styles.metric.display, "grid", `${name}: metric uses compact grid presentation`);
+    assert.equal(styles.metric.breakInside, "avoid", `${name}: metric requests keep-together`);
+    assert.equal(styles.integrity.breakInside, "avoid", `${name}: integrity block requests keep-together`);
+    assert.equal(styles.finding.breakInside, "avoid", `${name}: compact finding requests keep-together`);
     assert.equal(styles.callout.breakInside, "avoid", `${name}: callout requests keep-together`);
     assert.equal(styles.figure.breakInside, "avoid", `${name}: figure requests keep-together`);
     assert.equal(styles.thead, "table-header-group", `${name}: table header repetition intent is preserved`);

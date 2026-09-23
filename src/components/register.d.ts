@@ -11,6 +11,9 @@ export declare const elementNames: readonly [
   "ef-print-layer",
   "ef-print-break",
   "ef-print-keep",
+  "ef-print-metric",
+  "ef-print-integrity",
+  "ef-print-finding",
   "ef-print-callout",
   "ef-print-figure",
   "ef-print-table",
@@ -35,6 +38,9 @@ declare global {
     "ef-print-layer": HTMLElement;
     "ef-print-break": HTMLElement;
     "ef-print-keep": HTMLElement;
+    "ef-print-metric": HTMLElement;
+    "ef-print-integrity": HTMLElement;
+    "ef-print-finding": HTMLElement;
     "ef-print-callout": HTMLElement;
     "ef-print-figure": HTMLElement;
     "ef-print-table": HTMLElement;

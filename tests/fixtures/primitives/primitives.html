@@ -24,6 +24,28 @@
     <ef-print-layer data-probe="layer" decorative aria-hidden="true" style="--ef-print-art-opacity:.25; --ef-print-art-image:linear-gradient(135deg,#ddd,#fff)"></ef-print-layer>
     <h1>Primitive evidence</h1>
 
+    <ef-print-metric data-probe="metric" emphasis="strong">
+      <span data-label>Result</span>
+      <strong data-value>74 / 100</strong>
+      <span data-detail>Authoritative application value</span>
+    </ef-print-metric>
+
+    <ef-print-integrity data-probe="integrity" status="complete" aria-labelledby="primitive-integrity">
+      <h2 id="primitive-integrity">Result integrity</h2>
+      <dl>
+        <div><dt>Coverage</dt><dd>94%</dd></div>
+        <div><dt>Status</dt><dd>Complete</dd></div>
+      </dl>
+    </ef-print-integrity>
+
+    <ef-print-finding data-probe="finding" compact>
+      <h2>Finding</h2>
+      <dl>
+        <div><dt>Observation</dt><dd>Renderer capability varies.</dd></div>
+        <div><dt>Implication</dt><dd>Output claims must name the selected profile.</dd></div>
+      </dl>
+    </ef-print-finding>
+
     <ef-print-callout data-probe="callout">
       <strong>Decision.</strong> The renderer owns physical pagination.
     </ef-print-callout>

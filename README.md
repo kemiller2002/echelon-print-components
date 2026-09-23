@@ -59,6 +59,9 @@ The currently registered Folio components are:
 - `ef-print-layer`
 - `ef-print-break`
 - `ef-print-keep`
+- `ef-print-metric`
+- `ef-print-integrity`
+- `ef-print-finding`
 - `ef-print-callout`
 - `ef-print-figure`
 - `ef-print-table`
@@ -85,3 +88,9 @@ npm run site:test:browser
 The generated artifact is written to `site-dist/` and is not committed.
 
 Agent usage rules are in [docs/AGENT-USAGE.md](docs/AGENT-USAGE.md).
+
+## Canonical results-report composition
+
+Folio now includes a canonical Signal consumer fixture at `tests/fixtures/reports/signal-results.html` and a generated documentation example at `reports/signal-results/`.
+
+The fixture proves a substantial results document using existing Folio primitives plus three report-specific presentation contracts: `ef-print-metric`, `ef-print-integrity`, and `ef-print-finding`. Scoring, privacy, comparability, confidence, and recommendations remain application-owned. See `docs/recipes/SIGNAL-RESULTS-REPORT.md`.

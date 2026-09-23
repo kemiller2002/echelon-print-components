@@ -1,0 +1,308 @@
+:root {
+  --ef-print-page-size: Letter;
+  --ef-print-page-margin: 0.62in;
+  --ef-print-font-family: Arial, Helvetica, sans-serif;
+  --ef-print-font-size: 10pt;
+  --ef-print-line-height: 1.42;
+  --ef-print-text: #172026;
+  --ef-print-muted: #55616a;
+  --ef-print-rule: #aab2b8;
+  --ef-print-accent: #244a62;
+  --ef-print-surface: #f3f6f7;
+  --ef-print-metric-surface: #ffffff;
+  --signal-accent-soft: #dce8ee;
+  --signal-series-a: #244a62;
+  --signal-series-b: #6b5b3e;
+}
+
+@page signal-cover {
+  size: Letter portrait;
+  margin: 0.62in;
+  @top-left { content: none; }
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+}
+
+@page signal-body {
+  size: Letter portrait;
+  margin: 0.62in;
+  @top-left {
+    content: "Signal · Software Delivery Reality Assessment";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @top-right {
+    content: "SIG-RPT-2026-001";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @bottom-left {
+    content: "SRPP 1.0 · Assessment 1.0";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    color: #55616a;
+    font-size: 8pt;
+  }
+}
+
+@page signal-wide {
+  size: Letter landscape;
+  margin: 0.55in;
+  @top-left {
+    content: "Signal · Comparative detail";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @top-right {
+    content: "SIG-RPT-2026-001";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @bottom-left {
+    content: "SRPP 1.0 · Assessment 1.0";
+    color: #55616a;
+    font-size: 8pt;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    color: #55616a;
+    font-size: 8pt;
+  }
+}
+
+body {
+  background: #fff;
+}
+
+ef-print-title-page {
+  page: signal-cover;
+}
+
+ef-print-section {
+  page: signal-body;
+}
+
+ef-print-section[page-profile="wide"] {
+  page: signal-wide;
+  break-before: page;
+  break-after: page;
+}
+
+.signal-cover {
+  display: grid;
+  min-block-size: 8.4in;
+  align-content: end;
+  gap: 0.16in;
+  padding: 0.4in 0.18in;
+}
+
+.signal-cover .signal-cover-rule {
+  inline-size: 0.72in;
+  block-size: 0.05in;
+  background: var(--ef-print-accent);
+}
+
+.signal-kicker,
+.signal-overline {
+  margin: 0;
+  color: var(--ef-print-muted);
+  font-size: 0.76em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signal-cover h1 {
+  max-inline-size: 6.2in;
+  margin: 0;
+  font-size: 34pt;
+  line-height: 0.98;
+}
+
+.signal-cover-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.08in 0.24in;
+  max-inline-size: 5.7in;
+  margin-block-start: 0.12in;
+  padding-block-start: 0.13in;
+  border-block-start: 1px solid var(--ef-print-rule);
+}
+
+.signal-cover-meta p,
+.signal-cover > p {
+  margin: 0;
+}
+
+.signal-report-section {
+  padding-block: 0.08in 0.14in;
+}
+
+.signal-report-section > h1,
+.signal-report-section > h2 {
+  margin-block: 0 0.12in;
+}
+
+.signal-section-intro {
+  max-inline-size: 6.2in;
+  margin-block: -0.04in 0.18in;
+  color: var(--ef-print-muted);
+}
+
+.signal-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.1in;
+  margin-block: 0.14in 0.18in;
+}
+
+.signal-dimension-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.16in;
+}
+
+.signal-dimension {
+  padding-block: 0.04in 0.12in;
+  border-block-end: 1px solid var(--ef-print-rule);
+}
+
+.signal-dimension h3 {
+  margin-block: 0 0.06in;
+}
+
+.signal-dimension p {
+  margin-block: 0.06in;
+}
+
+.signal-radar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(2.25in, 0.85fr);
+  gap: 0.24in;
+  align-items: start;
+}
+
+.signal-radar svg {
+  display: block;
+  inline-size: 100%;
+  max-block-size: 3.6in;
+}
+
+.signal-radar .axis {
+  stroke: #aab2b8;
+  stroke-width: 1;
+}
+
+.signal-radar .ring {
+  fill: none;
+  stroke: #cbd1d5;
+  stroke-width: 1;
+}
+
+.signal-radar .series-observed {
+  fill: color-mix(in srgb, var(--signal-series-a) 10%, transparent);
+  stroke: var(--signal-series-a);
+  stroke-width: 3;
+}
+
+.signal-radar .series-claimed {
+  fill: none;
+  stroke: var(--signal-series-b);
+  stroke-width: 2.4;
+  stroke-dasharray: 7 5;
+}
+
+.signal-radar text {
+  fill: var(--ef-print-text);
+  font-family: var(--ef-print-font-family);
+  font-size: 11px;
+}
+
+.signal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.08in 0.16in;
+  margin: 0.08in 0 0;
+  font-size: 0.85em;
+}
+
+.signal-legend span::before {
+  display: inline-block;
+  inline-size: 0.3in;
+  margin-inline-end: 0.05in;
+  border-block-start: 3px solid var(--signal-series-a);
+  content: "";
+  vertical-align: middle;
+}
+
+.signal-legend span:last-child::before {
+  border-block-start: 2px dashed var(--signal-series-b);
+}
+
+.signal-small {
+  color: var(--ef-print-muted);
+  font-size: 0.86em;
+}
+
+.signal-provenance {
+  display: grid;
+  grid-template-columns: 1.6in minmax(0, 1fr);
+  gap: 0.05in 0.14in;
+}
+
+.signal-provenance dt {
+  color: var(--ef-print-muted);
+  font-weight: 700;
+}
+
+.signal-provenance dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.signal-wide-table {
+  font-size: 8.5pt;
+}
+
+.signal-wide-table th,
+.signal-wide-table td {
+  white-space: normal;
+}
+
+body[data-print-mode="grayscale"] {
+  --ef-print-accent: #303030;
+  --ef-print-surface: #f2f2f2;
+  --ef-print-metric-surface: #fff;
+  --signal-accent-soft: #e5e5e5;
+  --signal-series-a: #111;
+  --signal-series-b: #666;
+}
+
+@media screen and (max-width: 48rem) {
+  .signal-cover {
+    min-block-size: auto;
+    padding: 1rem 0;
+  }
+
+  .signal-cover h1 {
+    font-size: 2.45rem;
+  }
+
+  .signal-cover-meta,
+  .signal-metric-grid,
+  .signal-dimension-grid,
+  .signal-radar-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media print {
+  .signal-metric-grid,
+  .signal-dimension-grid,
+  .signal-radar-layout {
+    break-inside: auto;
+  }
+}
