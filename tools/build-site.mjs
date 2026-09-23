@@ -674,7 +674,7 @@ function agentsPage() {
       <article class="instruction-card">
         <span class="component-kicker">Natural flow</span>
         <h3>Structural primitives</h3>
-        <p><code>document</code>, <code>title-page</code>, <code>section</code>, <code>back-page</code>, <code>break</code>, and <code>keep</code> already follow normal block flow and do not need special mobile layout overrides.</p>
+        <p>Structural and content primitives such as <code>document</code>, <code>title-page</code>, <code>section</code>, <code>back-page</code>, <code>callout</code>, <code>figure</code>, <code>code</code>, <code>toc</code>, <code>note</code>, <code>break</code>, and <code>keep</code> follow normal flow. Header/footer regions stack for screen inspection, and wide tables scroll inside their wrapper rather than overflowing the page.</p>
       </article>
       <article class="instruction-card">
         <span class="component-kicker">Contract boundary</span>
