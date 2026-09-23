@@ -91,10 +91,10 @@
         "folio,print,components"
       ],
       "priority": "high",
-      "status": "ready",
+      "status": "complete",
       "attachments": [],
       "createdAt": "2026-09-23T15:45:39.000Z",
-      "updatedAt": "2026-09-23T15:45:39.000Z",
+      "updatedAt": "2026-09-23T16:03:18.000Z",
       "createdBy": "agent:chatgpt",
       "source": "github-issue",
       "sourceReference": "https://github.com/kemiller2002/folio/issues/11"
