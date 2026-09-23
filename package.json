@@ -1,21 +1,42 @@
 {
   "name": "@echelon-foundry/print-components",
-  "version": "0.0.0-experimental",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
   "description": "Folio: standards-first web components and CSS primitives for professional HTML print documents.",
   "type": "module",
+  "exports": {
+    ".": "./src/components/register.js",
+    "./print.css": "./src/styles/print.css"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./src/components/register.js",
+    "./src/styles/print.css"
+  ],
   "scripts": {
     "test": "node tests/run-print-experiments.mjs",
     "test:print": "node tests/run-print-experiments.mjs",
     "site:build": "node tools/build-site.mjs",
     "site:test": "node --test tests/site-build.test.mjs",
     "site:test:browser": "node tests/run-site-browser-tests.mjs",
-    "site:check": "npm run site:build && npm run site:test"
+    "site:check": "npm run site:build && npm run site:test",
+    "pack:verify": "npm pack --dry-run"
   },
   "devDependencies": {
     "playwright": "1.63.0"
   },
   "engines": {
     "node": ">=24 <25"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kemiller2002/folio.git"
   }
 }
