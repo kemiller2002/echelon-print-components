@@ -8,6 +8,8 @@ on:
       - "src/styles/print.css"
       - "site/**"
       - "tools/build-site.mjs"
+      - "tools/core-component-metadata.mjs"
+      - "tests/fixtures/reports/**"
       - "tests/site-build.test.mjs"
       - "docs/AGENT-USAGE.md"
       - "docs/requirements/FOLIO-SITE-REQUIREMENTS.md"
