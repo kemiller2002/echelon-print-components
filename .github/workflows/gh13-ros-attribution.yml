@@ -1,4 +1,5 @@
 name: GH-13 ROS attribution
+# Retry after canonical report pagination correction.
 
 on:
   push:
