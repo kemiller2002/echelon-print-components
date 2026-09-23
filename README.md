@@ -6,7 +6,7 @@ The project is **standards first**: semantic HTML and CSS express document and p
 
 ## Current status
 
-Requirements, architecture research, renderer experiments, and the first passive light-DOM component slice are established.
+Requirements, architecture research, renderer experiments, and the expanded passive light-DOM core component surface are established.
 
 Installed engineering foundation:
 
@@ -51,12 +51,22 @@ The currently registered Folio components are:
 - `ef-print-title-page`
 - `ef-print-section`
 - `ef-print-back-page`
+- `ef-print-header`
+- `ef-print-footer`
+- `ef-print-page-number`
 - `ef-print-columns`
 - `ef-print-sidebar` (provisional portability posture)
+- `ef-print-layer`
 - `ef-print-break`
 - `ef-print-keep`
+- `ef-print-callout`
+- `ef-print-figure`
+- `ef-print-table`
+- `ef-print-code`
+- `ef-print-toc`
+- `ef-print-note`
 
-The package identifier remains `@echelon-foundry/print-components`.
+The package identifier remains `@echelon-foundry/print-components`. Version 0.2.0 expands the public primitive surface while preserving zero runtime dependencies and CSS-first behavior.
 
 ## Folio documentation site
 

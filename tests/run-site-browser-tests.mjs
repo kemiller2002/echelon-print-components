@@ -92,7 +92,7 @@ try {
 
     await page.goto(baseURL + "/");
     assert.equal(await page.locator("h1").textContent(), "Folio", `${name}: home title`);
-    assert.equal(await page.locator(".component-card").count(), 8, `${name}: component count`);
+    assert.equal(await page.locator(".component-card").count(), siteManifest.componentCount, `${name}: component count`);
 
     await page.goto(baseURL + "/components/columns/");
     assert.equal(await page.locator("[data-example]").count(), 3, `${name}: three examples`);

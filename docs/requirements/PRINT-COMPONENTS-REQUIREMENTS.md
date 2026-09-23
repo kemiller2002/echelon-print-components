@@ -76,6 +76,19 @@ The initial public surface should center on layout/print semantics, not create a
 
 Native `h1`-`h6`, `p`, `ol`, `ul`, `blockquote`, `figure`, `table`, `code`, `pre`, `a`, `img`, `aside`, `section`, and related semantic elements remain preferred wherever a custom layout contract is not needed.
 
+### 0.2.0 implementation status
+
+The complete core primitive list above is now registered and included in the package stylesheet. Shipping status does not erase capability boundaries:
+
+- header/footer are portable in-flow primitives; repeated physical page-margin rendering remains renderer-dependent;
+- page-number is a renderer-capability intent marker with authored fallback; dynamic current/total counters remain P1/P2/P3 behavior;
+- artwork layers use document elements rather than unsupported portable page-box backgrounds;
+- callout, figure, code, and note are passive flow wrappers with print-safe fragmentation defaults;
+- table preserves native table semantics and contains wide screen inspection while print behavior stays authored/renderer-owned;
+- TOC supports semantic/authored contents portably while automatic target-page counters remain enhanced-renderer behavior.
+
+Cross-browser primitive-contract tests plus the existing MARGIN-01, ART-01, and TABLE-01 experiments are the current evidence basis. No component may be described as providing renderer behavior beyond that evidence.
+
 - **EPC-CMP-001 MUST** use a collision-resistant prefix for all custom elements.
 - **EPC-CMP-002 SHOULD** use `ef-print-` as the initial prefix.
 - **EPC-CMP-003 MUST** render layout primitives in light DOM by default so document-level print CSS, semantic flow, and fragmentation remain observable and overridable.

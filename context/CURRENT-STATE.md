@@ -28,7 +28,7 @@ npm at bootstrap time.
 - Current Firefox and Safari do not provide the same page-margin-box capability.
 - Mainstream browsers do not implement page-box background descriptors or
   paged-media bleed/crop marks.
-- The first passive light-DOM component slice is implemented: document, title page, section, back page, columns, sidebar, page break, and keep-together.
+- The passive light-DOM core surface is implemented: document, title page, section, back page, header, footer, page-number intent, columns, sidebar, artwork layer, break, keep, callout, figure, table, code, TOC, and note.
 
 ## Current decision posture
 
@@ -41,7 +41,7 @@ npm at bootstrap time.
 
 ## Active work
 
-Begin the first experiment sequence:
+The 0.2.0 core primitive expansion is implemented on GH-11. Continue the experiment sequence where renderer guarantees remain open:
 
 1. light-DOM custom-element fragmentation;
 2. Chromium margin headers/footers/page counters;
@@ -110,3 +110,19 @@ Current mobile posture:
 - `ef-print-document`, `ef-print-title-page`, `ef-print-section`, `ef-print-back-page`, `ef-print-break`, and `ef-print-keep`: ordinary block/fragmentation primitives already flow naturally on narrow screens and receive no unnecessary responsive override.
 - responsive behavior is CSS-only; no JavaScript runtime is introduced.
 - browser validation audits every registered component page and a standalone demo for every registered component at 320px, 390px, and 430px in Chromium, Firefox, and WebKit.
+
+
+## Folio 0.2.0 core primitive expansion
+
+Tracked work item GH-11 closes the original architecture-only gap for header, footer, page-number, artwork layer, callout, figure, table, code, TOC, and note primitives.
+
+Evidence posture:
+
+- all 18 public elements register idempotently as passive light-DOM custom elements;
+- the public CSS defines printable fallback behavior without a JavaScript pagination engine;
+- Chromium, Firefox, and WebKit run the primitive contract fixture;
+- documentation generation requires three examples and capability/maturity metadata for every registered element;
+- MARGIN-01 remains the evidence for Chromium physical margin boxes and Page X of Y;
+- ART-01 remains the evidence for suppressible artwork with preserved essential foreground content;
+- TABLE-01 remains the evidence for long-table/header/landscape behavior;
+- renderer-sensitive features remain explicitly capability-bound instead of being promoted to P0.

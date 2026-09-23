@@ -37,10 +37,20 @@ The registered component list is authoritative:
 - `ef-print-title-page`;
 - `ef-print-section`;
 - `ef-print-back-page`;
+- `ef-print-header`;
+- `ef-print-footer`;
+- `ef-print-page-number`;
 - `ef-print-columns`;
 - `ef-print-sidebar`;
+- `ef-print-layer`;
 - `ef-print-break`;
-- `ef-print-keep`.
+- `ef-print-keep`;
+- `ef-print-callout`;
+- `ef-print-figure`;
+- `ef-print-table`;
+- `ef-print-code`;
+- `ef-print-toc`;
+- `ef-print-note`.
 
 The Folio documentation generator fails if a newly registered public element lacks site metadata and three examples. Documentation examples must also remain usable at phone widths without changing the component's print-media contract.
 
@@ -91,7 +101,7 @@ Folio's public stylesheet is responsive on screens and keeps print behavior sepa
 
 - `ef-print-columns` collapses to one column at screen widths of 48rem or less.
 - `ef-print-sidebar` stacks to one column at screen widths of 48rem or less.
-- `ef-print-document`, `ef-print-title-page`, `ef-print-section`, `ef-print-back-page`, `ef-print-break`, and `ef-print-keep` already use ordinary block flow and do not need component-specific mobile overrides.
+- Structural/content primitives use ordinary block flow. `ef-print-header` and `ef-print-footer` stack their regions on narrow screens, `ef-print-table` contains wide screen inspection with horizontal scrolling, and print media restores the authored print contract.
 - These adaptations are screen-only. Print media preserves the authored column count, side-rail layout, break behavior, and renderer contract.
 - Do not introduce JavaScript solely for responsive behavior.
 - Do not change pagination semantics to make a screen preview fit.
@@ -140,6 +150,22 @@ Native multicolumn flow is accepted as the initial implementation, but real long
 ### ef-print-break
 
 Use explicit page breaks for authored document structure, not as repeated trial-and-error repair for unstable layout.
+
+### ef-print-header / ef-print-footer / ef-print-page-number
+
+In-flow header/footer content is P0. `repeat="page"` and page-number formats express capability intent; physical repetition and current/total counters require a validated P1/P2/P3 renderer path. Never estimate page counts from DOM height.
+
+### ef-print-layer
+
+Artwork layers are document elements, not portable `@page` backgrounds. Essential information must remain outside decorative/suppressible artwork.
+
+### ef-print-table
+
+Keep native table semantics. Wide print output needs an authored strategy such as a named landscape page; do not solve width by shrinking text below a readable size.
+
+### ef-print-toc / ef-print-note
+
+Authored TOC page values and in-flow notes are portable. Automatic target-page counters, footnotes, bottom-of-page placement, and true sidenotes remain enhanced-renderer capabilities.
 
 ## Adding a Folio component
 

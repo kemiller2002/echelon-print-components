@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { coreComponentMetadata } from "./core-component-metadata.mjs";
 
 const root = process.cwd();
 const output = path.join(root, "site-dist");
@@ -460,6 +461,8 @@ const components = {
   }
 };
 
+Object.assign(components, coreComponentMetadata);
+
 const escapeHtml = value => value
   .replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
@@ -622,6 +625,10 @@ function capabilitiesPage() {
         <tr><td>Native multicolumn flow</td><td>Accepted</td><td>COL-01 passed representative multipage fragmentation.</td></tr>
         <tr><td>Grid side rail</td><td>Provisional</td><td>SIDEBAR-01 preserved markers/separation in Chromium; deeper descendant/cross-browser proof remains open.</td></tr>
         <tr><td>Chromium page-margin boxes</td><td>P1/P2 only</td><td>MARGIN-01 validated static running content and Page X of Y in controlled Chromium.</td></tr>
+        <tr><td>Header/footer/page-number primitives</td><td>Core intent shipped; repetition/counters capability-bound</td><td>Cross-browser primitive contract validates in-flow fallback; MARGIN-01 remains the physical counter evidence.</td></tr>
+        <tr><td>Artwork layer</td><td>Accepted element-layer pattern</td><td>ART-01 validates that essential foreground content survives when page artwork is suppressed.</td></tr>
+        <tr><td>Table primitive</td><td>Accepted wrapper contract</td><td>TABLE-01 validates long-table header repetition, row behavior, and named landscape output in controlled Chromium.</td></tr>
+        <tr><td>Callout, figure, code, TOC, note</td><td>P0 core shipped</td><td>Cross-browser primitive contract plus generated mobile examples validate passive light-DOM/CSS behavior; enhanced placement remains capability-bound.</td></tr>
         <tr><td>Tagged/PDF-UA quality</td><td>Separate validation track</td><td>Semantic HTML is necessary but browser PDF tagging is not assumed.</td></tr>
       </tbody>
     </table>
@@ -667,7 +674,7 @@ function agentsPage() {
       <article class="instruction-card">
         <span class="component-kicker">Natural flow</span>
         <h3>Structural primitives</h3>
-        <p><code>document</code>, <code>title-page</code>, <code>section</code>, <code>back-page</code>, <code>break</code>, and <code>keep</code> already follow normal block flow and do not need special mobile layout overrides.</p>
+        <p>Structural and content primitives such as <code>document</code>, <code>title-page</code>, <code>section</code>, <code>back-page</code>, <code>callout</code>, <code>figure</code>, <code>code</code>, <code>toc</code>, <code>note</code>, <code>break</code>, and <code>keep</code> follow normal flow. Header/footer regions stack for screen inspection, and wide tables scroll inside their wrapper rather than overflowing the page.</p>
       </article>
       <article class="instruction-card">
         <span class="component-kicker">Contract boundary</span>
@@ -808,8 +815,8 @@ const indexBody = `<main id="main">
 
 <section class="content-section">
   <div class="section-heading">
-    <div><span class="eyebrow">Roadmap boundary</span><h2>Planned is not implemented.</h2></div>
-    <p>Header, footer, page-number, artwork layer, callout, figure, table, code, TOC, and note primitives remain architecture/requirements work until they ship and gain evidence.</p>
+    <div><span class="eyebrow">Evidence boundary</span><h2>Implemented is not the same as universally guaranteed.</h2></div>
+    <p>The original core primitive set is now registered, documented, and tested. Renderer-sensitive behavior such as repeated page-margin content, physical page counters, automatic TOC target pages, footnotes, sidenotes, bleed, and marks remains gated by the P1–P3 capability model.</p>
   </div>
 </section>
 </main>`;
