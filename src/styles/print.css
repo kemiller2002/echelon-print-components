@@ -122,6 +122,7 @@
 
   ef-print-header,
   ef-print-footer {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--ef-print-header-gap);
     align-items: baseline;
