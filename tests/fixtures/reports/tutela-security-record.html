@@ -1,0 +1,26 @@
+<ef-print-document>
+  <ef-print-security-record data-assessment-id="TUTELA-EXAMPLE-001">
+    <ef-print-section>
+      <h1>Tutela Security Evidence Record</h1>
+      <ef-print-security-posture data-posture="BLOCKED">
+        <h2>Release posture: BLOCKED</h2>
+        <dl><dt>Repository</dt><dd>example/app</dd><dt>Subject ref</dt><dd><code>0123456789abcdef</code></dd></dl>
+        <p>This posture is limited to the stated scope and evidence. It is not a general claim that the system is secure.</p>
+      </ef-print-security-posture>
+    </ef-print-section>
+    <ef-print-section>
+      <h2>Unknown security effects</h2>
+      <ef-print-security-unknown id="SEC-UNK-001">
+        <h3>SEC-UNK-001</h3>
+        <p>Authorization behavior for imported organizations is not established.</p>
+      </ef-print-security-unknown>
+    </ef-print-section>
+    <ef-print-section>
+      <h2>Invariant evidence</h2>
+      <ef-print-security-invariant id="SEC-INV-001" data-state="Verified">
+        <h3>SEC-INV-001 — Verified</h3>
+        <ef-print-security-evidence data-evidence-id="SEC-EVD-001">Evidence SEC-EVD-001</ef-print-security-evidence>
+      </ef-print-security-invariant>
+    </ef-print-section>
+  </ef-print-security-record>
+</ef-print-document>
