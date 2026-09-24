@@ -29,6 +29,12 @@ const expectedElements = [
   "ef-print-code",
   "ef-print-toc",
   "ef-print-note",
+  "ef-print-security-record",
+  "ef-print-security-posture",
+  "ef-print-security-invariant",
+  "ef-print-security-evidence",
+  "ef-print-security-unknown",
+  "ef-print-security-exception",
 ];
 
 assert.deepEqual(registeredElementNames, expectedElements, "Node-safe module import exposes the complete public registry");
