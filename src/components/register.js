@@ -20,6 +20,12 @@ const elementNames = [
   "ef-print-code",
   "ef-print-toc",
   "ef-print-note",
+  "ef-print-security-record",
+  "ef-print-security-posture",
+  "ef-print-security-invariant",
+  "ef-print-security-evidence",
+  "ef-print-security-unknown",
+  "ef-print-security-exception",
 ];
 
 const HTMLElementBase = globalThis.HTMLElement ?? class {};
