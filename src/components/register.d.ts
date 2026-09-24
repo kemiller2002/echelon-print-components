@@ -19,7 +19,13 @@ export declare const elementNames: readonly [
   "ef-print-table",
   "ef-print-code",
   "ef-print-toc",
-  "ef-print-note"
+  "ef-print-note",
+  "ef-print-security-record",
+  "ef-print-security-posture",
+  "ef-print-security-invariant",
+  "ef-print-security-evidence",
+  "ef-print-security-unknown",
+  "ef-print-security-exception"
 ];
 
 export declare function registerPrintElements(registry?: CustomElementRegistry): void;
@@ -47,6 +53,12 @@ declare global {
     "ef-print-code": HTMLElement;
     "ef-print-toc": HTMLElement;
     "ef-print-note": HTMLElement;
+    "ef-print-security-record": HTMLElement;
+    "ef-print-security-posture": HTMLElement;
+    "ef-print-security-invariant": HTMLElement;
+    "ef-print-security-evidence": HTMLElement;
+    "ef-print-security-unknown": HTMLElement;
+    "ef-print-security-exception": HTMLElement;
   }
 }
 
