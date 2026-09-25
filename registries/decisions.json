@@ -69,5 +69,25 @@
     "title": "Adopt native columns, tables, and named landscape pages while keeping grid sidebar provisional",
     "type": "decision-record",
     "updated": "2026-09-22"
+  },
+  {
+    "created": "2026-09-25",
+    "id": "DF-PRINT-2026-0004",
+    "path": "research/decisions/DF-PRINT-2026-0004--adopt-bounded-sheets-and-finite-fit-profiles.md",
+    "related_documents": [
+      "research/evidence/EV-PRINT-2026-0008--state-fair-bounded-sheet-reference.md"
+    ],
+    "status": "accepted",
+    "superseded_by": [],
+    "supersedes": [],
+    "tags": [
+      "print",
+      "bounded-sheet",
+      "adaptive-fit",
+      "state-fair"
+    ],
+    "title": "Adopt bounded sheets with finite authored fit profiles",
+    "type": "decision-record",
+    "updated": "2026-09-25"
   }
 ]
