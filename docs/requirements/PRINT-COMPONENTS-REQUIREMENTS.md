@@ -726,3 +726,24 @@ The Folio test suite MUST add canonical fixtures for at least:
 - **EPC-RPT-095 MUST** document the Signal integration as a consumer recipe rather than make Signal a runtime dependency.
 - **EPC-RPT-096 MUST** preserve Folio's standards-first, semantic-HTML, CSS-pagination architecture while adding report composition support.
 
+
+
+## 24. Bounded sheets and adaptive fit
+
+The bounded-sheet profile is an explicit exception to ordinary flowing-document pagination. It exists for competition entries, forms, certificates, one-page summaries, labels, and other artifacts where fitting a known physical sheet is part of the document contract.
+
+- **EPC-BOUND-001 MUST** provide an opt-in bounded physical sheet with explicit width, height, and padding.
+- **EPC-BOUND-002 MUST** support Letter and A4 first-class profiles.
+- **EPC-BOUND-003 MUST** provide logical header, body, and footer regions without changing source order.
+- **EPC-BOUND-004 MUST NOT** make bounded-sheet behavior the default document pagination model.
+- **EPC-BOUND-005 MUST** keep overflow observable and MUST NOT silently clip content that fails all fit profiles.
+- **EPC-FIT-001 MUST** permit an author to declare an ordered finite list of named fit profiles.
+- **EPC-FIT-002 MUST** select the least aggressive authored profile whose rendered descendants remain within the fit region.
+- **EPC-FIT-003 MUST NOT** synthesize arbitrary font sizes, coordinates, or layout values.
+- **EPC-FIT-004 MUST** expose the selected profile and fit/overflow status in DOM state.
+- **EPC-FIT-005 MUST** re-evaluate after document fonts become ready and after viewport changes.
+- **EPC-FIT-006 MUST** emit a folio-fit event containing the selected profile and success state.
+- **EPC-FIT-007 MUST** preserve useful source content when JavaScript is unavailable; fitting is enhancement, not content generation.
+- **EPC-FIT-008 SHOULD** allow authored profiles to change typography, spacing, and column count through CSS.
+- **EPC-FIT-009 MUST** treat failure of every profile as an explicit overflow state rather than success.
+- **EPC-FIT-010 MUST** include a regression fixture based on the 2026 State Fair recipe-entry layout.
