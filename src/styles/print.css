@@ -63,6 +63,8 @@
 
 @layer ef-print-components {
   ef-print-document,
+  ef-print-bounded-sheet,
+  ef-print-fit-region,
   ef-print-title-page,
   ef-print-section,
   ef-print-back-page,
@@ -104,6 +106,14 @@
     position: relative;
     z-index: 1;
   }
+
+
+  ef-print-bounded-sheet { --ef-print-sheet-width:8.5in; --ef-print-sheet-height:11in; --ef-print-sheet-padding:.35in; display:grid; grid-template-rows:auto minmax(0,1fr) auto; width:var(--ef-print-sheet-width); height:var(--ef-print-sheet-height); padding:var(--ef-print-sheet-padding); background:white; color:var(--ef-print-text); }
+  ef-print-bounded-sheet[size="a4"] { --ef-print-sheet-width:210mm; --ef-print-sheet-height:297mm; }
+  ef-print-bounded-sheet > [data-sheet-body] { min-height:0; }
+  ef-print-fit-region { display:block; min-width:0; min-height:0; }
+  ef-print-fit-region[data-fit-status="overflow"] { overflow:visible; }
+  @media screen { ef-print-bounded-sheet { max-width:100%; margin-inline:auto; box-shadow:0 0 20px rgb(0 0 0 / .15); } }
 
   ef-print-title-page {
     break-after: page;
@@ -561,6 +571,8 @@
 }
 
 @media print {
+  ef-print-bounded-sheet { margin:0; box-shadow:none; }
+
   [data-screen-only] {
     display: none !important;
   }
