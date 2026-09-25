@@ -1,3 +1,21 @@
+---
+id: EV-PRINT-2026-0008
+title: 2026 State Fair bounded-sheet reference
+research_area: print-components
+evidence_type: primary
+source_title: 2026 State Fair recipe print implementation
+source_author: Echelon Foundry
+source_uri: https://github.com/kemiller2002/recipes
+source_date: 2026-09-25
+retrieved: 2026-09-25
+created_by_agent: chatgpt
+confidence: high
+supports: []
+contradicts: []
+related_theories: []
+tags: [print, bounded-sheet, adaptive-fit, state-fair]
+---
+
 # EV-PRINT-2026-0008 — 2026 State Fair bounded-sheet reference
 
 Date: 2026-09-25
