@@ -21,7 +21,7 @@
     "./src/styles/print.css"
   ],
   "scripts": {
-    "test": "node tests/run-primitive-component-tests.mjs && node tests/run-tutela-security-record-tests.mjs && node tests/run-print-experiments.mjs && node tests/run-report-fixture-tests.mjs",
+    "test": "node tests/run-primitive-component-tests.mjs && node tests/run-bounded-sheet-tests.mjs && node tests/run-tutela-security-record-tests.mjs && node tests/run-print-experiments.mjs && node tests/run-report-fixture-tests.mjs",
     "test:print": "node tests/run-print-experiments.mjs",
     "site:build": "node tools/build-site.mjs",
     "site:test": "node --test tests/site-build.test.mjs",
