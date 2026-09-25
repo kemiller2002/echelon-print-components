@@ -128,5 +128,28 @@
       "chromium"
     ],
     "title": "TABLE-01 multipage and landscape evidence"
+  },
+  {
+    "confidence": "high",
+    "contradicts": [],
+    "created_by_agent": "chatgpt",
+    "evidence_type": "primary",
+    "id": "EV-PRINT-2026-0008",
+    "path": "research/evidence/EV-PRINT-2026-0008--state-fair-bounded-sheet-reference.md",
+    "related_theories": [],
+    "research_area": "print-components",
+    "retrieved": "2026-09-25",
+    "source_author": "Echelon Foundry",
+    "source_date": "2026-09-25",
+    "source_title": "2026 State Fair recipe print implementation",
+    "source_uri": "https://github.com/kemiller2002/recipes",
+    "supports": [],
+    "tags": [
+      "print",
+      "bounded-sheet",
+      "adaptive-fit",
+      "state-fair"
+    ],
+    "title": "2026 State Fair bounded-sheet reference"
   }
 ]
