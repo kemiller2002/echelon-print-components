@@ -9,6 +9,8 @@ const root = process.cwd();
 const fixture = "/tests/fixtures/primitives/primitives.html";
 const expectedElements = [
   "ef-print-document",
+  "ef-print-bounded-sheet",
+  "ef-print-fit-region",
   "ef-print-title-page",
   "ef-print-section",
   "ef-print-back-page",
@@ -97,6 +99,7 @@ try {
         };
       };
       return {
+        boundedSheet:value("ef-print-bounded-sheet"), fitRegion:value("ef-print-fit-region"), fitState:document.querySelector("ef-print-fit-region").dataset.fitStatus,
         header: value("ef-print-header"),
         footer: value("ef-print-footer"),
         pageNumber: value("ef-print-page-number"),
@@ -115,6 +118,9 @@ try {
       };
     });
 
+    assert.equal(styles.boundedSheet.display,"grid",`${name}: bounded sheet establishes physical composition grid`);
+    assert.equal(styles.fitRegion.display,"block",`${name}: fit region remains semantic light DOM`);
+    assert.equal(styles.fitState,"fit",`${name}: fit region reports successful authored profile`);
     assert.equal(styles.header.display, "grid", `${name}: header uses in-flow grid`);
     assert.equal(styles.footer.display, "grid", `${name}: footer uses in-flow grid`);
     assert.equal(styles.pageNumber.display, "inline", `${name}: page number remains inline intent`);
