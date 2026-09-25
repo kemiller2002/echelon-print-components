@@ -1,3 +1,15 @@
+---
+id: DF-PRINT-2026-0004
+title: Adopt bounded sheets with finite authored fit profiles
+research_area: print-components
+status: accepted
+decision_date: 2026-09-25
+created_by_agent: chatgpt
+related_evidence:
+  - EV-PRINT-2026-0008
+tags: [print, bounded-sheet, adaptive-fit, state-fair]
+---
+
 # DF-PRINT-2026-0004 — Adopt bounded sheets with finite authored fit profiles
 
 Status: accepted
