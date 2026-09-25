@@ -1,5 +1,7 @@
 export declare const elementNames: readonly [
   "ef-print-document",
+  "ef-print-bounded-sheet",
+  "ef-print-fit-region",
   "ef-print-title-page",
   "ef-print-section",
   "ef-print-back-page",
@@ -33,6 +35,8 @@ export declare function registerPrintElements(registry?: CustomElementRegistry):
 declare global {
   interface HTMLElementTagNameMap {
     "ef-print-document": HTMLElement;
+    "ef-print-bounded-sheet": HTMLElement;
+    "ef-print-fit-region": HTMLElement;
     "ef-print-title-page": HTMLElement;
     "ef-print-section": HTMLElement;
     "ef-print-back-page": HTMLElement;
